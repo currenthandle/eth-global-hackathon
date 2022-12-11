@@ -41,17 +41,32 @@ const Login: NextPage = () => {
     },
   });
   const onSubmit = async (/*data: Schema*/) => {
-    const formValues = getValues();
+    try {
+      const formValues = getValues();
 
-    const resp = await loginUser({
-      variables: {
+      const validUser = await loginUser({
+        variables: {
+          email: formValues.email,
+          password: formValues.password,
+        },
+      });
+
+      console.log('validUser', validUser);
+
+      const resp = await signIn('credentials', {
         email: formValues.email,
         password: formValues.password,
-      },
-    });
+        redirect: false,
+      });
 
-    console.log('resp', resp);
-
+      if (resp?.ok) {
+        router.push('/');
+      } else {
+        console.error('error', resp);
+      }
+    } catch (error) {
+      console.error('error', error);
+    }
     // try {
     //   await signIn("credentials", {
     //     // await signIn("credentials", {
