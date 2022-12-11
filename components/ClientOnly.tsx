@@ -5,7 +5,7 @@ export default function ClientOnly({
   ...delegated
 }: {
   children: React.ReactNode;
-  delegated: any;
+  delegated?: any;
 }) {
   const [hasMounted, setHasMounted] = useState(false);
 
