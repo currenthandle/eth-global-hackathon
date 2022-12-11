@@ -22,15 +22,15 @@ export const Sample = () => {
 
   return (
     <div
-      onClick={async () => {
-        const newUser = await createUserMutation({
-          variables: {
-            email: 'asasdakajshdkalsdkjfhhl@als.nom',
-            password: '123456',
-          },
-        });
-        console.log('newUser', newUser);
-      }}
+    // onClick={async () => {
+    //   const newUser = await createUserMutation({
+    //     variables: {
+    //       email: 'asasdakajshdkasadalsdkjfhhl@als.nom',
+    //       password: '123456',
+    //     },
+    //   });
+    //   console.log('newUser', newUser);
+    // }}
     >
       Hello
       <LoginForm />
