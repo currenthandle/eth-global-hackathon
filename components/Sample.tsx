@@ -25,7 +25,7 @@ export const Sample = () => {
       onClick={async () => {
         const newUser = await createUserMutation({
           variables: {
-            email: 'asasdalsdkjfhhl@als.nom',
+            email: 'asasdakajshdkalsdkjfhhl@als.nom',
             password: '123456',
           },
         });
