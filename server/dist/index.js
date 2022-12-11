@@ -17,6 +17,7 @@ const typeDefs = `#graphql
   type Mutation {
     createUser(email: String!, password: String!): User!
     login(email: String!, password: String!): User!
+    validateUser(email: String!, password: String!): User!
   }
 `;
 const resolvers = {
@@ -51,6 +52,21 @@ const resolvers = {
                     email,
                 },
             });
+            return user;
+        },
+        async validateUser(_, { email, password }) {
+            const user = await prisma.user.findUnique({
+                where: {
+                    email,
+                },
+            });
+            console.log('user before ', user);
+            if (!user) {
+                throw new Error('Invalid email or password');
+            }
+            if (user.password !== password) {
+                throw new Error('Invalid email or password');
+            }
             return user;
         },
         async login(parent, args, context

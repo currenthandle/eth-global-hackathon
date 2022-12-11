@@ -16,7 +16,7 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 //type SuccessInput extends Schema
-const LOGIN_MUTATION = gql`
+const VALIDATE_USER = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       email
@@ -26,7 +26,7 @@ const LOGIN_MUTATION = gql`
 
 const Login: NextPage = () => {
   const router = useRouter();
-  const [loginUser, { data, error }] = useMutation(LOGIN_MUTATION);
+  const [validateUser, { data, error }] = useMutation(VALIDATE_USER);
 
   const {
     register,
@@ -45,7 +45,7 @@ const Login: NextPage = () => {
     try {
       const formValues = getValues();
 
-      const validUser = await loginUser({
+      const validUser = await validateUser({
         variables: {
           email: formValues.email,
           password: formValues.password,
@@ -61,11 +61,11 @@ const Login: NextPage = () => {
         callbackUrl: '/',
       });
 
-      if (resp?.ok) {
-        router.push('/');
-      } else {
-        console.error('error', resp);
-      }
+      // if (resp?.ok) {
+      //   router.push('/');
+      // } else {
+      //   console.error('error', resp);
+      // }
     } catch (error) {
       console.error('error', error);
     }

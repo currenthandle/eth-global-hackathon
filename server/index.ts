@@ -3,7 +3,7 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { unwrapResolverError } from '@apollo/server/errors';
 
 import { PrismaClient } from '@prisma/client';
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, validate } from 'graphql';
 import { userInfo } from 'os';
 const prisma = new PrismaClient();
 
@@ -22,6 +22,7 @@ const typeDefs = `#graphql
   type Mutation {
     createUser(email: String!, password: String!): User!
     login(email: String!, password: String!): User!
+    validateUser(email: String!, password: String!): User!
   }
 `;
 
@@ -71,6 +72,24 @@ const resolvers = {
           email,
         },
       });
+      return user;
+    },
+    async validateUser(
+      _: undefined,
+      { email, password }: { email: string; password: string }
+    ) {
+      const user = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+      console.log('user before ', user);
+      if (!user) {
+        throw new Error('Invalid email or password');
+      }
+      if (user.password !== password) {
+        throw new Error('Invalid email or password');
+      }
       return user;
     },
     async login(
