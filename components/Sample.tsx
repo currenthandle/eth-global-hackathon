@@ -12,7 +12,7 @@ export const Sample = () => {
   return (
     <div>
       {data.allUsers.map((user) => {
-        return <div>{user.email}</div>;
+        return <div key={user.email}>{user.email}</div>;
       })}
     </div>
   );
