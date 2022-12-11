@@ -11,6 +11,7 @@ export const authOptions = {
         password: { label: 'Password', type: 'password', placeholder: 'cc' },
       },
       async authorize(credentials) {
+        console.log('credentials', credentials);
         return {
           email: 'c@c.com',
           password: 'cc',

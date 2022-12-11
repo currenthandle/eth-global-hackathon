@@ -56,7 +56,8 @@ const Login: NextPage = () => {
       const resp = await signIn('credentials', {
         email: formValues.email,
         password: formValues.password,
-        redirect: false,
+        // redirect: false,
+        callbackUrl: '/',
       });
 
       if (resp?.ok) {
