@@ -62,10 +62,7 @@ const resolvers = {
       // info: GraphQLResolveInfo
     ) {
       const { email, password } = args;
-      console.log('email', email);
-      console.log('email', typeof email);
-      console.log('password', password);
-      console.log('password', typeof password);
+
       const user = await prisma.user.create({
         data: {
           password,
@@ -78,6 +75,13 @@ const resolvers = {
       _: undefined,
       { email, password }: { email: string; password: string }
     ) {
+      console.log('');
+      console.log('');
+      console.log('');
+      console.log('email', email);
+      console.log('email', typeof email);
+      console.log('password', password);
+      console.log('password', typeof password);
       const user = await prisma.user.findUnique({
         where: {
           email,

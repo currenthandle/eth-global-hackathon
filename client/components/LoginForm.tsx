@@ -17,9 +17,10 @@ type Schema = z.infer<typeof schema>;
 
 //type SuccessInput extends Schema
 const VALIDATE_USER = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation ValidateUser($email: String!, $password: String!) {
+    validateUser(email: $email, password: $password) {
       email
+      id
     }
   }
 `;
@@ -42,6 +43,7 @@ const Login: NextPage = () => {
     },
   });
   const onSubmit = async (/*data: Schema*/) => {
+    console.log('onsubmit');
     try {
       const formValues = getValues();
 
@@ -54,12 +56,14 @@ const Login: NextPage = () => {
 
       console.log('validUser', validUser);
 
-      const resp = await signIn('credentials', {
-        email: formValues.email,
-        password: formValues.password,
-        // redirect: false,
-        callbackUrl: '/',
-      });
+      // const resp = await signIn('credentials', {
+      //   email: formValues.email,
+      //   password: formValues.password,
+      //   // redirect: false,
+      //   callbackUrl: '/',
+      // });
+
+      // console.log('resp', resp);
 
       // if (resp?.ok) {
       //   router.push('/');
