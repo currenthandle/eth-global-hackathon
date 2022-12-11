@@ -1,15 +1,15 @@
-import { type NextPage } from "next";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { type NextPage } from 'next';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 // import { trpc } from '../utils/trpc';
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
-import { gql, useMutation } from "@apollo/client";
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { gql, useMutation } from '@apollo/client';
 
 const schema = z.object({
-  email: z.string().email({ message: "Email is required" }),
-  password: z.string().min(2, { message: "Too short" }),
+  email: z.string().email({ message: 'Email is required' }),
+  password: z.string().min(2, { message: 'Too short' }),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -36,8 +36,8 @@ const Login: NextPage = () => {
   } = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
   const onSubmit = async (/*data: Schema*/) => {
@@ -50,7 +50,7 @@ const Login: NextPage = () => {
       },
     });
 
-    console.log("resp", resp);
+    console.log('resp', resp);
 
     // try {
     //   await signIn("credentials", {
@@ -67,39 +67,39 @@ const Login: NextPage = () => {
   };
 
   return (
-    <div className="flex justify-center pt-10">
-      <div className="w-6/12 rounded-lg border-2 py-4">
-        <h1 className="flex w-full justify-center">Login</h1>
-        <div className="flex w-full justify-center">
+    <div className='flex justify-center pt-10'>
+      <div className='w-6/12 rounded-lg border-2 py-4'>
+        <h1 className='flex w-full justify-center'>Login</h1>
+        <div className='flex w-full justify-center'>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex w-6/12 flex-col justify-center"
+            className='flex w-6/12 flex-col justify-center'
           >
-            <label htmlFor="email">email</label>
+            <label htmlFor='email'>email</label>
             <input
-              {...register("email")}
-              className="rounded-md border-2 border-black"
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email"
+              {...register('email')}
+              className='rounded-md border-2 border-black'
+              type='email'
+              name='email'
+              id='email'
+              placeholder='Email'
             />
             <p>{errors.email?.message}</p>
-            <label htmlFor="password">Password</label>
+            <label htmlFor='password'>Password</label>
             <input
-              {...register("password")}
-              className="rounded-md border-2 border-black"
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
+              {...register('password')}
+              className='rounded-md border-2 border-black'
+              type='password'
+              name='password'
+              id='password'
+              placeholder='Password'
             />
             <p>{errors.password?.message}</p>
 
-            <div className="flex justify-center">
+            <div className='flex justify-center'>
               <button
-                className="mt-4 w-4/12 rounded-md border-2 border-black"
-                type="submit"
+                className='mt-4 w-4/12 rounded-md border-2 border-black'
+                type='submit'
               >
                 Login
               </button>
