@@ -1,12 +1,9 @@
 import { type NextPage } from 'next';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm /*, type SubmitHandler*/ } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-// import { trpc } from '../utils/trpc';
+import { z } from 'zod';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { gql, useMutation } from '@apollo/client';
-import Link from 'next/link';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -15,24 +12,35 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-//type SuccessInput extends Schema
-const LOGIN_MUTATION = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      email
-    }
-  }
-`;
-
-const Login: NextPage = () => {
+const Signup: NextPage = () => {
   const router = useRouter();
-  const [loginUser, { data, error }] = useMutation(LOGIN_MUTATION);
+  // const { mutate } = trpc.user.create.useMutation({
+  //   onSuccess: async () => {
+  //     const formValues = getValues();
+  //     try {
+  //       const resp = await signIn('credentials', {
+  //         email: formValues.email,
+  //         password: formValues.password,
+  //         redirect: false,
+  //       });
+  //       if (resp?.ok) {
+  //         router.push('/');
+  //       } else {
+  //         console.error('error', resp);
+  //       }
+  //     } catch (error) {
+  //       console.error('error', error);
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     console.error('error', error);
+  //   },
+  // });
 
   const {
     register,
     handleSubmit,
     getValues,
-    watch,
     formState: { errors },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
@@ -41,52 +49,18 @@ const Login: NextPage = () => {
       password: '',
     },
   });
-  const onSubmit = async (/*data: Schema*/) => {
-    try {
-      const formValues = getValues();
-
-      const validUser = await loginUser({
-        variables: {
-          email: formValues.email,
-          password: formValues.password,
-        },
-      });
-
-      console.log('validUser', validUser);
-
-      const resp = await signIn('credentials', {
-        email: formValues.email,
-        password: formValues.password,
-        // redirect: false,
-        callbackUrl: '/',
-      });
-
-      if (resp?.ok) {
-        router.push('/');
-      } else {
-        console.error('error', resp);
-      }
-    } catch (error) {
-      console.error('error', error);
-    }
-    // try {
-    //   await signIn("credentials", {
-    //     // await signIn("credentials", {
-    //     id: "credentials",
-    //     email: formValues.email,
-    //     password: formValues.password,
-    //     // redirect: false,
-    //     callbackUrl: "/",
-    //   });
-    // } catch (error) {
-    //   console.error("error", error);
-    // }
+  // const onSubmit: SubmitHandler<Inputs> = (data) => console.log('hi', data)
+  const onSubmit = (data: Schema) => {
+    // mutate({
+    //   email: data.email,
+    //   password: data.password,
+    // });
   };
 
   return (
     <div className='flex justify-center pt-10'>
       <div className='w-6/12 rounded-lg border-2 py-4'>
-        <h1 className='flex w-full justify-center'>Login</h1>
+        <h1 className='flex w-full justify-center'>Signup</h1>
         <div className='flex w-full justify-center'>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -118,21 +92,13 @@ const Login: NextPage = () => {
                 className='mt-4 w-4/12 rounded-md border-2 border-black'
                 type='submit'
               >
-                Login
+                Sign up
               </button>
             </div>
-
-            <Link href='/signup'>
-              <div className='flex justify-center'>
-                <button className='mt-4 w-4/12 rounded-md border-2 border-black'>
-                  Sign Up
-                </button>
-              </div>
-            </Link>
           </form>
         </div>
       </div>
     </div>
   );
 };
-export default Login;
+export default Signup;
