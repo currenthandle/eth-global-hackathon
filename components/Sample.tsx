@@ -22,12 +22,13 @@ export const Sample = () => {
   return (
     <div
       onClick={async () => {
-        createUserMutation({
+        const newUser = await createUserMutation({
           variables: {
-            email: 'askdkfjahl@als.com',
+            email: 'askfjahl@als.com',
             password: '123456',
           },
         });
+        console.log('newUser', newUser);
       }}
     >
       hello
