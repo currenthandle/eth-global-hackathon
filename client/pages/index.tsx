@@ -9,14 +9,19 @@ import {
   type NextPage,
 } from 'next';
 import { getServerAuthSession } from '../get-server-auth-session';
+import { signOut } from 'next-auth/react';
 
 export default function Home() {
   return (
-    <div>
-      <h1>hello</h1>
-      <ClientOnly>
-        <Sample />
-      </ClientOnly>
+    <div className='flex justify-center items-center  min-h-screen '>
+      <button
+        className='rounded-lg border-2 p-6'
+        onClick={() => {
+          signOut();
+        }}
+      >
+        Sign Out
+      </button>
     </div>
   );
 }

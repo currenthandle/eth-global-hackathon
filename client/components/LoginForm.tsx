@@ -2,7 +2,6 @@ import { type NextPage } from 'next';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-// import { trpc } from '../utils/trpc';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { gql, useMutation } from '@apollo/client';
@@ -56,12 +55,12 @@ const Login: NextPage = () => {
 
       console.log('validUser', validUser);
 
-      // const resp = await signIn('credentials', {
-      //   email: formValues.email,
-      //   password: formValues.password,
-      //   // redirect: false,
-      //   callbackUrl: '/',
-      // });
+      const resp = await signIn('credentials', {
+        email: formValues.email,
+        password: formValues.password,
+        // redirect: false,
+        callbackUrl: '/',
+      });
 
       // console.log('resp', resp);
 
