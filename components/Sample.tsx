@@ -9,5 +9,11 @@ const allUsers = gql`
 `;
 export const Sample = () => {
   const { loading, error, data } = useQuery(allUsers);
-  return <div>Sampleadsfaljksdhfasdfkl</div>;
+  return (
+    <div>
+      {data.allUsers.map((user) => {
+        return <div>{user.email}</div>;
+      })}
+    </div>
+  );
 };
