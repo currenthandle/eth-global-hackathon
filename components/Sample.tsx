@@ -1,4 +1,5 @@
 import { useQuery, useMutation, gql } from '@apollo/client';
+import LoginForm from './LoginForm';
 
 const allUsers = gql`
   query AllUsers {
@@ -24,14 +25,15 @@ export const Sample = () => {
       onClick={async () => {
         const newUser = await createUserMutation({
           variables: {
-            email: 'askfasahl@als.nom',
+            email: 'askfasasdalsdkjfhhl@als.nom',
             password: '123456',
           },
         });
         console.log('newUser', newUser);
       }}
     >
-      hello
+      Hello
+      <LoginForm />
     </div>
   );
 };
