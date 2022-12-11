@@ -14,6 +14,7 @@ export const authOptions = {
         return {
           email: 'c@c.com',
           password: 'cc',
+          id: '1',
         };
       },
     }),
