@@ -7,6 +7,8 @@ import { PrismaClient } from '@prisma/client';
 // import { userInfo } from 'os';
 import { z } from 'zod';
 
+type Role = 'hacker' | 'mentor' | 'sponsor';
+
 const prisma = new PrismaClient();
 
 const typeDefs = `#graphql
@@ -16,6 +18,16 @@ const typeDefs = `#graphql
     id: ID!
     role: String!
     firstName: String
+    lastName: String
+    student: Boolean
+    school: String
+    country: String
+    company: String
+    website: String
+    github: String
+    twitter: String
+    telegram: String
+    linkedin: String
   }
 
   type Error {
@@ -104,11 +116,7 @@ const resolvers = {
   Mutation: {
     async signUpUser(
       _: undefined,
-      {
-        email,
-        password,
-        role,
-      }: { email: string; password: string; role: string }
+      { email, password, role }: { email: string; password: string; role: Role }
     ) {
       if (!emailValidator.parse(email)) {
         throw new Error('Invalid email input');
