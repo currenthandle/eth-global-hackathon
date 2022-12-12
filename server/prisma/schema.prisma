@@ -23,11 +23,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// define an enum called Role that can be either "ADMIN" or "USER"
+// enum Role {
+//   hacker
+//   mentor
+//   sponsor
+// }
+
 // Define the `User` table in the database
 model User {
   id       String @id @default(cuid())
   email    String @unique
   password String
+  role     String @default("hacker")
+  // create a role field on User that is an enum of "ADMIN" and "USER"
+
   // name     String?
   // posts    Post[]
   // Post     Post[]

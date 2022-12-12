@@ -10,8 +10,9 @@ const prisma = new PrismaClient();
 const typeDefs = `#graphql
   type User {
     email: String!
-    password: String
+    password: String!
     id: ID!
+    role: String!
   }
 
   type Error {
@@ -28,7 +29,7 @@ const typeDefs = `#graphql
 
   type Mutation {
     createUser(email: String!, password: String!): User!
-    signUpUser(email: String!, password: String!): UserOrError!
+    signUpUser(email: String!, password: String!, role: String!): UserOrError!
     login(email: String!, password: String!): User!
   }
 `;
@@ -84,7 +85,11 @@ const resolvers = {
   Mutation: {
     async signUpUser(
       _: undefined,
-      { email, password }: { email: string; password: string }
+      {
+        email,
+        password,
+        role,
+      }: { email: string; password: string; role: string }
     ) {
       // check prisma db to see if the user already exists
       const user = await prisma.user.findUnique({
@@ -102,10 +107,12 @@ const resolvers = {
       }
       // if the user doesn't exist, create the user and return the user
       else {
+        console.log('role', role);
         const user = await prisma.user.create({
           data: {
             email,
             password,
+            role,
           },
         });
         return {

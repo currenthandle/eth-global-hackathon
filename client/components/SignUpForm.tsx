@@ -19,8 +19,8 @@ const schema = z.object({
 });
 
 const SIGNUP_USER = gql`
-  mutation SignUpUser($email: String!, $password: String!) {
-    signUpUser(email: $email, password: $password) {
+  mutation SignUpUser($email: String!, $password: String!, $role: String!) {
+    signUpUser(email: $email, password: $password, role: $role) {
       __typename
       ... on User {
         email
@@ -82,10 +82,12 @@ const Signup = () => {
     if (formValues.password !== formValues.retypePassword) {
       setSignUpError('Passwords do not match');
     } else {
+      console.log('formValues', formValues.role);
       const signUpUserResp = await signUpUser({
         variables: {
           email: formValues.email,
           password: formValues.password,
+          role: formValues.role,
         },
       });
 
