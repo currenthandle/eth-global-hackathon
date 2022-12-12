@@ -11,6 +11,7 @@ import {
 import { getServerAuthSession } from '../get-server-auth-session';
 import { signOut, useSession } from 'next-auth/react';
 import Header from '../components/Header';
+import ProfileEditor from '../components/ProfileEditor';
 
 // export default function Home(): NextPage {
 const Home: NextPage = () => {
@@ -19,6 +20,7 @@ const Home: NextPage = () => {
   return (
     <main>
       <Header />
+      <ProfileEditor />
     </main>
   );
 };
