@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { unwrapResolverError } from '@apollo/server/errors';
+// import { unwrapResolverError } from '@apollo/server/errors';
 
 import { PrismaClient } from '@prisma/client';
 // import { GraphQLResolveInfo, validate } from 'graphql';
