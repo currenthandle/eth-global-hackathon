@@ -19,6 +19,25 @@ export const authOptions = {
       },
     }),
   ],
+  session: {
+    jwt: true,
+    maxAge: 60 * 60 * 24 * 7, // 7 days
+  },
+  callbacks: {
+    async jwt(token, user, account, profile, isNewUser) {
+      console.log('token', token);
+      console.log(token.token);
+      console.log('user!! ', user);
+      console.log('account', account);
+      console.log('profile', profile);
+      console.log('isNewUser', isNewUser);
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
+  },
 };
 
 export default NextAuth(authOptions);

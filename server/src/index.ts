@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 // import { unwrapResolverError } from '@apollo/server/errors';
@@ -116,8 +117,15 @@ const resolvers = {
   Mutation: {
     async signUpUser(
       _: undefined,
-      { email, password, role }: { email: string; password: string; role: Role }
+      {
+        email,
+        password,
+        role,
+      }: { email: string; password: string; role: Role },
+      ctx
     ) {
+      console.log('ctx', Object.keys(ctx));
+      console.log(ctx.userId);
       if (!emailValidator.parse(email)) {
         throw new Error('Invalid email input');
       }
@@ -171,9 +179,38 @@ const server = new ApolloServer({
   },
 });
 
+function getTokenPayload(token) {
+  // const payload = Buffer.from(token.split('.')[1], 'base64').toString();
+  // return JSON.parse(payload);
+  return jwt.verify(token, process.env.JWT_SECRET);
+}
+
+function getUserId(req, authToken?) {
+  if (req) {
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+      const token = authHeader.replace('Bearer ', '');
+      if (!token) {
+        throw new Error('No token found');
+      }
+      const { userId } = getTokenPayload(token);
+      return userId;
+    }
+  } else if (authToken) {
+    const { userId } = getTokenPayload(authToken);
+    return userId;
+  }
+
+  throw new Error('Not authenticated');
+}
+
 const { url } = await startStandaloneServer(server, {
   listen: { port: 3001 },
-  // context: async ({ req, res }) => ({}),
+  context: async ({ req, res }) => ({
+    ...req,
+    userId:
+      req && req.headers && req.headers.authorization ? getUserId(req) : null,
+  }),
 });
 
 console.log(`🚀  Server ready at: ${url}`);
