@@ -14,11 +14,11 @@ const typeDefs = `#graphql
     id: ID!
   }
 
-  type UserNotFoundError {
+  type Error {
     message: String!
   }
 
-  union UserOrError = User | UserNotFoundError
+  union UserOrError = User | Error
 
   type Query {
     allUsers: [User!]!
@@ -59,7 +59,7 @@ const resolvers = {
       });
       if (!user || user.password !== password) {
         return {
-          __typename: 'UserNotFoundError',
+          __typename: 'Error',
           message: 'Invalid user or password',
         };
       }
@@ -96,7 +96,7 @@ const resolvers = {
       if (user) {
         // throw new Error('User already exists');
         return {
-          __typename: 'UserAlreadyExistsError',
+          __typename: 'Error',
           message: 'Email already registered',
         };
       }

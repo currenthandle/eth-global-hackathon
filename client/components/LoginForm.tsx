@@ -24,7 +24,7 @@ const VALIDATE_USER = gql`
         email
         id
       }
-      ... on UserNotFoundError {
+      ... on Error {
         message
       }
     }

@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -14,6 +15,7 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 const Signup: NextPage = () => {
+  const [signUpError, setSignUpError] = useState('');
   const router = useRouter();
   // const { mutate } = trpc.user.create.useMutation({
   //   onSuccess: async () => {
@@ -52,10 +54,8 @@ const Signup: NextPage = () => {
   });
   // const onSubmit: SubmitHandler<Inputs> = (data) => console.log('hi', data)
   const onSubmit = (/*data: Schema*/) => {
-    // mutate({
-    //   email: data.email,
-    //   password: data.password,
-    // });
+    // check that the password and retype password match
+    return;
   };
 
   return (
