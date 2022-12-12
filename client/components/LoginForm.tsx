@@ -31,7 +31,7 @@ const VALIDATE_USER = gql`
   }
 `;
 
-const Login: NextPage = () => {
+const Login = () => {
   const [incorrectCreds, setIncorrectCreds] = useState('');
   const router = useRouter();
   // const [validateUser, { data, error }] = useMutation(VALIDATE_USER);

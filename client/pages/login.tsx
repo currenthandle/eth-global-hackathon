@@ -1,6 +1,7 @@
 import LoginForm from '../components/LoginForm';
 import ClientOnly from '../components/ClientOnly';
-export default function login() {
+import { NextPage } from 'next';
+const login: NextPage = () => {
   return (
     <div>
       <ClientOnly>
@@ -8,4 +9,6 @@ export default function login() {
       </ClientOnly>
     </div>
   );
-}
+};
+
+export default login;

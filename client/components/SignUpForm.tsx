@@ -14,7 +14,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const Signup: NextPage = () => {
+const Signup = () => {
   const [signUpError, setSignUpError] = useState('');
   const router = useRouter();
   // const { mutate } = trpc.user.create.useMutation({
@@ -55,7 +55,6 @@ const Signup: NextPage = () => {
   // const onSubmit: SubmitHandler<Inputs> = (data) => console.log('hi', data)
   const onSubmit = (/*data: Schema*/) => {
     // check that the password and retype password match
-    return;
   };
 
   return (
