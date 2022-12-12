@@ -86,6 +86,16 @@ const Signup: NextPage = () => {
               placeholder='Password'
             />
             <p>{errors.password?.message}</p>
+            <label htmlFor='retype-password'>Password</label>
+            <input
+              {...register('password')}
+              className='rounded-md border-2 border-black'
+              type='retype-password'
+              name='retype-password'
+              id='retype-password'
+              placeholder='Retype Password'
+            />
+            <p>{errors.password?.message}</p>
 
             <div className='flex justify-center'>
               <button
