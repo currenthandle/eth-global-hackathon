@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 const typeDefs = `#graphql
   type User {
     email: String!
-    password: String!
+    password: String
     id: ID!
   }
 
@@ -23,10 +23,9 @@ const typeDefs = `#graphql
   type Query {
     allUsers: [User!]!
     userByEmail(email: String!): User!
-    validateUser(email: String!, password: String!): User
+    validateUser(email: String!, password: String!): UserOrError!
   }
 
-  
   type Mutation {
     createUser(email: String!, password: String!): User!
     login(email: String!, password: String!): User!
