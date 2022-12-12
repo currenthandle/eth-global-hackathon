@@ -15,27 +15,28 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
   // Further reading:
   // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
   // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
   url      = env("DATABASE_URL")
+  // relationMode = "prisma"
 }
 
 // define an enum called Role that can be either "ADMIN" or "USER"
-// enum Role {
-//   hacker
-//   mentor
-//   sponsor
-// }
+enum Role {
+  hacker
+  mentor
+  sponsor
+}
 
 // Define the `User` table in the database
 model User {
   id       String @id @default(cuid())
   email    String @unique
   password String
-  role     String @default("hacker")
+  role     Role   @default(hacker)
   // create a role field on User that is an enum of "ADMIN" and "USER"
 
   // name     String?
