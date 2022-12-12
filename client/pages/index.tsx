@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     if (!document.cookie) {
       router.push('/login');
     }
-  }, []);
+  }, [router]);
   // const session = useSession();
   // console.log('session', session);
   return (
