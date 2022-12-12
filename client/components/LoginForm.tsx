@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
 import Link from 'next/link';
 
 const schema = z.object({
@@ -16,17 +16,23 @@ type Schema = z.infer<typeof schema>;
 
 //type SuccessInput extends Schema
 const VALIDATE_USER = gql`
-  mutation ValidateUser($email: String!, $password: String!) {
+  query ValidateUser($email: String!, $password: String!) {
     validateUser(email: $email, password: $password) {
-      email
-      id
+      __typename
+      ... on User {
+        email
+      }
+      ... on UserNotFoundError {
+        message
+      }
     }
   }
 `;
 
 const Login: NextPage = () => {
   const router = useRouter();
-  const [validateUser, { data, error }] = useMutation(VALIDATE_USER);
+  // const [validateUser, { data, error }] = useMutation(VALIDATE_USER);
+  const [validateUser, { data, error }] = useLazyQuery(VALIDATE_USER);
 
   const {
     register,
@@ -45,6 +51,8 @@ const Login: NextPage = () => {
     console.log('onsubmit');
     try {
       const formValues = getValues();
+      console.log('formValues', formValues);
+      console.log('about to call LAZY');
 
       const validUser = await validateUser({
         variables: {
@@ -53,7 +61,16 @@ const Login: NextPage = () => {
         },
       });
 
+      // const { data } = useQuery(VALIDATE_USER, {
+      //   // const validUser = await validateUser({
+      //   variables: {
+      //     email: formValues.email,
+      //     password: formValues.password,
+      //   },
+      // });
+
       console.log('validUser', validUser);
+      console.log('validUser.error', validUser.error);
 
       const resp = await signIn('credentials', {
         email: formValues.email,
@@ -61,8 +78,9 @@ const Login: NextPage = () => {
         // redirect: false,
         callbackUrl: '/',
       });
+      console.log('data', data);
 
-      // console.log('resp', resp);
+      console.log('resp', resp);
 
       // if (resp?.ok) {
       //   router.push('/');

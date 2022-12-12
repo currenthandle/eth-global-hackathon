@@ -5,23 +5,55 @@ const prisma = new PrismaClient();
 const typeDefs = `#graphql
   type User {
     email: String!
-    password: String
+    password: String!
     id: ID!
   }
+
+  type UserNotFoundError {
+    message: String!
+  }
+
+  union UserOrError = User | UserNotFoundError
 
   type Query {
     allUsers: [User!]!
     userByEmail(email: String!): User!
+    validateUser(email: String!, password: String!): User
   }
 
+  
   type Mutation {
     createUser(email: String!, password: String!): User!
     login(email: String!, password: String!): User!
-    validateUser(email: String!, password: String!): User!
   }
 `;
+console.log('resolvers!');
 const resolvers = {
     Query: {
+        async validateUser(_, { email, password }) {
+            console.log('');
+            console.log('');
+            console.log('');
+            console.log('email', email);
+            console.log('email', typeof email);
+            console.log('password', password);
+            console.log('password', typeof password);
+            const user = await prisma.user.findUnique({
+                where: {
+                    email,
+                },
+            });
+            console.log('user before ', user);
+            if (!user || user.password !== password) {
+                console.log('about to resturn err');
+                // const err = new Error('Invalid user or password');
+                const err = { message: 'Invalid user or password' };
+                console.log('err', err);
+                // return false;
+                return err;
+            }
+            return user;
+        },
         allUsers: async () => {
             const users = await prisma.user.findMany();
             return users;
@@ -48,28 +80,6 @@ const resolvers = {
                     email,
                 },
             });
-            return user;
-        },
-        async validateUser(_, { email, password }) {
-            console.log('');
-            console.log('');
-            console.log('');
-            console.log('email', email);
-            console.log('email', typeof email);
-            console.log('password', password);
-            console.log('password', typeof password);
-            const user = await prisma.user.findUnique({
-                where: {
-                    email,
-                },
-            });
-            console.log('user before ', user);
-            if (!user) {
-                throw new Error('Invalid email or password');
-            }
-            if (user.password !== password) {
-                throw new Error('Invalid email or password');
-            }
             return user;
         },
         async login(parent, args, context
