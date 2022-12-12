@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const session = await getServerAuthSession(ctx);
 
-  console.log('session', session);
+  // console.log('session', session);
   if (!session) {
     return {
       redirect: {
