@@ -49,10 +49,10 @@ const ProfileEditor = () => {
     },
   });
 
-  const session = useSession();
-  const userEmail = session?.data?.user?.email;
+  // const session = useSession();
+  // const userEmail = session?.data?.user?.email;
   const { data, error } = useQuery(userByEmail, {
-    variables: { email: userEmail },
+    variables: { email: 'c@c.com' },
   });
   const userData = data?.userByEmail;
   console.log('userData', userData);
