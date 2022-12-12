@@ -67,12 +67,18 @@ const resolvers = {
       if (!user || user.password !== password) {
         console.log('about to resturn err');
         // const err = new Error('Invalid user or password');
-        const err = { message: 'Invalid user or password' };
+        const err = {
+          __typename: 'UserNotFoundError',
+          message: 'Invalid user or password',
+        };
         console.log('err', err);
         // return false;
         return err;
       }
-      return user;
+      return {
+        __typename: 'User',
+        ...user,
+      };
     },
     allUsers: async () => {
       const users = await prisma.user.findMany();
