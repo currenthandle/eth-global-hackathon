@@ -81,12 +81,10 @@ const Login = () => {
         console.log('set incorect creds');
         setIncorrectCreds(validUser.data.validateUser.message);
       } else {
-        console.log('in else');
-        const resp = await signIn('credentials', {
+        await signIn('credentials', {
           email: formValues.email,
           password: formValues.password,
           id: validUser.data.validateUser.id,
-          // redirect: false,
           callbackUrl: '/',
         });
       }

@@ -76,7 +76,6 @@ const Signup = () => {
     const formValues = getValues();
     if (formValues.password !== formValues.retypePassword) {
       setSignUpError('Passwords do not match');
-      // return;
     } else {
       const signUpUserResp = await signUpUser({
         variables: {
@@ -89,20 +88,12 @@ const Signup = () => {
         setSignUpError(signUpUserResp.data.signUpUser.message);
       }
       if (signUpUserResp.data.signUpUser.__typename === 'User') {
-        try {
-          const resp = await signIn('credentials', {
-            email: formValues.email,
-            password: formValues.password,
-            callbackUrl: '/',
-          });
-          // if (resp?.ok) {
-          //   router.push('/');
-          // } else {
-          //   console.error('error resp', resp);
-          // }
-        } catch (error) {
-          console.error('error catch', error);
-        }
+        await signIn('credentials', {
+          email: formValues.email,
+          password: formValues.password,
+          id: signUpUserResp.data.signUpUser.id,
+          callbackUrl: '/',
+        });
       }
     }
   };
