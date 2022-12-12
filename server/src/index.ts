@@ -31,11 +31,16 @@ const typeDefs = `#graphql
     linkedin: String
   }
 
+  type UserWithToken {
+    user: User!
+    token: String!
+  }
+
   type Error {
     message: String!
   }
 
-  union UserOrError = User | Error
+  union UserOrError = UserWithToken | Error
 
   type Query {
     allUsers: [User!]!
@@ -45,7 +50,7 @@ const typeDefs = `#graphql
 
   type Mutation {
     createUser(email: String!, password: String!): User!
-    signUpUser(email: String!, password: String!, role: String!): UserOrError!
+    signUpUser(email: String!, password: String!, role: String!): UserWithToken!
     login(email: String!, password: String!): User!
   }
 `;
@@ -106,6 +111,7 @@ const resolvers = {
       }
       return {
         __typename: 'User',
+        // token,
         ...user,
       };
     },
@@ -159,10 +165,16 @@ const resolvers = {
             role,
           },
         });
-        return {
-          __typename: 'User',
-          ...user,
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+        const resp = {
+          __typename: 'UserWithToken',
+          user: {
+            ...user,
+          },
+          token,
         };
+        console.log('resp', resp);
+        return resp;
       }
     },
   },
