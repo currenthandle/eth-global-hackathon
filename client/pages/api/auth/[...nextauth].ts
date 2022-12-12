@@ -13,9 +13,8 @@ export const authOptions = {
       async authorize(credentials) {
         console.log('credentials', credentials);
         return {
-          email: 'c@c.com',
-          password: 'cc',
-          id: '1',
+          email: credentials?.email,
+          id: '3',
         };
       },
     }),

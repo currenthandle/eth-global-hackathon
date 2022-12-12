@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -21,6 +22,7 @@ const VALIDATE_USER = gql`
       __typename
       ... on User {
         email
+        id
       }
       ... on UserNotFoundError {
         message
@@ -30,6 +32,7 @@ const VALIDATE_USER = gql`
 `;
 
 const Login: NextPage = () => {
+  const [incorrectCreds, setIncorrectCreds] = useState('');
   const router = useRouter();
   // const [validateUser, { data, error }] = useMutation(VALIDATE_USER);
   const [validateUser, { data, error }] = useLazyQuery(VALIDATE_USER);
@@ -70,44 +73,41 @@ const Login: NextPage = () => {
       // });
 
       console.log('validUser', validUser);
+      console.log('validUser.data', validUser.data.validateUser);
       console.log('validUser.error', validUser.error);
+      console.log('message', validUser.data.validateUser.message);
 
-      const resp = await signIn('credentials', {
-        email: formValues.email,
-        password: formValues.password,
-        // redirect: false,
-        callbackUrl: '/',
-      });
-      console.log('data', data);
-
-      console.log('resp', resp);
-
-      // if (resp?.ok) {
-      //   router.push('/');
-      // } else {
-      //   console.error('error', resp);
-      // }
+      if (validUser.data.validateUser.message) {
+        console.log('set incorect creds');
+        setIncorrectCreds(validUser.data.validateUser.message);
+        return;
+      } else {
+        console.log('in else');
+        const resp = await signIn('credentials', {
+          email: formValues.email,
+          password: formValues.password,
+          id: validUser.data.validateUser.id,
+          // redirect: false,
+          callbackUrl: '/',
+        });
+      }
     } catch (error) {
       console.error('error', error);
     }
-    // try {
-    //   await signIn("credentials", {
-    //     // await signIn("credentials", {
-    //     id: "credentials",
-    //     email: formValues.email,
-    //     password: formValues.password,
-    //     // redirect: false,
-    //     callbackUrl: "/",
-    //   });
-    // } catch (error) {
-    //   console.error("error", error);
-    // }
   };
 
+  console.log('render');
+  console.log('');
   return (
     <div className='flex justify-center pt-10'>
       <div className='w-6/12 rounded-lg border-2 py-4'>
         <h1 className='flex w-full justify-center'>Login</h1>
+        {console.log('incorrectCreds', incorrectCreds)}
+        {incorrectCreds && (
+          <p className='flex w-full justify-center text-red-500'>
+            {incorrectCreds}
+          </p>
+        )}
         <div className='flex w-full justify-center'>
           <form
             onSubmit={handleSubmit(onSubmit)}
