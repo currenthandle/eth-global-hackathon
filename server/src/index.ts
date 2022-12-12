@@ -5,6 +5,8 @@ import { unwrapResolverError } from '@apollo/server/errors';
 import { PrismaClient } from '@prisma/client';
 import { GraphQLResolveInfo, validate } from 'graphql';
 import { userInfo } from 'os';
+import { z } from 'zod';
+
 const prisma = new PrismaClient();
 
 const typeDefs = `#graphql
@@ -33,6 +35,13 @@ const typeDefs = `#graphql
     login(email: String!, password: String!): User!
   }
 `;
+const emailValidator = z.string().email();
+const passwordValidator = z.string().min(2);
+const roleValidator = z.union([
+  z.literal('hacker'),
+  z.literal('mentor'),
+  z.literal('sponsor'),
+]);
 
 type CreateUserArgs = {
   email: string;
@@ -45,7 +54,6 @@ interface AppContext {
   // userService: UserService;
   res: any;
 }
-console.log('resolvers!');
 
 const resolvers = {
   Query: {
@@ -53,6 +61,12 @@ const resolvers = {
       _: undefined,
       { email, password }: { email: string; password: string }
     ) {
+      if (!emailValidator.parse(email)) {
+        throw new Error('Invalid email input');
+      }
+      if (!passwordValidator.parse(password)) {
+        throw new Error('Invalid password input');
+      }
       const user = await prisma.user.findUnique({
         where: {
           email,
@@ -73,14 +87,6 @@ const resolvers = {
       const users = await prisma.user.findMany();
       return users;
     },
-    userByEmail: async (parent: undefined, { email }: { email: string }) => {
-      const user = await prisma.user.findUnique({
-        where: {
-          email: email,
-        },
-      });
-      return user;
-    },
   },
   Mutation: {
     async signUpUser(
@@ -91,6 +97,15 @@ const resolvers = {
         role,
       }: { email: string; password: string; role: string }
     ) {
+      if (!emailValidator.parse(email)) {
+        throw new Error('Invalid email input');
+      }
+      if (!passwordValidator.parse(password)) {
+        throw new Error('Invalid password input');
+      }
+      if (!roleValidator.parse(role)) {
+        throw new Error('Invalid role input');
+      }
       // check prisma db to see if the user already exists
       const user = await prisma.user.findUnique({
         where: {
@@ -107,7 +122,7 @@ const resolvers = {
       }
       // if the user doesn't exist, create the user and return the user
       else {
-        console.log('role', role);
+        // console.log('role', role);
         const user = await prisma.user.create({
           data: {
             email,
@@ -119,55 +134,6 @@ const resolvers = {
           __typename: 'User',
           ...user,
         };
-      }
-    },
-    // a mutation resolver that creates a new user and adds it to the database
-    async createUser(
-      parent: undefined,
-      args: CreateUserArgs
-      // context: AppContext,
-      // info: GraphQLResolveInfo
-    ) {
-      const { email, password } = args;
-
-      const user = await prisma.user.create({
-        data: {
-          password,
-          email,
-        },
-      });
-      return user;
-    },
-    async login(
-      parent: undefined,
-      args: CreateUserArgs,
-      context: AppContext
-      // info: GraphQLResolveInfo
-    ) {
-      // console.log('context', context);
-      const { email, password } = args;
-
-      try {
-        const user = await prisma.user.findUnique({
-          where: {
-            email,
-          },
-        });
-        if (!user) {
-          throw new Error('Invalid email or password');
-        }
-        if (user.password !== password) {
-          throw new Error('Invalid email or password');
-        }
-        // context.res.cookie('user', user, {
-        //   httpOnly: true,
-        //   maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
-        // });
-        // context.res.stausCode = 200;
-        // context.res.end(user);
-        return user;
-      } catch (err) {
-        throw new Error('Invalid email or password');
       }
     },
   },
