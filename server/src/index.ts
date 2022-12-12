@@ -59,6 +59,17 @@ interface AppContext {
 
 const resolvers = {
   Query: {
+    async userByEmail(_: undefined, { email }: { email: string }) {
+      if (!emailValidator.parse(email)) {
+        throw new Error('Invalid email input');
+      }
+      const user = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+      return user;
+    },
     async validateUser(
       _: undefined,
       { email, password }: { email: string; password: string }
