@@ -3,8 +3,8 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { unwrapResolverError } from '@apollo/server/errors';
 
 import { PrismaClient } from '@prisma/client';
-import { GraphQLResolveInfo, validate } from 'graphql';
-import { userInfo } from 'os';
+// import { GraphQLResolveInfo, validate } from 'graphql';
+// import { userInfo } from 'os';
 import { z } from 'zod';
 
 const prisma = new PrismaClient();
@@ -35,6 +35,7 @@ const typeDefs = `#graphql
     login(email: String!, password: String!): User!
   }
 `;
+
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
 const roleValidator = z.union([
