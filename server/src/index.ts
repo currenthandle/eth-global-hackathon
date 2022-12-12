@@ -28,6 +28,7 @@ const typeDefs = `#graphql
 
   type Mutation {
     createUser(email: String!, password: String!): User!
+    signUpUser(email: String!, password: String!): User!
     login(email: String!, password: String!): User!
   }
 `;
@@ -51,29 +52,16 @@ const resolvers = {
       _: undefined,
       { email, password }: { email: string; password: string }
     ) {
-      console.log('');
-      console.log('');
-      console.log('');
-      console.log('email', email);
-      console.log('email', typeof email);
-      console.log('password', password);
-      console.log('password', typeof password);
       const user = await prisma.user.findUnique({
         where: {
           email,
         },
       });
-      console.log('user before ', user);
       if (!user || user.password !== password) {
-        console.log('about to resturn err');
-        // const err = new Error('Invalid user or password');
-        const err = {
+        return {
           __typename: 'UserNotFoundError',
           message: 'Invalid user or password',
         };
-        console.log('err', err);
-        // return false;
-        return err;
       }
       return {
         __typename: 'User',
@@ -119,8 +107,6 @@ const resolvers = {
     ) {
       // console.log('context', context);
       const { email, password } = args;
-      console.log('email', email);
-      console.log('password', password);
 
       try {
         const user = await prisma.user.findUnique({
@@ -128,14 +114,12 @@ const resolvers = {
             email,
           },
         });
-        console.log('user before ', user);
         if (!user) {
           throw new Error('Invalid email or password');
         }
         if (user.password !== password) {
           throw new Error('Invalid email or password');
         }
-        console.log('user', user);
         // context.res.cookie('user', user, {
         //   httpOnly: true,
         //   maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
@@ -144,7 +128,6 @@ const resolvers = {
         // context.res.end(user);
         return user;
       } catch (err) {
-        console.log('err', err);
         throw new Error('Invalid email or password');
       }
     },

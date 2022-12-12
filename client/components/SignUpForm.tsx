@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
   password: z.string().min(2, { message: 'Too short' }),
+  retypePassword: z.string().min(2, { message: 'Too short' }),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -50,7 +51,7 @@ const Signup: NextPage = () => {
     },
   });
   // const onSubmit: SubmitHandler<Inputs> = (data) => console.log('hi', data)
-  const onSubmit = (data: Schema) => {
+  const onSubmit = (/*data: Schema*/) => {
     // mutate({
     //   email: data.email,
     //   password: data.password,
@@ -86,13 +87,13 @@ const Signup: NextPage = () => {
               placeholder='Password'
             />
             <p>{errors.password?.message}</p>
-            <label htmlFor='retype-password'>Password</label>
+            <label htmlFor='retypePassword'>Password</label>
             <input
-              {...register('password')}
+              {...register('retypePassword')}
               className='rounded-md border-2 border-black'
-              type='retype-password'
-              name='retype-password'
-              id='retype-password'
+              type='retypePassword'
+              name='retypePassword'
+              id='retypePassword'
               placeholder='Retype Password'
             />
             <p>{errors.password?.message}</p>
