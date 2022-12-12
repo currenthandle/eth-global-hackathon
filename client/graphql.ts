@@ -29,6 +29,9 @@ export const SIGNUP_USER = gql`
         }
         token
       }
+      ... on Error {
+        message
+      }
     }
   }
 `;

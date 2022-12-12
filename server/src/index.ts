@@ -50,7 +50,7 @@ const typeDefs = `#graphql
 
   type Mutation {
     createUser(email: String!, password: String!): User!
-    signUpUser(email: String!, password: String!, role: String!): UserWithToken!
+    signUpUser(email: String!, password: String!, role: String!): UserOrError!
     login(email: String!, password: String!): User!
   }
 `;
