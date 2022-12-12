@@ -11,7 +11,7 @@ export const authOptions = {
         id: { label: 'ID', type: 'id', placeholder: '1' },
       },
       async authorize(credentials) {
-        console.log('credentials', credentials);
+        // console.log('credentials', credentials);
         return {
           email: credentials?.email,
           id: credentials?.id as string,
