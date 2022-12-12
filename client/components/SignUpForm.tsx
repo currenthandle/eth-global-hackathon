@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
 import { SIGNUP_USER } from '../graphql';
+import { isConditionalExpression } from 'typescript';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -25,28 +26,6 @@ const Signup = () => {
   const [signUpUser, { data, error }] = useMutation(SIGNUP_USER);
   const [signUpError, setSignUpError] = useState('');
   const router = useRouter();
-  // const { mutate } = trpc.user.create.useMutation({
-  //   onSuccess: async () => {
-  //     const formValues = getValues();
-  //     try {
-  //       const resp = await signIn('credentials', {
-  //         email: formValues.email,
-  //         password: formValues.password,
-  //         redirect: false,
-  //       });
-  //       if (resp?.ok) {
-  //         router.push('/');
-  //       } else {
-  //         console.error('error', resp);
-  //       }
-  //     } catch (error) {
-  //       console.error('error', error);
-  //     }
-  //   },
-  //   onError: (error) => {
-  //     console.error('error', error);
-  //   },
-  // });
 
   const {
     register,
@@ -76,17 +55,21 @@ const Signup = () => {
           role: formValues.role,
         },
       });
+      console.log('hello after');
 
       if (signUpUserResp.data.signUpUser.__typename === 'Error') {
         setSignUpError(signUpUserResp.data.signUpUser.message);
       }
-      if (signUpUserResp.data.signUpUser.__typename === 'User') {
-        await signIn('credentials', {
-          email: formValues.email,
-          password: formValues.password,
-          id: signUpUserResp.data.signUpUser.id,
-          callbackUrl: '/',
-        });
+      if (signUpUserResp.data.signUpUser.__typename === 'UserWithToken') {
+        // await signIn('credentials', {
+        //   email: formValues.email,
+        //   password: formValues.password,
+        //   id: signUpUserResp.data.signUpUser.id,
+        //   callbackUrl: '/',
+        // });
+        console.log('signUpUserResp', signUpUserResp.data.signUpUser);
+        document.cookie = `token=${signUpUserResp.data.signUpUser.token}; path=/`;
+        router.push('/');
       }
     }
   };
