@@ -41,7 +41,6 @@ const Login = () => {
     register,
     handleSubmit,
     getValues,
-    watch,
     formState: { errors },
   } = useForm<Schema>({
     resolver: zodResolver(schema),
@@ -81,10 +80,12 @@ const Login = () => {
         console.log('set incorect creds');
         setIncorrectCreds(validUser.data.validateUser.message);
       } else {
+        console.log('validUser.data.validateUser', validUser.data.validateUser);
+        // const user = validUser.data.validateUser;
         await signIn('credentials', {
           email: formValues.email,
           password: formValues.password,
-          id: validUser.data.validateUser.id,
+          // id: id,
           callbackUrl: '/',
         });
       }
@@ -99,7 +100,6 @@ const Login = () => {
     <div className='flex justify-center pt-10'>
       <div className='w-6/12 rounded-lg border-2 py-4'>
         <h1 className='flex w-full justify-center'>Login</h1>
-        {console.log('incorrectCreds', incorrectCreds)}
         {incorrectCreds && (
           <p className='flex w-full justify-center text-red-500'>
             {incorrectCreds}

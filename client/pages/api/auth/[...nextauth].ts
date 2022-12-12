@@ -1,3 +1,4 @@
+import { createSecretKey } from 'crypto';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
@@ -7,7 +8,6 @@ export const authOptions = {
       name: 'Credentials',
       credentials: {
         email: { label: 'Email', type: 'email', placeholder: 'c@c.com' },
-        password: { label: 'Password', type: 'password', placeholder: 'cc' },
         id: { label: 'ID', type: 'id', placeholder: '1' },
       },
       async authorize(credentials) {

@@ -15,6 +15,7 @@ const typeDefs = `#graphql
     password: String!
     id: ID!
     role: String!
+    firstName: String
   }
 
   type Error {
