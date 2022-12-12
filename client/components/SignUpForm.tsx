@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -12,9 +13,25 @@ const schema = z.object({
   retypePassword: z.string().min(2, { message: 'Too short' }),
 });
 
+const SIGNUP_USER = gql`
+  mutation SignUpUser($email: String!, $password: String!) {
+    signUpUser(email: $email, password: $password) {
+      __typename
+      ... on User {
+        email
+        id
+      }
+      ... on Error {
+        message
+      }
+    }
+  }
+`;
+
 type Schema = z.infer<typeof schema>;
 
 const Signup = () => {
+  const [signUpUser, { data, error }] = useMutation(SIGNUP_USER);
   const [signUpError, setSignUpError] = useState('');
   const router = useRouter();
   // const { mutate } = trpc.user.create.useMutation({
@@ -50,17 +67,55 @@ const Signup = () => {
     defaultValues: {
       email: '',
       password: '',
+      retypePassword: '',
     },
   });
   // const onSubmit: SubmitHandler<Inputs> = (data) => console.log('hi', data)
-  const onSubmit = (/*data: Schema*/) => {
+  const onSubmit = async (/*data: Schema*/) => {
     // check that the password and retype password match
+    const formValues = getValues();
+    if (formValues.password !== formValues.retypePassword) {
+      setSignUpError('Passwords do not match');
+      // return;
+    } else {
+      const signUpUserResp = await signUpUser({
+        variables: {
+          email: formValues.email,
+          password: formValues.password,
+        },
+      });
+
+      if (signUpUserResp.data.signUpUser.__typename === 'Error') {
+        setSignUpError(signUpUserResp.data.signUpUser.message);
+      }
+      if (signUpUserResp.data.signUpUser.__typename === 'User') {
+        try {
+          const resp = await signIn('credentials', {
+            email: formValues.email,
+            password: formValues.password,
+            callbackUrl: '/',
+          });
+          // if (resp?.ok) {
+          //   router.push('/');
+          // } else {
+          //   console.error('error resp', resp);
+          // }
+        } catch (error) {
+          console.error('error catch', error);
+        }
+      }
+    }
   };
 
   return (
     <div className='flex justify-center pt-10'>
       <div className='w-6/12 rounded-lg border-2 py-4'>
         <h1 className='flex w-full justify-center'>Signup</h1>
+        {signUpError && (
+          <p className='flex w-full justify-center text-red-500'>
+            {signUpError}
+          </p>
+        )}
         <div className='flex w-full justify-center'>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -90,7 +145,7 @@ const Signup = () => {
             <input
               {...register('retypePassword')}
               className='rounded-md border-2 border-black'
-              type='retypePassword'
+              type='password'
               name='retypePassword'
               id='retypePassword'
               placeholder='Retype Password'
