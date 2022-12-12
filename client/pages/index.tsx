@@ -10,22 +10,16 @@ import {
 } from 'next';
 import { getServerAuthSession } from '../get-server-auth-session';
 import { signOut, useSession } from 'next-auth/react';
+import Header from '../components/Header';
 
 // export default function Home(): NextPage {
 const Home: NextPage = () => {
   const session = useSession();
   console.log('session', session);
   return (
-    <div className='flex justify-center items-center  min-h-screen '>
-      <button
-        className='rounded-lg border-2 p-6'
-        onClick={() => {
-          signOut();
-        }}
-      >
-        Sign Out
-      </button>
-    </div>
+    <main>
+      <Header />
+    </main>
   );
 };
 
