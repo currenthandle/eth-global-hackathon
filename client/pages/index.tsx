@@ -9,10 +9,12 @@ import {
   type NextPage,
 } from 'next';
 import { getServerAuthSession } from '../get-server-auth-session';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 // export default function Home(): NextPage {
 const Home: NextPage = () => {
+  const session = useSession();
+  console.log('session', session);
   return (
     <div className='flex justify-center items-center  min-h-screen '>
       <button
