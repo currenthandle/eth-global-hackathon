@@ -1,7 +1,7 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import ClientOnly from '../components/ClientOnly';
-import { Sample } from '../components/Sample';
+// import Head from 'next/head';
+// import Image from 'next/image';
+// import ClientOnly from '../components/ClientOnly';
+// import { Sample } from '../components/Sample';
 // import styles from '../styles/Home.module.css';
 import {
   type GetServerSideProps,
@@ -11,7 +11,8 @@ import {
 import { getServerAuthSession } from '../get-server-auth-session';
 import { signOut } from 'next-auth/react';
 
-export default function Home() {
+// export default function Home(): NextPage {
+const Home: NextPage = () => {
   return (
     <div className='flex justify-center items-center  min-h-screen '>
       <button
@@ -24,7 +25,9 @@ export default function Home() {
       </button>
     </div>
   );
-}
+};
+
+export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
