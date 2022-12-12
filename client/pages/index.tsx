@@ -14,18 +14,21 @@ import { signOut, useSession } from 'next-auth/react';
 import Header from '../components/Header';
 import ProfileEditor from '../components/ProfileEditor';
 import ClientOnly from '../components/ClientOnly';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 
 // export default function Home(): NextPage {
 const Home: NextPage = () => {
   const router = useRouter();
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!document.cookie) {
       router.push('/login');
     }
   }, [router]);
   // const session = useSession();
   // console.log('session', session);
+  // if (!document.cookie) {
+  //   router.push('/login');
+  // }
   return (
     <main>
       <Header />
