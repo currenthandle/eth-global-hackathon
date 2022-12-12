@@ -16,20 +16,6 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 //type SuccessInput extends Schema
-const VALIDATE_USER = gql`
-  query ValidateUser($email: String!, $password: String!) {
-    validateUser(email: $email, password: $password) {
-      __typename
-      ... on User {
-        email
-        id
-      }
-      ... on Error {
-        message
-      }
-    }
-  }
-`;
 
 const Login = () => {
   const [incorrectCreds, setIncorrectCreds] = useState('');

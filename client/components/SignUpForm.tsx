@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
+import { SIGNUP_USER } from '../graphql';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -17,21 +18,6 @@ const schema = z.object({
     z.literal('sponsor'),
   ]),
 });
-
-const SIGNUP_USER = gql`
-  mutation SignUpUser($email: String!, $password: String!, $role: String!) {
-    signUpUser(email: $email, password: $password, role: $role) {
-      __typename
-      ... on User {
-        email
-        id
-      }
-      ... on Error {
-        message
-      }
-    }
-  }
-`;
 
 type Schema = z.infer<typeof schema>;
 
