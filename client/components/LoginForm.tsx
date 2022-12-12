@@ -80,7 +80,6 @@ const Login = () => {
       if (validUser.data.validateUser.message) {
         console.log('set incorect creds');
         setIncorrectCreds(validUser.data.validateUser.message);
-        return;
       } else {
         console.log('in else');
         const resp = await signIn('credentials', {
