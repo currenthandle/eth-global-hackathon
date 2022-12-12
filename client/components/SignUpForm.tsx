@@ -11,6 +11,11 @@ const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
   password: z.string().min(2, { message: 'Too short' }),
   retypePassword: z.string().min(2, { message: 'Too short' }),
+  role: z.union([
+    z.literal('hacker'),
+    z.literal('mentor'),
+    z.literal('sponsor'),
+  ]),
 });
 
 const SIGNUP_USER = gql`
@@ -142,6 +147,19 @@ const Signup = () => {
               placeholder='Retype Password'
             />
             <p>{errors.password?.message}</p>
+
+            <label htmlFor='role'>Role</label>
+            <select
+              {...register('role')}
+              className='rounded-md border-2 border-black'
+              name='role'
+              id='role'
+            >
+              <option value='hacker'>Hacker</option>
+              <option value='mentor'>Mentor</option>
+              <option value='sponsor'>Sponsor</option>
+            </select>
+            {/* <p>{errors.role?.message}</p> */}
 
             <div className='flex justify-center'>
               <button
