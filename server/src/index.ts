@@ -82,6 +82,38 @@ const resolvers = {
     },
   },
   Mutation: {
+    async signUpUser(
+      _: undefined,
+      { email, password }: { email: string; password: string }
+    ) {
+      // check prisma db to see if the user already exists
+      const user = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+      // if the user exists, return an error
+      if (user) {
+        // throw new Error('User already exists');
+        return {
+          __typename: 'UserAlreadyExistsError',
+          message: 'Email already registered',
+        };
+      }
+      // if the user doesn't exist, create the user and return the user
+      else {
+        const user = await prisma.user.create({
+          data: {
+            email,
+            password,
+          },
+        });
+        return {
+          __typename: 'User',
+          ...user,
+        };
+      }
+    },
     // a mutation resolver that creates a new user and adds it to the database
     async createUser(
       parent: undefined,
