@@ -43,13 +43,13 @@ const roleValidator = z.union([
   z.literal('sponsor'),
 ]);
 
-type CreateUserArgs = {
-  email: string;
-  password: string;
-};
-interface UserService {
-  createUser(email: string, password: string): boolean;
-}
+// type CreateUserArgs = {
+//   email: string;
+//   password: string;
+// };
+// interface UserService {
+//   createUser(email: string, password: string): boolean;
+// }
 interface AppContext {
   // userService: UserService;
   res: any;
@@ -146,13 +146,13 @@ const server = new ApolloServer({
     // unwrapResolverError removes the outer GraphQLError wrapping from
     // errors thrown in resolvers, enabling us to check the instance of
     // the original error
-    return { message: 'Internal server error' };
+    return { message: formattedError.message };
   },
 });
 
 const { url } = await startStandaloneServer(server, {
   listen: { port: 3001 },
-  context: async ({ req, res }) => ({ res }),
+  // context: async ({ req, res }) => ({}),
 });
 
 console.log(`🚀  Server ready at: ${url}`);
