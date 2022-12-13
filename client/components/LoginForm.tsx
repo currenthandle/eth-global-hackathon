@@ -68,21 +68,13 @@ const Login = () => {
         setIncorrectCreds(validUser.data.validateUser.message);
       } else {
         console.log('validUser.data.validateUser', validUser.data.validateUser);
-        // const user = validUser.data.validateUser;
-        await signIn('credentials', {
-          email: formValues.email,
-          password: formValues.password,
-          // id: id,
-          callbackUrl: '/',
-        });
+        document.cookie = `token=${validUser.data.validateUser.token}`;
       }
     } catch (error) {
       console.error('error', error);
     }
   };
 
-  console.log('render');
-  console.log('');
   return (
     <div className='flex justify-center pt-10'>
       <div className='w-6/12 rounded-lg border-2 py-4'>

@@ -19,8 +19,10 @@ import { useEffect, useLayoutEffect } from 'react';
 // export default function Home(): NextPage {
 const Home: NextPage = () => {
   const router = useRouter();
-  useLayoutEffect(() => {
+  useEffect(() => {
+    console.log('document.cookie', document.cookie);
     if (!document.cookie) {
+      console.log('redirecting');
       router.push('/login');
     }
   }, [router]);

@@ -5,6 +5,7 @@ import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
 import getUserId from './utils/getUserId.js';
 
+// consider putting prisma on context
 const prisma = new PrismaClient();
 
 interface AppContext {
