@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.2",
     "@hookform/resolvers": "^2.9.10",
     "@types/node": "18.11.13",
     "@types/react": "18.0.26",

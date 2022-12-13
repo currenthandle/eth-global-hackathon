@@ -1,38 +1,16 @@
-import jwt from 'jsonwebtoken';
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-// import { unwrapResolverError } from '@apollo/server/errors';
-
 import { PrismaClient } from '@prisma/client';
-// import { GraphQLResolveInfo, validate } from 'graphql';
-// import { userInfo } from 'os';
-// import { z } from 'zod';
-import typeDefs from './graphql/typeDefs';
-// const typeDefs = require('./graphql/typeDefs');
-
-import * as queries from './graphql/resolvers/queries';
-import * as mutations from './graphql/resolvers/mutations';
-
-// console.log('queries', queries);
+import typeDefs from './graphql/typeDefs.js';
+import resolvers from './graphql/resolvers/index.js';
+import getUserId from './utils/getUserId.js';
 
 const prisma = new PrismaClient();
 
-// type CreateUserArgs = {
-//   email: string;
-//   password: string;
-// };
-// interface UserService {
-//   createUser(email: string, password: string): boolean;
-// }
 interface AppContext {
   // userService: UserService;
   res: any;
 }
-
-const resolvers = {
-  Query: queries,
-  Mutation: mutations,
-};
 
 const server = new ApolloServer({
   typeDefs,
@@ -44,31 +22,6 @@ const server = new ApolloServer({
     return { message: formattedError.message };
   },
 });
-
-function getTokenPayload(token) {
-  // const payload = Buffer.from(token.split('.')[1], 'base64').toString();
-  // return JSON.parse(payload);
-  return jwt.verify(token, process.env.JWT_SECRET);
-}
-
-function getUserId(req, authToken?) {
-  if (req) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const token = authHeader.replace('Bearer ', '');
-      if (!token) {
-        throw new Error('No token found');
-      }
-      const { userId } = getTokenPayload(token);
-      return userId;
-    }
-  } else if (authToken) {
-    const { userId } = getTokenPayload(authToken);
-    return userId;
-  }
-
-  throw new Error('Not authenticated');
-}
 
 const { url } = await startStandaloneServer(server, {
   listen: { port: 3001 },
