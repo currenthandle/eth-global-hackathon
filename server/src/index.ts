@@ -6,62 +6,16 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { PrismaClient } from '@prisma/client';
 // import { GraphQLResolveInfo, validate } from 'graphql';
 // import { userInfo } from 'os';
-import { z } from 'zod';
+// import { z } from 'zod';
+import typeDefs from './graphql/typeDefs';
+// const typeDefs = require('./graphql/typeDefs');
 
-type Role = 'hacker' | 'mentor' | 'sponsor';
+import * as queries from './graphql/resolvers/queries';
+import * as mutations from './graphql/resolvers/mutations';
+
+// console.log('queries', queries);
 
 const prisma = new PrismaClient();
-
-const typeDefs = `#graphql
-  type User {
-    email: String!
-    password: String!
-    id: ID!
-    role: String!
-    firstName: String
-    lastName: String
-    student: Boolean
-    school: String
-    country: String
-    company: String
-    website: String
-    github: String
-    twitter: String
-    telegram: String
-    linkedin: String
-  }
-
-  type UserWithToken {
-    user: User!
-    token: String!
-  }
-
-  type Error {
-    message: String!
-  }
-
-  union UserOrError = UserWithToken | Error
-
-  type Query {
-    allUsers: [User!]!
-    userByEmail(email: String!): User!
-    validateUser(email: String!, password: String!): UserOrError!
-  }
-
-  type Mutation {
-    createUser(email: String!, password: String!): User!
-    signUpUser(email: String!, password: String!, role: String!): UserOrError!
-    login(email: String!, password: String!): User!
-  }
-`;
-
-const emailValidator = z.string().email();
-const passwordValidator = z.string().min(2);
-const roleValidator = z.union([
-  z.literal('hacker'),
-  z.literal('mentor'),
-  z.literal('sponsor'),
-]);
 
 // type CreateUserArgs = {
 //   email: string;
@@ -76,109 +30,8 @@ interface AppContext {
 }
 
 const resolvers = {
-  Query: {
-    async userByEmail(_: undefined, { email }: { email: string }) {
-      if (!emailValidator.parse(email)) {
-        throw new Error('Invalid email input');
-      }
-      const user = await prisma.user.findUnique({
-        where: {
-          email,
-        },
-      });
-      return user;
-    },
-    async validateUser(
-      _: undefined,
-      { email, password }: { email: string; password: string }
-    ) {
-      console.log('in validateUser');
-      if (!emailValidator.parse(email)) {
-        throw new Error('Invalid email input');
-      }
-      if (!passwordValidator.parse(password)) {
-        throw new Error('Invalid password input');
-      }
-      const user = await prisma.user.findUnique({
-        where: {
-          email,
-        },
-      });
-      if (!user || user.password !== password) {
-        return {
-          __typename: 'Error',
-          message: 'Invalid user or password',
-        };
-      }
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-      console.log('token', token);
-      return {
-        __typename: 'UserWithToken',
-        user,
-        token,
-      };
-    },
-    allUsers: async () => {
-      const users = await prisma.user.findMany();
-      return users;
-    },
-  },
-  Mutation: {
-    async signUpUser(
-      _: undefined,
-      {
-        email,
-        password,
-        role,
-      }: { email: string; password: string; role: Role },
-      ctx
-    ) {
-      // console.log('ctx', Object.keys(ctx));
-      // console.log(ctx.userId);
-      if (!emailValidator.parse(email)) {
-        throw new Error('Invalid email input');
-      }
-      if (!passwordValidator.parse(password)) {
-        throw new Error('Invalid password input');
-      }
-      if (!roleValidator.parse(role)) {
-        throw new Error('Invalid role input');
-      }
-      // check prisma db to see if the user already exists
-      const user = await prisma.user.findUnique({
-        where: {
-          email,
-        },
-      });
-      // if the user exists, return an error
-      if (user) {
-        // throw new Error('User already exists');
-        return {
-          __typename: 'Error',
-          message: 'Email already registered',
-        };
-      }
-      // if the user doesn't exist, create the user and return the user
-      else {
-        // console.log('role', role);
-        const user = await prisma.user.create({
-          data: {
-            email,
-            password,
-            role,
-          },
-        });
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-        const resp = {
-          __typename: 'UserWithToken',
-          user,
-          token,
-        };
-        console.log('resp', resp);
-        return resp;
-      }
-    },
-  },
+  Query: queries,
+  Mutation: mutations,
 };
 
 const server = new ApolloServer({
