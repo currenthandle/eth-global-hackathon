@@ -50,6 +50,7 @@ const Signup = () => {
           role: formValues.role,
         },
       });
+      console.log('hello');
 
       if (signUpUserResp.data.signUpUser.__typename === 'Error') {
         setSignUpError(signUpUserResp.data.signUpUser.message);

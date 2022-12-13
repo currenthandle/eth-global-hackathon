@@ -1,5 +1,6 @@
+import { setContext } from '@apollo/client/link/context';
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+// import { startStandaloneServer } from '@apollo/server/standalone';
 import { PrismaClient } from '@prisma/client';
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
@@ -20,9 +21,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).split('/').slice(0, -2).join('/');
 import * as dotenv from 'dotenv';
 const env = dotenv.config({ path: __dirname + '/.env' });
-// console.log('env', env);
-// console.log('env', process.env.DATABASE_URL);
-// console.log('env', process.env.JWT_SECRET);
 
 // consider putting prismabjecon context
 const prisma = new PrismaClient();
@@ -52,31 +50,25 @@ await server.start();
 app.use(
   '/',
   cors<cors.CorsRequest>({
-    origin: [
-      'http://localhost:3000',
-      'https://www.your-app.example',
-      'https://studio.apollographql.com',
-    ],
+    origin: ['http://localhost:3000', 'https://studio.apollographql.com'],
     credentials: true,
   }),
   json(),
-  expressMiddleware(server)
+  expressMiddleware(server, {
+    context: async ({ req, res }) => {
+      return {
+        req,
+        res,
+        prisma,
+        userId:
+          req && req.headers && req.headers.authorization
+            ? getUserId(req)
+            : null,
+      };
+    },
+  })
 );
 await new Promise<void>((resolve) =>
   httpServer.listen({ port: 3001 }, resolve)
 );
 console.log(`🚀 Server ready at http://localhost:3001`);
-
-// const { url } = await startStandaloneServer(server, {
-//   listen: { port: 3001 },
-//   context: async ({ req, res }) => {
-//     console.log('req', req);
-//     return {
-//       ...req,
-//       userId:
-//         req && req.headers && req.headers.authorization ? getUserId(req) : null,
-//     };
-//   },
-// });
-
-// console.log(`🚀  Server ready at: ${url}`);

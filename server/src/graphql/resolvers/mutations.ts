@@ -19,7 +19,6 @@ export const signUpUser = async (
   { email, password, role }: { email: string; password: string; role: Role },
   ctx
 ) => {
-  console.log('ctx', ctx);
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
   }
