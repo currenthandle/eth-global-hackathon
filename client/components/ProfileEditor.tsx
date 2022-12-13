@@ -1,11 +1,9 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-// import * as z from 'zod';
 import { z } from 'zod';
-import { useSession } from 'next-auth/react';
 
 import { userByEmail } from '../graphql';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -49,13 +47,10 @@ const ProfileEditor = () => {
     },
   });
 
-  // const session = useSession();
-  // const userEmail = session?.data?.user?.email;
   const { data, error } = useQuery(userByEmail, {
     variables: { email: 'c@c.com' },
   });
   const userData = data?.userByEmail;
-  console.log('userData', userData);
 
   return (
     <div className='flex justify-center'>

@@ -1,10 +1,9 @@
 import { type NextPage } from 'next';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { signIn } from 'next-auth/react';
+import { z } from 'zod';
 import { useRouter } from 'next/router';
-import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import Link from 'next/link';
 import { useState } from 'react';
 import { VALIDATE_USER } from '../graphql';
@@ -16,12 +15,9 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-//type SuccessInput extends Schema
-
 const Login = () => {
   const [incorrectCreds, setIncorrectCreds] = useState('');
   const router = useRouter();
-  // const [validateUser, { data, error }] = useMutation(VALIDATE_USER);
   const [validateUser, { data, error }] = useLazyQuery(VALIDATE_USER);
 
   const {
@@ -37,12 +33,8 @@ const Login = () => {
     },
   });
   const onSubmit = async (/*data: Schema*/) => {
-    console.log('onsubmit');
     try {
       const formValues = getValues();
-      console.log('formValues', formValues);
-      console.log('about to call LAZY');
-
       const validUser = await validateUser({
         variables: {
           email: formValues.email,
@@ -50,24 +42,9 @@ const Login = () => {
         },
       });
 
-      // const { data } = useQuery(VALIDATE_USER, {
-      //   // const validUser = await validateUser({
-      //   variables: {
-      //     email: formValues.email,
-      //     password: formValues.password,
-      //   },
-      // });
-
-      console.log('validUser', validUser);
-      console.log('validUser.data', validUser.data.validateUser);
-      console.log('validUser.error', validUser.error);
-      console.log('message', validUser.data.validateUser.message);
-
       if (validUser.data.validateUser.message) {
-        console.log('set incorect creds');
         setIncorrectCreds(validUser.data.validateUser.message);
       } else {
-        console.log('validUser.data.validateUser', validUser.data.validateUser);
         document.cookie = `token=${validUser.data.validateUser.token}`;
         router.push('/');
       }

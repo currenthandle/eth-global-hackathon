@@ -31,7 +31,6 @@ export const validateUser = async (
   _: undefined,
   { email, password }: { email: string; password: string }
 ) => {
-  console.log('in validateUser');
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
   }
@@ -50,7 +49,6 @@ export const validateUser = async (
     };
   }
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-  console.log('token', token);
   return {
     __typename: 'UserWithToken',
     user,

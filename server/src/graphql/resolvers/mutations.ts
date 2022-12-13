@@ -19,8 +19,6 @@ export const signUpUser = async (
   { email, password, role }: { email: string; password: string; role: Role },
   ctx
 ) => {
-  // console.log('ctx', Object.keys(ctx));
-  // console.log(ctx.userId);
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
   }
@@ -46,7 +44,6 @@ export const signUpUser = async (
   }
   // if the user doesn't exist, create the user and return the user
   else {
-    // console.log('role', role);
     const user = await prisma.user.create({
       data: {
         email,
@@ -60,7 +57,6 @@ export const signUpUser = async (
       user,
       token,
     };
-    console.log('resp', resp);
     return resp;
   }
 };

@@ -2,12 +2,10 @@ import { type NextPage } from 'next';
 import { useForm /*, type SubmitHandler*/ } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { SIGNUP_USER } from '../graphql';
-import { isConditionalExpression } from 'typescript';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -40,14 +38,11 @@ const Signup = () => {
       retypePassword: '',
     },
   });
-  // const onSubmit: SubmitHandler<Inputs> = (data) => console.log('hi', data)
   const onSubmit = async (/*data: Schema*/) => {
-    // check that the password and retype password match
     const formValues = getValues();
     if (formValues.password !== formValues.retypePassword) {
       setSignUpError('Passwords do not match');
     } else {
-      console.log('formValues', formValues.role);
       const signUpUserResp = await signUpUser({
         variables: {
           email: formValues.email,
@@ -55,19 +50,11 @@ const Signup = () => {
           role: formValues.role,
         },
       });
-      console.log('hello after');
 
       if (signUpUserResp.data.signUpUser.__typename === 'Error') {
         setSignUpError(signUpUserResp.data.signUpUser.message);
       }
       if (signUpUserResp.data.signUpUser.__typename === 'UserWithToken') {
-        // await signIn('credentials', {
-        //   email: formValues.email,
-        //   password: formValues.password,
-        //   id: signUpUserResp.data.signUpUser.id,
-        //   callbackUrl: '/',
-        // });
-        console.log('signUpUserResp', signUpUserResp.data.signUpUser);
         document.cookie = `token=${signUpUserResp.data.signUpUser.token}; path=/`;
         router.push('/');
       }
