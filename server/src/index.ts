@@ -92,6 +92,7 @@ const resolvers = {
       _: undefined,
       { email, password }: { email: string; password: string }
     ) {
+      console.log('in validateUser');
       if (!emailValidator.parse(email)) {
         throw new Error('Invalid email input');
       }
@@ -109,10 +110,12 @@ const resolvers = {
           message: 'Invalid user or password',
         };
       }
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+      console.log('token', token);
       return {
-        __typename: 'User',
-        // token,
-        ...user,
+        __typename: 'UserWithToken',
+        user,
+        token,
       };
     },
     allUsers: async () => {
@@ -130,8 +133,8 @@ const resolvers = {
       }: { email: string; password: string; role: Role },
       ctx
     ) {
-      console.log('ctx', Object.keys(ctx));
-      console.log(ctx.userId);
+      // console.log('ctx', Object.keys(ctx));
+      // console.log(ctx.userId);
       if (!emailValidator.parse(email)) {
         throw new Error('Invalid email input');
       }
@@ -168,9 +171,7 @@ const resolvers = {
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
         const resp = {
           __typename: 'UserWithToken',
-          user: {
-            ...user,
-          },
+          user,
           token,
         };
         console.log('resp', resp);

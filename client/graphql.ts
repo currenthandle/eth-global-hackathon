@@ -40,9 +40,11 @@ export const VALIDATE_USER = gql`
   query ValidateUser($email: String!, $password: String!) {
     validateUser(email: $email, password: $password) {
       __typename
-      ... on User {
-        email
-        id
+      ... on UserWithToken {
+        user {
+          email
+        }
+        token
       }
       ... on Error {
         message
