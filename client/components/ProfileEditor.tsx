@@ -2,7 +2,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { userByEmail } from '../graphql';
+import { userByEmail } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
 
 const schema = z.object({

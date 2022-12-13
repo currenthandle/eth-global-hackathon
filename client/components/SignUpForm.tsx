@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { SIGNUP_USER } from '../graphql';
+import { SIGNUP_USER } from '../graphql/mutations';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),

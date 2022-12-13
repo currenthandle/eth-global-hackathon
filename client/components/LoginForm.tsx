@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useLazyQuery } from '@apollo/client';
 import Link from 'next/link';
 import { useState } from 'react';
-import { VALIDATE_USER } from '../graphql';
+import { VALIDATE_USER } from '../graphql/queries';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),

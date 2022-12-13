@@ -9,8 +9,6 @@ import {
   type GetServerSidePropsContext,
   type NextPage,
 } from 'next';
-import { getServerAuthSession } from '../get-server-auth-session';
-import { signOut, useSession } from 'next-auth/react';
 import Header from '../components/Header';
 import ProfileEditor from '../components/ProfileEditor';
 import ClientOnly from '../components/ClientOnly';
