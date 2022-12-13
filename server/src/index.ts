@@ -4,8 +4,25 @@ import { PrismaClient } from '@prisma/client';
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
 import getUserId from './utils/getUserId.js';
+// import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+// .split('/')
+// .slice(0, -1)
+// .join('/');
+console.log('filename', __filename);
+const __dirname = path.dirname(__filename).split('/').slice(0, -2).join('/');
+console.log('directory-name 👉️', __dirname);
+import * as dotenv from 'dotenv';
+const env = dotenv.config({ path: __dirname + '/.env' });
+console.log('env', env);
+// dotenv.config();
+// console.log('env', Object.keys(process.env));
+console.log('env', process.env.DATABASE_URL);
+console.log('env', process.env.JWT_SECRET);
 
-// consider putting prisma on context
+// consider putting prismabjecon context
 const prisma = new PrismaClient();
 
 interface AppContext {

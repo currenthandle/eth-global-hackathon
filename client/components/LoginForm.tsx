@@ -34,6 +34,7 @@ const Login = () => {
   });
   const onSubmit = async (/*data: Schema*/) => {
     try {
+      console.log('begin');
       const formValues = getValues();
       const validUser = await validateUser({
         variables: {
@@ -42,8 +43,10 @@ const Login = () => {
         },
       });
 
-      if (validUser.data.validateUser.message) {
-        setIncorrectCreds(validUser.data.validateUser.message);
+      console.log('begin', validUser);
+      if (validUser?.data?.validateUser?.message) {
+        console.log('hello');
+        setIncorrectCreds(validUser?.data?.validateUser?.message);
       } else {
         document.cookie = `token=${validUser.data.validateUser.token}`;
         router.push('/');
