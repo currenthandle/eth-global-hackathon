@@ -69,6 +69,7 @@ const Login = () => {
       } else {
         console.log('validUser.data.validateUser', validUser.data.validateUser);
         document.cookie = `token=${validUser.data.validateUser.token}`;
+        router.push('/');
       }
     } catch (error) {
       console.error('error', error);
