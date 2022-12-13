@@ -1,6 +1,7 @@
+import { IncomingMessage } from 'http';
 import getTokenPayload from './getTokenPayload.js';
 
-function getUserId(req, authToken?) {
+function getUserId(req: IncomingMessage, authToken?: string) {
   if (req) {
     const authHeader = req.headers.authorization;
     if (authHeader) {

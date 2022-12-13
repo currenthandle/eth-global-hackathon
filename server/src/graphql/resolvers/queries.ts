@@ -7,11 +7,6 @@ const prisma = new PrismaClient();
 
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
-const roleValidator = z.union([
-  z.literal('hacker'),
-  z.literal('mentor'),
-  z.literal('sponsor'),
-]);
 
 export const userByEmail = async (
   _: undefined,
@@ -31,6 +26,7 @@ export const validateUser = async (
   _: undefined,
   { email, password }: { email: string; password: string }
 ) => {
+  console.log('inside validateUser');
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
   }
