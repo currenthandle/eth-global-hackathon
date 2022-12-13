@@ -14,7 +14,7 @@ const { json } = bodyParser;
 import { expressMiddleware } from '@apollo/server/express4';
 import http from 'http';
 
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -27,24 +27,21 @@ const prisma = new PrismaClient();
 
 const app = express();
 const httpServer = http.createServer(app);
-
-interface AppContext {
-  // userService: UserService;
-  res: any;
+interface Context {
+  prisma: PrismaClient;
+  userId: string | null;
+  req: Request;
+  res: Response;
 }
 
-const server = new ApolloServer({
+const server = new ApolloServer<Context>({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-  formatError: (formattedError, error) => {
-    // unwrapResolverError removes the outer GraphQLError wrapping from
-    // errors thrown in resolvers, enabling us to check the instance of
-    // the original error
+  formatError: (formattedError /*, error*/) => {
     return { message: formattedError.message };
   },
 });
-
 await server.start();
 
 app.use(
