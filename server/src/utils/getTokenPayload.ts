@@ -1,9 +1,9 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
-function getTokenPayload(token: string) {
-  const resp = jwt.verify(token, process.env.JWT_SECRET);
-  // console.log('resp', resp);
-  return resp;
+type TokenPayload = { userId: string } & JwtPayload;
+
+function getTokenPayload(token: string): TokenPayload {
+  return jwt.verify(token, process.env.JWT_SECRET) as TokenPayload;
 }
 
 export default getTokenPayload;

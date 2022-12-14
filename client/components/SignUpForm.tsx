@@ -56,7 +56,7 @@ const Signup = () => {
         setSignUpError(signUpUserResp.data.signUpUser.message);
       }
       if (signUpUserResp.data.signUpUser.__typename === 'UserWithToken') {
-        document.cookie = `token=${signUpUserResp.data.signUpUser.token}; path=/`;
+        document.cookie = `server-auth-token=${signUpUserResp.data.signUpUser.token}; path=/`;
         router.push('/');
       }
     }

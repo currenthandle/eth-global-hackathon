@@ -20,19 +20,13 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).split('/').slice(0, -2).join('/');
 import * as dotenv from 'dotenv';
+import { Context } from './utils/types.js';
 const env = dotenv.config({ path: __dirname + '/.env' });
 
-// consider putting prismabjecon context
 const prisma = new PrismaClient();
 
 const app = express();
 const httpServer = http.createServer(app);
-interface Context {
-  prisma: PrismaClient;
-  userId: string | null;
-  req: Request;
-  res: Response;
-}
 
 const server = new ApolloServer<Context>({
   typeDefs,
@@ -45,7 +39,6 @@ const server = new ApolloServer<Context>({
 await server.start();
 
 app.use(
-  '/',
   cors<cors.CorsRequest>({
     origin: ['http://localhost:3000', 'https://studio.apollographql.com'],
     credentials: true,
@@ -53,15 +46,25 @@ app.use(
   json(),
   expressMiddleware(server, {
     context: async ({ req, res }) => {
-      return {
-        req,
-        res,
-        prisma,
-        userId:
-          req && req.headers && req.headers.authorization
-            ? getUserId(req)
-            : null,
-      };
+      // console.log('req.headers.authorization', req.headers.authorization);
+      // console.log('==================================================');
+      // console.log('==================================================');
+      // console.log('==================================================');
+      // console.log('==================================================');
+      // console.log('req.headers', req.headers);
+      // console.log('==================================================');
+      // console.log('==================================================');
+      // console.log('==================================================');
+      // console.log('==================================================');
+      const cookie = req.headers.cookie;
+      if (cookie)
+        return {
+          req,
+          res,
+          prisma,
+          userId:
+            req && req.headers && req.headers.cookie ? getUserId(req) : null,
+        };
     },
   })
 );

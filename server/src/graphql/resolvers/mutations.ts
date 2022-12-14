@@ -2,6 +2,7 @@ import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
 import { PrismaClient } from '@prisma/client';
+import { Context } from '../..';
 type Role = 'hacker' | 'mentor' | 'sponsor';
 
 const prisma = new PrismaClient();

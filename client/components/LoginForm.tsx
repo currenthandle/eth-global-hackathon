@@ -48,7 +48,7 @@ const Login = () => {
         console.log('hello');
         setIncorrectCreds(validUser?.data?.validateUser?.message);
       } else {
-        document.cookie = `token=${validUser.data.validateUser.token}`;
+        document.cookie = `server-auth-token=${validUser.data.validateUser.token}`;
         router.push('/');
       }
     } catch (error) {

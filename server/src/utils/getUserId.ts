@@ -1,20 +1,19 @@
 import { IncomingMessage } from 'http';
 import getTokenPayload from './getTokenPayload.js';
 
-function getUserId(req: IncomingMessage, authToken?: string) {
-  if (req) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const token = authHeader.replace('Bearer ', '');
-      if (!token) {
-        throw new Error('No token found');
+function getUserId(req: IncomingMessage) {
+  const cookie = req.headers?.cookie;
+  let serverAuthToken = null;
+  if (cookie) {
+    const cookies = cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const [key, value] = cookie.split('=');
+      if (key === 'server-auth-token') {
+        serverAuthToken = value;
+        return getTokenPayload(serverAuthToken);
       }
-      const { userId } = getTokenPayload(token);
-      return userId;
     }
-  } else if (authToken) {
-    const { userId } = getTokenPayload(authToken);
-    return userId;
   }
 
   throw new Error('Not authenticated');
