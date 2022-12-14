@@ -12,18 +12,21 @@ export interface Context {
 
 export interface UserUpdate {
   userUpdate: {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    password?: string;
-    student?: boolean;
-    school?: string;
-    country?: string;
-    company?: string;
-    website?: string;
-    github?: string;
-    twitter?: string;
-    telegram?: string;
-    linkedin?: string;
+    // [key: string]: string | boolean | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    email?: string | undefined;
+    password?: string | undefined;
+    student?: boolean | undefined;
+    school?: string | undefined;
+    country?: string | undefined;
+    company?: string | undefined;
+    website?: string | undefined;
+    github?: string | undefined;
+    twitter?: string | undefined;
+    telegram?: string | undefined;
+    linkedin?: string | undefined;
   };
 }
+
+export type UserUpdateKeys = keyof UserUpdate['userUpdate'];

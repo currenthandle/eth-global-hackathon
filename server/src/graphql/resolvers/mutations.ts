@@ -1,4 +1,5 @@
-import { UserUpdate } from './../../utils/types';
+import { userData } from './queries';
+import { UserUpdate, UserUpdateKeys } from './../../utils/types';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
@@ -20,16 +21,16 @@ export const updateUser = async (
   ctx: Context
 ) => {
   authRequest(ctx);
-  console.log('userUpdate', userUpdate);
-  const updates = Object.entries(userUpdate.userUpdate).reduce(
-    (acc, [key, value]) => {
-      if (value) {
-        acc[key] = value;
-      }
-      return acc;
-    },
-    {}
-  );
+  // console.log('userUpdate', userUpdate);
+  type ReduceInput = typeof userUpdate.userUpdate;
+  const updates = Object.entries(userUpdate.userUpdate).reduce<{
+    [key: string]: string | boolean;
+  }>((acc, [key, value]: [UserUpdateKeys, string | boolean]) => {
+    if (value) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
   console.log('updates', updates);
   const user = await ctx.prisma.user.update({
     where: {
