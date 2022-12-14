@@ -2,6 +2,7 @@ import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
 import { PrismaClient } from '@prisma/client';
+import { Context } from '../../utils/types';
 
 const prisma = new PrismaClient();
 
@@ -10,8 +11,12 @@ const passwordValidator = z.string().min(2);
 
 export const userByEmail = async (
   _: undefined,
-  { email }: { email: string }
+  { email }: { email: string },
+  ctx: Context
 ) => {
+  if (!ctx.auth || !ctx.auth.userId) {
+    throw new Error('Unauthorized');
+  }
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
   }

@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 export type TokenPayload = { userId: string } & JwtPayload;
 export interface Context {
   prisma: PrismaClient;
-  userId: TokenPayload;
+  auth: TokenPayload;
   req: Request;
   res: Response;
 }

@@ -4,7 +4,7 @@ import { ApolloServer } from '@apollo/server';
 import { PrismaClient } from '@prisma/client';
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
-import getUserId from './utils/getUserId.js';
+import getAuth from './utils/getAuth.js';
 // import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -40,18 +40,18 @@ await server.start();
 
 app.use(
   cors<cors.CorsRequest>({
-    origin: ['http://localhost:3000', 'https://studio.apollographql.com'],
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
     credentials: true,
   }),
   json(),
   expressMiddleware(server, {
     context: async ({ req, res }) => {
+      console.log('req.headers', req.headers);
       return {
         req,
         res,
         prisma,
-        userId:
-          req && req.headers && req.headers.cookie ? getUserId(req) : null,
+        auth: req && req.headers && req.headers.cookie ? getAuth(req) : null,
       };
     },
   })
