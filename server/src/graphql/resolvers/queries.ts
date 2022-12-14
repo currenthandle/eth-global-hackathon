@@ -10,9 +10,8 @@ const prisma = new PrismaClient();
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
 
-export const userData = async (_: undefined, args: any, ctx: Context) => {
+export const userData = async (_: undefined, __: {}, ctx: Context) => {
   authRequest(ctx);
-  console.log('args', args);
 
   const user = await prisma.user.findUnique({
     where: {
