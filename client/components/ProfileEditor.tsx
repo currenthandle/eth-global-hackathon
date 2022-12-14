@@ -47,10 +47,9 @@ const ProfileEditor = () => {
     },
   });
 
-  const { data, error } = useQuery(USER_DATA, {
-    variables: { email: 'c@c.com' },
-  });
+  const { data, error } = useQuery(USER_DATA);
   const userData = data?.userData;
+  console.log('userData', userData);
 
   return (
     <div className='flex justify-center'>

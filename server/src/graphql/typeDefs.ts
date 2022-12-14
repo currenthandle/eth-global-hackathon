@@ -30,14 +30,13 @@ const typeDefs = `#graphql
 
   type Query {
     allUsers: [User!]!
-    userData(email: String!): User!
+    userData: User!
     validateUser(email: String!, password: String!): UserOrError!
   }
 
   type Mutation {
     createUser(email: String!, password: String!): User!
     signUpUser(email: String!, password: String!, role: String!): UserOrError!
-    login(email: String!, password: String!): User!
   }
 `;
 
