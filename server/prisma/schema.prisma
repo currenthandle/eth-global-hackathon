@@ -42,6 +42,14 @@ model User {
   // wallet    String?
 }
 
+enum ExperienceLevel {
+  new
+  beginner
+  intermediate
+  advanced
+  expert
+}
+
 model Experience {
   id          String           @id @default(cuid())
   userId      String           @unique
@@ -51,14 +59,8 @@ model Experience {
   tools       Tool[]
   languages   Language[]
   user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
 
-enum ExperienceLevel {
-  new
-  beginner
-  intermediate
-  advanced
-  expert
+  @@index([userId])
 }
 
 model Tool {
@@ -66,6 +68,8 @@ model Tool {
   experienceId String
   name         String
   experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+
+  @@index([experienceId])
 }
 
 model Language {
@@ -73,4 +77,6 @@ model Language {
   experienceId String
   name         String
   experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+
+  @@index([experienceId])
 }

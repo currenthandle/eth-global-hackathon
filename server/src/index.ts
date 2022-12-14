@@ -46,7 +46,7 @@ app.use(
   json(),
   expressMiddleware(server, {
     context: async ({ req, res }) => {
-      console.log('req.headers', req.headers);
+      // console.log('req.headers', req.headers);
       return {
         req,
         res,

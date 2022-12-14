@@ -15,6 +15,7 @@ export const userByEmail = async (
   ctx: Context
 ) => {
   if (!ctx.auth || !ctx.auth.userId) {
+    console.log('about to say unauth');
     throw new Error('Unauthorized');
   }
   if (!emailValidator.parse(email)) {
