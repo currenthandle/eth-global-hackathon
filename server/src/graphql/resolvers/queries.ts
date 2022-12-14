@@ -3,27 +3,20 @@ import jwt from 'jsonwebtoken';
 
 import { PrismaClient } from '@prisma/client';
 import { Context } from '../../utils/types';
+import authRequest from '../../utils/authRequest.js';
 
 const prisma = new PrismaClient();
 
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
 
-export const userByEmail = async (
-  _: undefined,
-  { email }: { email: string },
-  ctx: Context
-) => {
-  if (!ctx.auth || !ctx.auth.userId) {
-    console.log('about to say unauth');
-    throw new Error('Unauthorized');
-  }
-  if (!emailValidator.parse(email)) {
-    throw new Error('Invalid email input');
-  }
+export const userByEmail = async (_: undefined, args: any, ctx: Context) => {
+  authRequest(ctx);
+  console.log('args', args);
+
   const user = await prisma.user.findUnique({
     where: {
-      email,
+      id: ctx.auth.userId,
     },
   });
   return user;
