@@ -5,7 +5,6 @@ import { PrismaClient } from '@prisma/client';
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
 import getAuth from './utils/getAuth.js';
-// import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
@@ -15,7 +14,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 import http from 'http';
 import { Context } from './utils/types.js';
 
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 
 // const __filename = fileURLToPath(import.meta.url);
