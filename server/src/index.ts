@@ -46,25 +46,13 @@ app.use(
   json(),
   expressMiddleware(server, {
     context: async ({ req, res }) => {
-      // console.log('req.headers.authorization', req.headers.authorization);
-      // console.log('==================================================');
-      // console.log('==================================================');
-      // console.log('==================================================');
-      // console.log('==================================================');
-      // console.log('req.headers', req.headers);
-      // console.log('==================================================');
-      // console.log('==================================================');
-      // console.log('==================================================');
-      // console.log('==================================================');
-      const cookie = req.headers.cookie;
-      if (cookie)
-        return {
-          req,
-          res,
-          prisma,
-          userId:
-            req && req.headers && req.headers.cookie ? getUserId(req) : null,
-        };
+      return {
+        req,
+        res,
+        prisma,
+        userId:
+          req && req.headers && req.headers.cookie ? getUserId(req) : null,
+      };
     },
   })
 );

@@ -2,7 +2,7 @@ import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
 import { PrismaClient } from '@prisma/client';
-import { Context } from '../..';
+import { Context } from '../../utils/types';
 type Role = 'hacker' | 'mentor' | 'sponsor';
 
 const prisma = new PrismaClient();
@@ -18,7 +18,7 @@ const roleValidator = z.union([
 export const signUpUser = async (
   _: undefined,
   { email, password, role }: { email: string; password: string; role: Role },
-  ctx
+  ctx: Context
 ) => {
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
