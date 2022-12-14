@@ -1,12 +1,9 @@
-import { setContext } from '@apollo/client/link/context';
 import { ApolloServer } from '@apollo/server';
 // import { startStandaloneServer } from '@apollo/server/standalone';
 import { PrismaClient } from '@prisma/client';
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
 import getAuth from './utils/getAuth.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 const { json } = bodyParser;
@@ -16,11 +13,6 @@ import { Context } from './utils/types.js';
 
 import express from 'express';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename).split('/').slice(0, -2).join('/');
-// import * as dotenv from 'dotenv';
-// const env = dotenv.config({ path: __dirname + '/.env' });
 
 const prisma = new PrismaClient();
 
@@ -45,7 +37,6 @@ app.use(
   json(),
   expressMiddleware(server, {
     context: async ({ req, res }) => {
-      // console.log('req.headers', req.headers);
       return {
         req,
         res,
