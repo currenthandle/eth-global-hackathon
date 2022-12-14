@@ -34,7 +34,6 @@ const Login = () => {
   });
   const onSubmit = async (/*data: Schema*/) => {
     try {
-      console.log('begin');
       const formValues = getValues();
       const validUser = await validateUser({
         variables: {

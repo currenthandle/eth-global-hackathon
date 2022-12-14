@@ -6,18 +6,25 @@ import { USER_DATA } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
 
 const schema = z.object({
-  email: z.string().email({ message: 'Email is required' }),
-  firstName: z.string().min(2, { message: 'Too short' }),
-  lastName: z.string().min(2, { message: 'Too short' }),
+  email: z.union([
+    z.string().email({ message: 'Email is required' }),
+    z.string().min(0),
+  ]),
+  firstName: z.string(),
+  lastName: z.string(),
   student: z.boolean(),
-  school: z.string().min(2, { message: 'Too short' }),
-  country: z.string().min(2, { message: 'Too short' }),
-  company: z.string().min(2, { message: 'Too short' }),
-  website: z.string().min(2, { message: 'Too short' }),
-  github: z.string().min(2, { message: 'Too short' }),
-  twitter: z.string().min(2, { message: 'Too short' }),
-  telgram: z.string().min(2, { message: 'Too short' }),
-  linkedin: z.string().min(2, { message: 'Too short' }),
+  school: z.string(),
+  country: z.string(),
+  company: z.string(),
+  website: z.union([
+    z.string().url({ message: 'Url is required' }),
+    z.string().min(0),
+  ]),
+  // website: z.union([z.string().url({ message: 'Invalid' }), z.string().min(0)]),
+  github: z.string(),
+  twitter: z.string(),
+  telgram: z.string(),
+  linkedin: z.string(),
 });
 
 type Schema = z.infer<typeof schema>;
