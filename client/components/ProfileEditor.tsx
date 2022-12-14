@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 const schema = z.object({
   email: z.union([
     z.string().email({ message: 'Email is required' }),
-    z.string().min(0),
+    z.string().min(0).max(0),
   ]),
   firstName: z.string(),
   lastName: z.string(),
@@ -17,10 +17,9 @@ const schema = z.object({
   country: z.string(),
   company: z.string(),
   website: z.union([
-    z.string().url({ message: 'Url is required' }),
-    z.string().min(0),
+    z.string().url({ message: 'Invalid' }),
+    z.string().min(0).max(0),
   ]),
-  // website: z.union([z.string().url({ message: 'Invalid' }), z.string().min(0)]),
   github: z.string(),
   twitter: z.string(),
   telgram: z.string(),
