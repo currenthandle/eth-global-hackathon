@@ -2,7 +2,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { userByEmail } from '../graphql/queries';
+import { USER_DATA } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
 
 const schema = z.object({
@@ -47,10 +47,10 @@ const ProfileEditor = () => {
     },
   });
 
-  const { data, error } = useQuery(userByEmail, {
+  const { data, error } = useQuery(USER_DATA, {
     variables: { email: 'c@c.com' },
   });
-  const userData = data?.userByEmail;
+  const userData = data?.userData;
 
   return (
     <div className='flex justify-center'>
