@@ -19,8 +19,6 @@ const typeDefs = `#graphql
 
   input UserUpdate {
     email: String
-    password: String
-    role: String
     firstName: String
     lastName: String
     student: Boolean
@@ -54,7 +52,7 @@ const typeDefs = `#graphql
   type Mutation {
     createUser(email: String!, password: String!): User!
     signUpUser(email: String!, password: String!, role: String!): UserOrError!
-    updateUser(userUpdate: UserUpdate!): User!
+    updateUser(userUpdate: UserUpdate): User!
   }
 `;
 

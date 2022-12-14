@@ -11,17 +11,19 @@ export interface Context {
 }
 
 export interface UserUpdate {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  password?: string;
-  student?: boolean;
-  school?: string;
-  country?: string;
-  company?: string;
-  website?: string;
-  github?: string;
-  twitter?: string;
-  telegram?: string;
-  linkedin?: string;
+  userUpdate: {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    password?: string;
+    student?: boolean;
+    school?: string;
+    country?: string;
+    company?: string;
+    website?: string;
+    github?: string;
+    twitter?: string;
+    telegram?: string;
+    linkedin?: string;
+  };
 }

@@ -20,11 +20,13 @@ export const updateUser = async (
   ctx: Context
 ) => {
   authRequest(ctx);
+  console.log('userUpdate', userUpdate);
   const user = await ctx.prisma.user.update({
     where: {
       id: ctx.auth.userId,
+      // email: "c@c/com"
     },
-    data: userUpdate,
+    data: userUpdate.userUpdate,
   });
   return user;
 };

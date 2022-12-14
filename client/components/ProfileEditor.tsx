@@ -3,7 +3,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 import { USER_DATA } from '../graphql/queries';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
+import { UPDATE_USER } from '../graphql/mutations';
 
 const schema = z.object({
   email: z.union([
@@ -53,15 +54,39 @@ const ProfileEditor = () => {
     },
   });
 
-  const { data, error } = useQuery(USER_DATA);
-  const userData = data?.userData;
-  // console.log('userData', userData);
+  const { data: initialData, error: initialError } = useQuery(USER_DATA);
+  const [updateUser, { data: updatedUser, error: updatedUserErr }] =
+    useMutation(UPDATE_USER);
+  const userData = initialData?.userData;
+  console.log('initialData', initialData);
   const onSubmit = async (/*data: Schema*/) => {
     try {
       console.log('begin');
       const formValues = getValues();
       console.log('formValues', formValues);
       console.log('formValues', formValues);
+      const variables = {
+        userUpdate: {
+          email: formValues.email,
+          firstName: formValues.firstName,
+          lastName: formValues.lastName,
+          //
+          student: formValues.student,
+          school: formValues.school,
+          country: formValues.country,
+          company: formValues.company,
+          website: formValues.website,
+          github: formValues.github,
+          twitter: formValues.twitter,
+          telegram: formValues.telgram,
+          linkedin: formValues.linkedin,
+        },
+      };
+      console.log('variables', variables);
+      const updatedUser = await updateUser({
+        variables,
+      });
+      console.log('updatedUser', updatedUser);
     } catch (error) {
       console.error('error', error);
     }

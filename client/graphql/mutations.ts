@@ -16,3 +16,22 @@ export const SIGNUP_USER = gql`
     }
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation Mutation($userUpdate: UserUpdate) {
+    updateUser(userUpdate: $userUpdate) {
+      email
+      firstName
+      lastName
+      student
+      school
+      country
+      company
+      website
+      github
+      twitter
+      telegram
+      linkedin
+    }
+  }
+`;
