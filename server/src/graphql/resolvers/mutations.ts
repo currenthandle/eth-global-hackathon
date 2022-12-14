@@ -1,11 +1,8 @@
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
-import { PrismaClient } from '@prisma/client';
 import { Context } from '../../utils/types';
 type Role = 'hacker' | 'mentor' | 'sponsor';
-
-const prisma = new PrismaClient();
 
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
@@ -30,7 +27,7 @@ export const signUpUser = async (
     throw new Error('Invalid role input');
   }
   // check prisma db to see if the user already exists
-  const user = await prisma.user.findUnique({
+  const user = await ctx.prisma.user.findUnique({
     where: {
       email,
     },
@@ -45,7 +42,7 @@ export const signUpUser = async (
   }
   // if the user doesn't exist, create the user and return the user
   else {
-    const user = await prisma.user.create({
+    const user = await ctx.prisma.user.create({
       data: {
         email,
         password,

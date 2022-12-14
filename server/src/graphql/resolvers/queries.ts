@@ -1,11 +1,8 @@
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
-import { PrismaClient } from '@prisma/client';
 import { Context } from '../../utils/types';
 import authRequest from '../../utils/authRequest.js';
-
-const prisma = new PrismaClient();
 
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
@@ -13,7 +10,7 @@ const passwordValidator = z.string().min(2);
 export const userData = async (_: undefined, __: {}, ctx: Context) => {
   authRequest(ctx);
 
-  const user = await prisma.user.findUnique({
+  const user = await ctx.prisma.user.findUnique({
     where: {
       id: ctx.auth.userId,
     },
@@ -22,7 +19,8 @@ export const userData = async (_: undefined, __: {}, ctx: Context) => {
 };
 export const validateUser = async (
   _: undefined,
-  { email, password }: { email: string; password: string }
+  { email, password }: { email: string; password: string },
+  ctx: Context
 ) => {
   console.log('inside validateUser');
   if (!emailValidator.parse(email)) {
@@ -31,7 +29,7 @@ export const validateUser = async (
   if (!passwordValidator.parse(password)) {
     throw new Error('Invalid password input');
   }
-  const user = await prisma.user.findUnique({
+  const user = await ctx.prisma.user.findUnique({
     where: {
       email,
     },
@@ -50,7 +48,7 @@ export const validateUser = async (
   };
 };
 
-export const allUsers = async () => {
-  const users = await prisma.user.findMany();
+export const allUsers = async (_: undefined, __: {}, ctx: Context) => {
+  const users = await ctx.prisma.user.findMany();
   return users;
 };
