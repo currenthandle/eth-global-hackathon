@@ -13,15 +13,15 @@ import bodyParser from 'body-parser';
 const { json } = bodyParser;
 import { expressMiddleware } from '@apollo/server/express4';
 import http from 'http';
+import { Context } from './utils/types.js';
 
 import express, { Request, Response } from 'express';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename).split('/').slice(0, -2).join('/');
-import * as dotenv from 'dotenv';
-import { Context } from './utils/types.js';
-const env = dotenv.config({ path: __dirname + '/.env' });
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename).split('/').slice(0, -2).join('/');
+// import * as dotenv from 'dotenv';
+// const env = dotenv.config({ path: __dirname + '/.env' });
 
 const prisma = new PrismaClient();
 
