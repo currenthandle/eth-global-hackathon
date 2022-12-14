@@ -49,14 +49,28 @@ const ProfileEditor = () => {
 
   const { data, error } = useQuery(USER_DATA);
   const userData = data?.userData;
-  console.log('userData', userData);
+  // console.log('userData', userData);
+  const onSubmit = async (/*data: Schema*/) => {
+    try {
+      console.log('begin');
+      const formValues = getValues();
+      console.log('formValues', formValues);
+      console.log('formValues', formValues);
+    } catch (error) {
+      console.error('error', error);
+    }
+  };
 
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>
         <h1>Edit profile</h1>
         <p>Change your profile and account settings</p>
-        <form action='' className='flex flex-col'>
+        <form
+          action=''
+          className='flex flex-col'
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <label htmlFor='email'>Email</label>
           <input
             {...register('email')}

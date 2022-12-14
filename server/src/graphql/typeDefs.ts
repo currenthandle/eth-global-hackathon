@@ -17,7 +17,7 @@ const typeDefs = `#graphql
     linkedin: String
   }
 
-  type UserUpdate {
+  input UserUpdate {
     email: String
     password: String
     role: String

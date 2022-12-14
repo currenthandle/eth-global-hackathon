@@ -3,7 +3,7 @@ import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
 import { Context } from '../../utils/types';
-import authRequest from '../../utils/authRequest';
+import authRequest from '../../utils/authRequest.js';
 type Role = 'hacker' | 'mentor' | 'sponsor';
 
 const emailValidator = z.string().email();
