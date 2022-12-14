@@ -21,12 +21,22 @@ export const updateUser = async (
 ) => {
   authRequest(ctx);
   console.log('userUpdate', userUpdate);
+  const updates = Object.entries(userUpdate.userUpdate).reduce(
+    (acc, [key, value]) => {
+      if (value) {
+        acc[key] = value;
+      }
+      return acc;
+    },
+    {}
+  );
+  console.log('updates', updates);
   const user = await ctx.prisma.user.update({
     where: {
       id: ctx.auth.userId,
       // email: "c@c/com"
     },
-    data: userUpdate.userUpdate,
+    data: updates,
   });
   return user;
 };
