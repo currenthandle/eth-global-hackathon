@@ -17,6 +17,23 @@ const typeDefs = `#graphql
     linkedin: String
   }
 
+  type UserUpdate {
+    email: String
+    password: String
+    role: String
+    firstName: String
+    lastName: String
+    student: Boolean
+    school: String
+    country: String
+    company: String
+    website: String
+    github: String
+    twitter: String
+    telegram: String
+    linkedin: String
+  }
+
   type UserWithToken {
     user: User!
     token: String!
@@ -37,6 +54,7 @@ const typeDefs = `#graphql
   type Mutation {
     createUser(email: String!, password: String!): User!
     signUpUser(email: String!, password: String!, role: String!): UserOrError!
+    updateUser(userUpdate: UserUpdate!): User!
   }
 `;
 

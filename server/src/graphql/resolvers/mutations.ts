@@ -1,7 +1,9 @@
+import { UserUpdate } from './../../utils/types';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
 import { Context } from '../../utils/types';
+import authRequest from '../../utils/authRequest';
 type Role = 'hacker' | 'mentor' | 'sponsor';
 
 const emailValidator = z.string().email();
@@ -11,6 +13,21 @@ const roleValidator = z.union([
   z.literal('mentor'),
   z.literal('sponsor'),
 ]);
+
+export const updateUser = async (
+  _: undefined,
+  userUpdate: UserUpdate,
+  ctx: Context
+) => {
+  authRequest(ctx);
+  const user = await ctx.prisma.user.update({
+    where: {
+      id: ctx.auth.userId,
+    },
+    data: userUpdate,
+  });
+  return user;
+};
 
 export const signUpUser = async (
   _: undefined,
