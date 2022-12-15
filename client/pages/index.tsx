@@ -48,69 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     };
   }
-  console.log('ctx', ctx.req.cookies);
-  // make a query to USER_DATA to get the initial values
-  // useQuery(USER_DATA);
-  // const { data: initialData, error: initialError } = useQuery(USER_DATA);
-
-  const resp = await fetch('http://localhost:3001', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Cookie: `server-auth-token=${ctx.req.cookies['server-auth-token']}`,
-    },
-    body: JSON.stringify({
-      query: `
-        query {
-          userData {
-            email
-            firstName
-            lastName
-            student
-            school
-            country
-            company
-            website
-            github
-            twitter
-            telegram
-            linkedin
-          }
-        }
-      `,
-    }),
-  });
-  const json = await resp.json();
-  console.log('json', json);
-  // const text = await resp.text();
-  // console.log('text', text);
   return {
-    props: {
-      initialData: json,
-      // initialData: text,
-    },
+    props: {},
   };
 };
-
-// export const getServerSideProps: GetServerSideProps = async (
-//   ctx: GetServerSidePropsContext
-// ) => {
-//   const session = await getServerAuthSession(ctx);
-
-//   // console.log('session', session);
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: '/login',
-//         permanent: false,
-//       },
-//       props: {},
-//     };
-//   }
-
-//   return {
-//     props: {
-//       session,
-//     },
-//   };
-// };
