@@ -32,7 +32,7 @@ type Schema = z.infer<typeof schema>;
 
 const ProfileEditor = ({ userSsr }) => {
   // console.log('props internal', email);
-  const { firstName, lastName } = userSsr;
+  // const { firstName, lastName } = userSsr;
 
   const {
     register,
@@ -42,27 +42,26 @@ const ProfileEditor = ({ userSsr }) => {
   } = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: '',
-      firstName: firstName,
-      lastName: '',
+      email: userSsr.email || '',
+      firstName: userSsr.firstName || '',
+      lastName: userSsr.lastName || '',
       // gender: '',
-      student: false,
-      school: '',
-      country: '',
-      company: '',
-      website: '',
-      github: '',
-      twitter: '',
-      telegram: '',
-      linkedin: '',
+      student: userSsr.student || false,
+      school: userSsr.school || '',
+      country: userSsr.country || '',
+      company: userSsr.company || '',
+      website: userSsr.website || '',
+      github: userSsr.github || '',
+      twitter: userSsr.twitter || '',
+      telegram: userSsr.telegram || '',
+      linkedin: userSsr.linkedin || '',
     },
   });
 
   // const { data: initialData, error: initialError } = useQuery(USER_DATA);
   const [updateUser, { data: updatedUser, error: updatedUserErr }] =
     useMutation(UPDATE_USER);
-  // const userData = initialData?.userData;
-  // console.log('initialData', initialData);
+
   const onSubmit = async (/*data: Schema*/) => {
     try {
       console.log('begin');
@@ -95,11 +94,6 @@ const ProfileEditor = ({ userSsr }) => {
       console.error('error', error);
     }
   };
-  // console.log('updatedUser', updatedUser);
-  // console.log('userSsr', userSsr.firstName);
-  // console.log('userSsr', typeof userSsr.firstName);
-  // console.log('firstName', firstName);
-
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>
