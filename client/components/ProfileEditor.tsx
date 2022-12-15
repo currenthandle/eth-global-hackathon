@@ -31,7 +31,9 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 const ProfileEditor = ({ userSsr }) => {
-  console.log('props internal', userSsr);
+  // console.log('props internal', email);
+  const { firstName, lastName } = userSsr;
+
   const {
     register,
     handleSubmit,
@@ -41,7 +43,7 @@ const ProfileEditor = ({ userSsr }) => {
     resolver: zodResolver(schema),
     defaultValues: {
       email: '',
-      firstName: '',
+      firstName: firstName,
       lastName: '',
       // gender: '',
       student: false,
@@ -56,10 +58,10 @@ const ProfileEditor = ({ userSsr }) => {
     },
   });
 
-  const { data: initialData, error: initialError } = useQuery(USER_DATA);
+  // const { data: initialData, error: initialError } = useQuery(USER_DATA);
   const [updateUser, { data: updatedUser, error: updatedUserErr }] =
     useMutation(UPDATE_USER);
-  const userData = initialData?.userData;
+  // const userData = initialData?.userData;
   // console.log('initialData', initialData);
   const onSubmit = async (/*data: Schema*/) => {
     try {
@@ -93,6 +95,10 @@ const ProfileEditor = ({ userSsr }) => {
       console.error('error', error);
     }
   };
+  // console.log('updatedUser', updatedUser);
+  // console.log('userSsr', userSsr.firstName);
+  // console.log('userSsr', typeof userSsr.firstName);
+  // console.log('firstName', firstName);
 
   return (
     <div className='flex justify-center'>
