@@ -30,8 +30,8 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const ProfileEditor = (props) => {
-  console.log('props internal', props);
+const ProfileEditor = ({ userSsr }) => {
+  console.log('props internal', userSsr);
   const {
     register,
     handleSubmit,
@@ -209,58 +209,3 @@ const ProfileEditor = (props) => {
   );
 };
 export default ProfileEditor;
-
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  if (!ctx.req.cookies['server-auth-token']) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-  console.log('ctx', ctx.req.cookies);
-  // make a query to USER_DATA to get the initial values
-  // useQuery(USER_DATA);
-  // const { data: initialData, error: initialError } = useQuery(USER_DATA);
-
-  const resp = await fetch('http://localhost:3001', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Cookie: `server-auth-token=${ctx.req.cookies['server-auth-token']}`,
-    },
-    body: JSON.stringify({
-      query: `
-        query {
-          userData {
-            email
-            firstName
-            lastName
-            student
-            school
-            country
-            company
-            website
-            github
-            twitter
-            telegram
-            linkedin
-          }
-        }
-      `,
-    }),
-  });
-  const json = await resp.json();
-  console.log('jsonasdjkfhasldfk', json);
-  // const text = await resp.text();
-  // console.log('text', text);
-  return {
-    props: {
-      initialDatasdfasdfa: json,
-      // initialData: text,
-    },
-  };
-};

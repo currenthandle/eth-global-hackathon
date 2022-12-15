@@ -24,12 +24,13 @@ const Home: NextPage = (props) => {
       router.push('/login');
     }
   }, [router]);
+  console.log('props', props);
 
   return (
     <main>
       <Header />
       <ClientOnly>
-        <ProfileEditor initialData={props.initialData} />
+        <ProfileEditor userSsr={props.userSsr} />
       </ClientOnly>
     </main>
   );
@@ -48,7 +49,40 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     };
   }
+  const resp = await fetch('http://localhost:3001', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Cookie: `server-auth-token=${ctx.req.cookies['server-auth-token']}`,
+    },
+    body: JSON.stringify({
+      query: `
+        query {
+          userData {
+            email
+            firstName
+            lastName
+            student
+            school
+            country
+            company
+            website
+            github
+            twitter
+            telegram
+            linkedin
+          }
+        }
+      `,
+    }),
+  });
+  const json = await resp.json();
+  console.log('jsonasdjkfhasldfk', json);
+  // const text = await resp.text();
+  // console.log('text', text);
   return {
-    props: {},
+    props: {
+      userSsr: json.data.userData,
+    },
   };
 };
