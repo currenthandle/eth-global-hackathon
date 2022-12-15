@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { USER_DATA } from '../graphql/queries';
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next/types';
 
 const schema = z.object({
   email: z.union([
@@ -23,13 +24,14 @@ const schema = z.object({
   ]),
   github: z.string(),
   twitter: z.string(),
-  telgram: z.string(),
+  telegram: z.string(),
   linkedin: z.string(),
 });
 
 type Schema = z.infer<typeof schema>;
 
-const ProfileEditor = () => {
+const ProfileEditor = (props) => {
+  console.log('props internal', props);
   const {
     register,
     handleSubmit,
@@ -49,7 +51,7 @@ const ProfileEditor = () => {
       website: '',
       github: '',
       twitter: '',
-      telgram: '',
+      telegram: '',
       linkedin: '',
     },
   });
@@ -58,7 +60,7 @@ const ProfileEditor = () => {
   const [updateUser, { data: updatedUser, error: updatedUserErr }] =
     useMutation(UPDATE_USER);
   const userData = initialData?.userData;
-  console.log('initialData', initialData);
+  // console.log('initialData', initialData);
   const onSubmit = async (/*data: Schema*/) => {
     try {
       console.log('begin');
@@ -78,7 +80,7 @@ const ProfileEditor = () => {
           website: formValues.website,
           github: formValues.github,
           twitter: formValues.twitter,
-          telegram: formValues.telgram,
+          telegram: formValues.telegram,
           linkedin: formValues.linkedin,
         },
       };
@@ -184,13 +186,13 @@ const ProfileEditor = () => {
             id='twitter'
             placeholder='Twitter'
           />
-          <label htmlFor='telgram'>Telgram</label>
+          <label htmlFor='telegram'>Telegram</label>
           <input
-            {...register('telgram')}
+            {...register('telegram')}
             type='text'
-            name='telgram'
-            id='telgram'
-            placeholder='Telgram'
+            name='telegram'
+            id='teegram'
+            placeholder='Telegram'
           />
           <label htmlFor='linkedin'>Linkedin</label>
           <input
@@ -207,3 +209,58 @@ const ProfileEditor = () => {
   );
 };
 export default ProfileEditor;
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  if (!ctx.req.cookies['server-auth-token']) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+  console.log('ctx', ctx.req.cookies);
+  // make a query to USER_DATA to get the initial values
+  // useQuery(USER_DATA);
+  // const { data: initialData, error: initialError } = useQuery(USER_DATA);
+
+  const resp = await fetch('http://localhost:3001', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Cookie: `server-auth-token=${ctx.req.cookies['server-auth-token']}`,
+    },
+    body: JSON.stringify({
+      query: `
+        query {
+          userData {
+            email
+            firstName
+            lastName
+            student
+            school
+            country
+            company
+            website
+            github
+            twitter
+            telegram
+            linkedin
+          }
+        }
+      `,
+    }),
+  });
+  const json = await resp.json();
+  console.log('jsonasdjkfhasldfk', json);
+  // const text = await resp.text();
+  // console.log('text', text);
+  return {
+    props: {
+      initialDatasdfasdfa: json,
+      // initialData: text,
+    },
+  };
+};
