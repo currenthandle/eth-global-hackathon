@@ -77,7 +77,6 @@ export const getServerSideProps: GetServerSideProps = async (
     }),
   });
   const json = await resp.json();
-  console.log('jsonasdjkfhasldfk', json);
   // const text = await resp.text();
   // console.log('text', text);
   return {

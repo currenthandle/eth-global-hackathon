@@ -1,12 +1,10 @@
-import { initialUserData } from './initialUserData';
+// import { initialUserData } from './initialUserData';
+// import { initialState } from './reducer';
 import { createContext, useContext } from 'react';
 import { Action } from './reducer';
 
-export const UserDataContext = createContext(initialUserData);
-export const UserDataDispatchContext = createContext(
-  {} as React.Dispatch<Action>
-);
+const initialState = {};
 
-// export function useContext() {
-//   return useContext(Context);
-// }
+export const StateContext = createContext(null);
+export const DispatchContext = createContext({} as React.Dispatch<Action>);
+// export const DispatchContext = createContext(null);
