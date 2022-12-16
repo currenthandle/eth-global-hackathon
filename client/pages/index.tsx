@@ -59,6 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (
       query: `
         query {
           userData {
+            role
             email
             firstName
             lastName
