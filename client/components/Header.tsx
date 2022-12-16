@@ -2,7 +2,7 @@ import SignOutButton from './SignOutButton';
 
 const Header = () => {
   return (
-    <div className='flex justify-between items-center mr-4 pt-4'>
+    <div className='flex justify-between items-center mx-4 pt-4'>
       <svg
         width='160'
         height='60'
