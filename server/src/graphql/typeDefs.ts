@@ -13,6 +13,11 @@ const typeDefs = `#graphql
     linkedin: String
     website: String
     yearsOfExp: Int
+    ethExp: String
+    motivation: [String]
+    builtBefore: String
+    lookingToBuild: String
+    rules: Boolean
   }
 
   input SponsorProfile {
