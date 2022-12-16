@@ -6,30 +6,14 @@ const typeDefs = `#graphql
     role: String!
     firstName: String
     lastName: String
-    student: Boolean
-    school: String
-    country: String
-    company: String
-    website: String
-    github: String
-    twitter: String
-    telegram: String
-    linkedin: String
+
   }
 
   input UserUpdate {
     email: String
     firstName: String
     lastName: String
-    student: Boolean
-    school: String
-    country: String
-    company: String
-    website: String
-    github: String
-    twitter: String
-    telegram: String
-    linkedin: String
+
   }
 
   type UserWithToken {

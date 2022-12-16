@@ -63,15 +63,6 @@ export const getServerSideProps: GetServerSideProps = async (
             email
             firstName
             lastName
-            student
-            school
-            country
-            company
-            website
-            github
-            twitter
-            telegram
-            linkedin
           }
         }
       `,

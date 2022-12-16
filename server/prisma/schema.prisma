@@ -19,27 +19,27 @@ enum Role {
 }
 
 model User {
-  id                String      @id @default(cuid())
-  email             String      @unique
-  password          String
-  role              Role        @default(hacker)
-  firstName         String?
-  lastName          String?
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @default(now()) @updatedAt
-  student           Boolean     @default(false)
-  school            String?
-  country           String?
-  company           String?
-  website           String?
-  github            String?
-  twitter           String?
-  telegram          String?
-  linkedin          String?
-  experience        Experience?
-  jobs              Boolean     @default(false)
-  applicationStatus Boolean     @default(false)
+  id        String  @id @default(cuid())
+  email     String  @unique
+  password  String
+  role      Role    @default(hacker)
+  firstName String?
+  lastName  String?
+
+  applicationStatus Boolean        @default(false)
   // wallet    String?
+  Experience        Experience?
+  HackerProfile     HackerProfile?
+}
+
+model HackerProfile {
+  id         String  @id @default(cuid())
+  userId     String  @unique
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  github     String?
+  linkedin   String?
+  website    String?
+  yearsOfExp Int?
 }
 
 enum ExperienceLevel {
