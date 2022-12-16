@@ -12,13 +12,12 @@ const schema = z.object({
   github: z.string().optional(),
   linkedin: z.string().optional(),
   yearsOfExp: z.number().optional(),
-  ethExp: z.any(),
-  // .union([
-  //   z.literal('beginner'),
-  //   z.literal('intermediate'),
-  //   z.literal('advanced'),
-  // ])
-  // .optional(),
+  ethExp: z.union([
+    z.literal('beginner'),
+    z.literal('intermediate'),
+    z.literal('advanced'),
+    z.literal(''),
+  ]),
   motivation: z.union([
     z.literal(''),
     z.array(
@@ -65,7 +64,7 @@ const HackerEditor = ({ userSsr }) => {
       github: userSsr.github || '',
       linkedin: userSsr.linkedin || '',
       yearsOfExp: userSsr.yearsOfExp || 0,
-      ethExp: userSsr.ethExp || 0,
+      ethExp: userSsr.ethExp || '',
       motivation: userSsr.motivation || '',
       builtBefore: userSsr.builtBefore || '',
       lookingToBuild: userSsr.lookingToBuild || '',
