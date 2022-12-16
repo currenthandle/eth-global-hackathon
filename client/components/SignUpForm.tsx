@@ -11,11 +11,11 @@ const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
   password: z.string().min(2, { message: 'Too short' }),
   retypePassword: z.string().min(2, { message: 'Too short' }),
-  role: z.union([
-    z.literal('hacker'),
-    z.literal('mentor'),
-    z.literal('sponsor'),
-  ]),
+  // role: z.union([
+  //   z.literal('hacker'),
+  //   z.literal('mentor'),
+  //   z.literal('sponsor'),
+  // ]),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -47,7 +47,7 @@ const Signup = () => {
         variables: {
           email: formValues.email,
           password: formValues.password,
-          role: formValues.role,
+          // role: formValues.role,
         },
       });
       console.log('hello');
@@ -107,7 +107,7 @@ const Signup = () => {
             />
             <p>{errors.password?.message}</p>
 
-            <label htmlFor='role'>Role</label>
+            {/* <label htmlFor='role'>Role</label>
             <select
               {...register('role')}
               className='rounded-md border-2 border-black'
@@ -118,7 +118,7 @@ const Signup = () => {
               <option value='mentor'>Mentor</option>
               <option value='sponsor'>Sponsor</option>
             </select>
-            {/* <p>{errors.role?.message}</p> */}
+            <p>{errors.role?.message}</p> */}
 
             <div className='flex justify-center'>
               <button

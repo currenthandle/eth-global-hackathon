@@ -9,11 +9,11 @@ type Role = 'hacker' | 'mentor' | 'sponsor';
 
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
-const roleValidator = z.union([
-  z.literal('hacker'),
-  z.literal('mentor'),
-  z.literal('sponsor'),
-]);
+// const roleValidator = z.union([
+//   z.literal('hacker'),
+//   z.literal('mentor'),
+//   z.literal('sponsor'),
+// ]);
 
 export const updateUser = async (
   _: undefined,
@@ -44,7 +44,7 @@ export const updateUser = async (
 
 export const signUpUser = async (
   _: undefined,
-  { email, password, role }: { email: string; password: string; role: Role },
+  { email, password }: { email: string; password: string },
   ctx: Context
 ) => {
   if (!emailValidator.parse(email)) {
@@ -53,9 +53,9 @@ export const signUpUser = async (
   if (!passwordValidator.parse(password)) {
     throw new Error('Invalid password input');
   }
-  if (!roleValidator.parse(role)) {
-    throw new Error('Invalid role input');
-  }
+  // if (!roleValidator.parse(role)) {
+  //   throw new Error('Invalid role input');
+  // }
   // check prisma db to see if the user already exists
   const user = await ctx.prisma.user.findUnique({
     where: {
@@ -76,7 +76,7 @@ export const signUpUser = async (
       data: {
         email,
         password,
-        role,
+        // role,
       },
     });
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
