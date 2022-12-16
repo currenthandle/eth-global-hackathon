@@ -45,7 +45,7 @@ const typeDefs = `#graphql
 
   type Query {
     allUsers: [User!]!
-    userData: User!
+    userData: User
     validateUser(email: String!, password: String!): UserOrError!
   }
 
