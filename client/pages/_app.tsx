@@ -11,7 +11,7 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) {
-  const initialState = { loggedIn: false, signUpData: null };
+  const initialState = { signUpData: null };
 
   const [state, dispatch] = useReducer(reducer, initialState);
   return (

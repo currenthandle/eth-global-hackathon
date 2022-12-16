@@ -9,44 +9,20 @@ export const SelectRole = () => {
   const dispatch = useContext(DispatchContext);
   const router = useRouter();
   const [signUpUser, { data, error }] = useMutation(SIGNUP_USER);
-  const handleClick = async () => {
-    const signUpResp = await signUpUser(
-      {
-        variables: {
-          email: state.signUpData.email,
-          password: state.signUpData.password,
-          // role: formValues.role,
-        },
-      }
-      // {
-      //   onCompleted: (data) => {
-      //     console.log('data', data);
-      //   },
-      //   onError: (error) => {
-      //     console.log('error', error);
-      //   },
-      // }
-    );
+  const handleClick = async (e: React.SyntheticEvent<EventTarget>) => {
+    if (!(e.target instanceof HTMLButtonElement)) {
+      return;
+    }
+    const signUpResp = await signUpUser({
+      variables: {
+        email: state.signUpData.email,
+        password: state.signUpData.password,
+        role: e.target.dataset.role,
+      },
+    });
     document.cookie = `server-auth-token=${signUpResp.data.signUpUser.token}; path=/`;
     router.push('/');
-    // dispatch({ type: 'CLEAR_SIGNUP_DATA' });
-
-    //   variables: {
-    //     email: state.signUpData.email,
-    //     password: state.signUpData.password,
-    //     // role: formValues.role,
-    //   },
-    // });
-    // console.log('hello');
-    // if (signUpUserResp.data.signUpUser.__typename === 'Error') {
-    //   setSignUpError(signUpUserResp.data.signUpUser.message);
-    // }
-    // if (signUpUserResp.data.signUpUser.__typename === 'UserWithToken') {
-    //   document.cookie = `server-auth-token=${signUpUserResp.data.signUpUser.token}; path=/`;
-    //   router.push('/');
-    // }
   };
-  // const signUpUserResp = await signUpUser({
   return (
     <div className='flex flex-col items-center'>
       <h2>What are you?</h2>
