@@ -8,7 +8,7 @@ const typeDefs = `#graphql
     lastName: String
   }
 
-  input HackerProfileUpdate {
+  input HackerProfile {
     github: String
     linkedin: String
     website: String
@@ -19,7 +19,7 @@ const typeDefs = `#graphql
     email: String
     firstName: String
     lastName: String
-    hackerProfile: HackerProfileUpdate
+    hackerProfile: HackerProfile
   }
 
   type UserWithToken {

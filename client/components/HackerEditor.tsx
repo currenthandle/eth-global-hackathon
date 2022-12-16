@@ -71,6 +71,9 @@ const HackerEditor = ({ userSsr }) => {
           email: formValues.email,
           firstName: formValues.firstName,
           lastName: formValues.lastName,
+          hackerProfile: {
+            github: formValues.github,
+          },
           //
         },
       };

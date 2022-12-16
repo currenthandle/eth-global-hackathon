@@ -37,8 +37,22 @@ export const updateUser = async (
       id: ctx.auth.userId,
       // email: "c@c/com"
     },
-    data: updates,
+    data: {
+      firstName: updates.firstName,
+      lastName: updates.lastName,
+    },
   });
+  const hackerProfile = await ctx.prisma.hackerProfile.update({
+    where: {
+      userId: ctx.auth.userId,
+    },
+    data: {
+      github: updates.github,
+      linkedin: updates.linkedin,
+      website: updates.website,
+    },
+  });
+  console.log('updated user', user);
   return user;
 };
 
@@ -80,6 +94,27 @@ export const signUpUser = async (
         role,
       },
     });
+
+    if (role === 'hacker') {
+      const hackerProfile = await ctx.prisma.hackerProfile.create({
+        data: {
+          userId: user.id,
+        },
+      });
+    } else if (role === 'mentor') {
+      const mentorProfile = await ctx.prisma.mentorProfile.create({
+        data: {
+          userId: user.id,
+        },
+      });
+    } else if (role === 'sponsor') {
+      const sponsorProfile = await ctx.prisma.sponsorProfile.create({
+        data: {
+          userId: user.id,
+        },
+      });
+    }
+
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
     const resp = {
       __typename: 'UserWithToken',
