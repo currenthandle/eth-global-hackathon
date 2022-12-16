@@ -19,18 +19,21 @@ const schema = z.object({
   //   z.literal('advanced'),
   // ])
   // .optional(),
-  motivation: z.any().optional(),
-  // .set(
-  //   z.literal('workshop'),
-  //   z.literal('resume'),
-  //   z.literal('improve'),
-  //   z.literal('jobOps'),
-  //   z.literal('meetPpl'),
-  //   z.literal('launchProduct'),
-  //   z.literal('winPrize'),
-  //   z.literal('other')
-  // )
-  // .optional(),
+  motivation: z.union([
+    z.literal(''),
+    z.array(
+      z.union([
+        z.literal('workshop'),
+        z.literal('resume'),
+        z.literal('improve'),
+        z.literal('jobOps'),
+        z.literal('meetPpl'),
+        z.literal('launchProduct'),
+        z.literal('winPrize'),
+        z.literal('other'),
+      ])
+    ),
+  ]),
   builtBefore: z.any(),
   //z.string().min(250).max(500).optional(),
   lookingToBuild: z.any().optional(),
@@ -106,6 +109,7 @@ const HackerEditor = ({ userSsr }) => {
       console.error('error', error);
     }
   };
+  console.log('formValues', getValues());
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>
@@ -189,6 +193,7 @@ const HackerEditor = ({ userSsr }) => {
             name='motivation'
             id='motivation'
             placeholder='beginner'
+            defaultValue={['workshop']}
             multiple
           >
             <option value='workshop'>Attend workshops & tech talks</option>
