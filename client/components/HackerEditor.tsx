@@ -117,28 +117,34 @@ const HackerEditor = ({ userSsr }) => {
           className='flex flex-col'
           onSubmit={handleSubmit(onSubmit)}
         >
-          <label htmlFor='firstName'>First Name</label>
-          <input
-            className='rounded-md border-2 border-black'
-            {...register('firstName')}
-            type='text'
-            name='firstName'
-            id='firstName'
-            placeholder='First Name'
-          />
-          <label htmlFor='lastName'>Last Name</label>
-          <input
-            className='rounded-md border-2 border-black'
-            {...register('lastName')}
-            type='text'
-            name='lastName'
-            id='lastName'
-            placeholder='Last Name'
-          />
+          <div className='flex flex-row justify-between mb-6'>
+            <div className='flex flex-col grow mr-2'>
+              <label htmlFor='firstName'>First Name</label>
+              <input
+                className='rounded-md border-2 border-[#dadadb] h-12'
+                {...register('firstName')}
+                type='text'
+                name='firstName'
+                id='firstName'
+                placeholder='First Name'
+              />
+            </div>
+            <div className='flex flex-col grow ml-2'>
+              <label htmlFor='lastName'>Last Name</label>
+              <input
+                className='rounded-md border-2 border-[#dadadb] h-12'
+                {...register('lastName')}
+                type='text'
+                name='lastName'
+                id='lastName'
+                placeholder='Last Name'
+              />
+            </div>
+          </div>
 
           <label htmlFor='website'>Website</label>
           <input
-            className='rounded-md border-2 border-black'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
             {...register('website')}
             type='text'
             name='website'
@@ -147,7 +153,7 @@ const HackerEditor = ({ userSsr }) => {
           />
           <label htmlFor='github'>Github</label>
           <input
-            className='rounded-md border-2 border-black'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
             {...register('github')}
             type='text'
             name='github'
@@ -157,7 +163,7 @@ const HackerEditor = ({ userSsr }) => {
 
           <label htmlFor='linkedin'>Linkedin</label>
           <input
-            className='rounded-md border-2 border-black'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
             {...register('linkedin')}
             type='text'
             name='linkedin'
@@ -168,7 +174,7 @@ const HackerEditor = ({ userSsr }) => {
             How many years of experience do you have with sofware development?
           </label>
           <input
-            className='rounded-md border-2 border-black'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
             {...register('yearsOfExp')}
             type='number'
             name='yearsOfExp'
@@ -180,7 +186,7 @@ const HackerEditor = ({ userSsr }) => {
             {"What's your experience level with Ethereum?"}
           </label>
           <select
-            className='rounded-md border-2 border-black'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
             {...register('ethExp')}
             name='ethExp'
             id='ethExp'
@@ -194,7 +200,7 @@ const HackerEditor = ({ userSsr }) => {
             {"What's your experience level with Ethereum?"}
           </label>
           <select
-            className='rounded-md border-2 border-black'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
             {...register('motivation')}
             name='motivation'
             id='motivation'
@@ -223,7 +229,7 @@ const HackerEditor = ({ userSsr }) => {
             {"Tell us about what you've built before?"}
           </label>
           <textarea
-            className='rounded-md border-2 border-black'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
             {...register('builtBefore')}
             // type='text'
             name='builtBefore'
@@ -234,7 +240,7 @@ const HackerEditor = ({ userSsr }) => {
             Tell us about what are you looking to build at this hackathon?
           </label>
           <textarea
-            className='rounded-md border-2 border-black'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
             {...register('lookingToBuild')}
             name='lookingToBuild'
             id='lookingToBuild'

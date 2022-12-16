@@ -27,7 +27,7 @@ const Home: NextPage = (props) => {
   console.log('props', props);
 
   return (
-    <main>
+    <main className='bg-project-blur  bg-contain bg-no-repeat'>
       <Header />
       <ClientOnly>
         <ProfileEditor userSsr={props.userSsr} />
