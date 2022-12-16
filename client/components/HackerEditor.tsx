@@ -46,11 +46,7 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 const HackerEditor = ({ userSsr }) => {
-  // console.log('props internal', email);
-  // const { firstName, lastName } = userSsr;
-
   // console.log('userSsr', userSsr);
-
   const {
     register,
     handleSubmit,
@@ -78,6 +74,7 @@ const HackerEditor = ({ userSsr }) => {
     useMutation(UPDATE_USER);
 
   const onSubmit = async (/*data: Schema*/) => {
+    console.log('formValues', getValues());
     try {
       const formValues = getValues();
       const variables = {
@@ -97,7 +94,7 @@ const HackerEditor = ({ userSsr }) => {
           rules: formValues.rules,
         },
       };
-      console.log('submit formValues', formValues);
+      // console.log('submit formValues', formValues);
 
       const updatedUser = await updateUser({
         variables,
@@ -107,8 +104,8 @@ const HackerEditor = ({ userSsr }) => {
     }
   };
 
-  console.log('formVale', getValues().yearsOfExp);
-  console.log('formVale', typeof getValues().yearsOfExp);
+  // console.log('formVale', getValues().yearsOfExp);
+  // console.log('formVale', typeof getValues().yearsOfExp);
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>
