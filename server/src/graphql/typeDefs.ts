@@ -47,6 +47,7 @@ const typeDefs = `#graphql
     allUsers: [User!]!
     userData: User
     validateUser(email: String!, password: String!): UserOrError!
+    emailIsAvailable(email: String!): Boolean!
   }
 
   type Mutation {

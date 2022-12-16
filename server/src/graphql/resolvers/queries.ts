@@ -7,6 +7,24 @@ import authRequest from '../../utils/authRequest.js';
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
 
+export const emailIsAvailable = async (
+  _: undefined,
+  { email }: { email: string },
+  ctx: Context
+) => {
+  if (!emailValidator.parse(email)) {
+    throw new Error('Invalid email input');
+  }
+  const user = await ctx.prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+  return !user;
+  // console.log('user', user);
+  // return true;
+};
+
 export const userData = async (_: undefined, __: {}, ctx: Context) => {
   authRequest(ctx);
 

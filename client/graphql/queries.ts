@@ -19,6 +19,12 @@ export const USER_DATA = gql`
   }
 `;
 
+export const EMAIL_IS_AVAILABLE = gql`
+  query EmailIsAvailable($email: String!) {
+    emailIsAvailable(email: $email)
+  }
+`;
+
 export const VALIDATE_USER = gql`
   query ValidateUser($email: String!, $password: String!) {
     validateUser(email: $email, password: $password) {
