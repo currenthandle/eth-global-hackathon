@@ -9,9 +9,9 @@ const typeDefs = `#graphql
   }
 
   input HackerProfileUpdate {
-    github:    String
-    linkedin:   String
-    website:  String
+    github: String
+    linkedin: String
+    website: String
     yearsOfExp: Int
   }
 

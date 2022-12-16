@@ -21,7 +21,7 @@ export const updateUser = async (
   ctx: Context
 ) => {
   authRequest(ctx);
-  // console.log('userUpdate', userUpdate);
+  console.log('userUpdate', userUpdate);
   type ReduceInput = typeof userUpdate.userUpdate;
   const updates = Object.entries(userUpdate.userUpdate).reduce<{
     [key: string]: string | boolean;

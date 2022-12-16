@@ -72,15 +72,6 @@ const HackerEditor = ({ userSsr }) => {
           firstName: formValues.firstName,
           lastName: formValues.lastName,
           //
-          student: formValues.student,
-          school: formValues.school,
-          country: formValues.country,
-          company: formValues.company,
-          website: formValues.website,
-          github: formValues.github,
-          twitter: formValues.twitter,
-          telegram: formValues.telegram,
-          linkedin: formValues.linkedin,
         },
       };
       console.log('variables', variables);
