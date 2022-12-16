@@ -24,11 +24,13 @@ export const emailIsAvailable = async (
 };
 
 export const userData = async (_: undefined, __: {}, ctx: Context) => {
+  console.log('inside userData');
   authRequest(ctx);
 
   const user = await ctx.prisma.user.findUnique({
     where: {
       id: ctx.auth.userId,
+      // email: 'c@c.com',
     },
   });
   return user;

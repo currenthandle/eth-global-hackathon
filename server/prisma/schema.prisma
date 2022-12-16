@@ -3,13 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider     = "postgresql"
+  provider = "postgresql"
   // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
   // Further reading:
   // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
   // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  url      = env("DATABASE_URL")
+  // relationMode = "prisma"
 }
 
 enum Role {
@@ -60,7 +60,7 @@ model Experience {
   languages   Language[]
   user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId])
+  // @@index([userId])
 }
 
 model Tool {
@@ -69,7 +69,7 @@ model Tool {
   name         String
   experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
 
-  @@index([experienceId])
+  // @@index([experienceId])
 }
 
 model Language {
@@ -78,5 +78,5 @@ model Language {
   name         String
   experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
 
-  @@index([experienceId])
+  // @@index([experienceId])
 }

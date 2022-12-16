@@ -6,14 +6,20 @@ const typeDefs = `#graphql
     role: String!
     firstName: String
     lastName: String
+  }
 
+  input HackerProfileUpdate {
+    github:    String
+    linkedin:   String
+    website:  String
+    yearsOfExp: Int
   }
 
   input UserUpdate {
     email: String
     firstName: String
     lastName: String
-
+    hackerProfile: HackerProfileUpdate
   }
 
   type UserWithToken {
