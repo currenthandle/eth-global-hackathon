@@ -63,7 +63,14 @@ export const getServerSideProps: GetServerSideProps = async (
             firstName
             lastName
             github
-  
+            linkedin
+            website
+            yearsOfExp
+            ethExp
+            motivation
+            builtBefore
+            lookingToBuild
+            rules
           }
         }
       `,

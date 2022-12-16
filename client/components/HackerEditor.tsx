@@ -11,7 +11,11 @@ const schema = z.object({
   website: z.string().optional(),
   github: z.string().optional(),
   linkedin: z.string().optional(),
-  yearsOfExp: z.number().optional(),
+  yearsOfExp: z.preprocess(
+    (a) => parseInt(z.string().parse(a), 10),
+    z.number().positive()
+  ),
+  // z.union([z.literal(0), z.string().numeric().min(1)]),
   ethExp: z.union([
     z.literal('beginner'),
     z.literal('intermediate'),
@@ -45,6 +49,8 @@ const HackerEditor = ({ userSsr }) => {
   // console.log('props internal', email);
   // const { firstName, lastName } = userSsr;
 
+  // console.log('userSsr', userSsr);
+
   const {
     register,
     handleSubmit,
@@ -73,10 +79,7 @@ const HackerEditor = ({ userSsr }) => {
 
   const onSubmit = async (/*data: Schema*/) => {
     try {
-      console.log('begin');
       const formValues = getValues();
-      console.log('formValues', formValues);
-      console.log('formValues', formValues);
       const variables = {
         userUpdate: {
           firstName: formValues.firstName,
@@ -86,7 +89,7 @@ const HackerEditor = ({ userSsr }) => {
           github: formValues.github,
           linkedin: formValues.linkedin,
           website: formValues.website,
-          yearsOfExp: formValues.yearsOfExp,
+          yearsOfExp: Number(formValues.yearsOfExp),
           ethExp: formValues.ethExp,
           motivation: formValues.motivation,
           builtBefore: formValues.builtBefore,
@@ -94,16 +97,18 @@ const HackerEditor = ({ userSsr }) => {
           rules: formValues.rules,
         },
       };
-      console.log('variables', variables);
+      console.log('formValues.yearsOfExp', Number(formValues.yearsOfExp));
+      console.log(
+        'formValues.yearsOfExp',
+        typeof Number(formValues.yearsOfExp)
+      );
       const updatedUser = await updateUser({
         variables,
       });
-      console.log('updatedUser', updatedUser);
     } catch (error) {
       console.error('error', error);
     }
   };
-  console.log('formValues', getValues());
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>

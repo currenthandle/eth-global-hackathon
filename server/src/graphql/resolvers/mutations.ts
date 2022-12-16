@@ -19,40 +19,47 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   authRequest(ctx);
   // console.log('args', args);
   const { userUpdate, hackerProfile } = args;
-  type ReduceInput = typeof userUpdate.userUpdate;
+  // type ReduceInput = typeof userUpdate.userUpdate;
   console.log('here', userUpdate);
-  // const updates = Object.entries(userUpdate).reduce<{
-  //   [key: string]: string;
-  // }>((acc, [key, value]: [UserUpdateKeys, string]) => {
-  //   if (value) {
-  //     acc[key] = value;
-  //   }
-  //   return acc;
-  // }, {});
+  const updates = Object.entries(userUpdate).reduce<{
+    [key: string]: string;
+  }>((acc, [key, value]: [UserUpdateKeys, string]) => {
+    if (value) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
   // console.log('here!', ctx);
   const user = await ctx.prisma.user.update({
     where: {
       id: ctx.auth.userId,
       // email: "c@c/com"
     },
-    data: {
-      firstName: userUpdate.firstName,
-      lastName: userUpdate.lastName,
-    },
+    data: updates,
   });
-  console.log('here', hackerProfile.github);
+  const hackerUpdate = Object.entries(hackerProfile).reduce<{
+    [key: string]: string;
+  }>((acc, [key, value]: [any, string]) => {
+    if (value) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
+
+  console.log('hackerProfile', hackerProfile);
   const _hackerProfile = await ctx.prisma.hackerProfile.update({
     where: {
       userId: ctx.auth.userId,
     },
-    data: {
-      github: hackerProfile.github,
-      linkedin: hackerProfile.linkedin,
-      website: hackerProfile.website,
-    },
+    // data: {
+    //   github: hackerProfile.github,
+    //   linkedin: hackerProfile.linkedin,
+    //   website: hackerProfile.website,
+    // },
+    data: hackerUpdate,
   });
-  console.log('user', user);
-  console.log('hackerProfile', _hackerProfile);
+  // console.log('user', user);
+  console.log('_hackerProfile', _hackerProfile);
   return user;
 };
 
