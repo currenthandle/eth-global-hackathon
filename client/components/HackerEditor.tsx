@@ -33,15 +33,10 @@ const schema = z.object({
       ])
     ),
   ]),
-  builtBefore: z.any(),
-  //z.string().min(250).max(500).optional(),
-  lookingToBuild: z.any().optional(),
-  //z.string().min(250).max(500).optional(),
+  builtBefore: z.union([z.string().min(250).max(500), z.literal('')]),
+  lookingToBuild: z.union([z.string().min(250).max(500), z.literal('')]),
   rules: z.boolean().default(false),
-  // website: z.union([
-  //   z.string().url({ message: 'Invalid' }),
-  //   z.string().min(0).max(0),
-  // ]),
+  // website: z.union([z.string(), z.literal('')]),
 });
 
 type Schema = z.infer<typeof schema>;
