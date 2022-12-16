@@ -6,21 +6,36 @@ import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 
 const schema = z.object({
-  email: z.union([
-    z.string().email({ message: 'Email is required' }),
-    z.string().min(0).max(0),
-  ]),
-  firstName: z.string(),
-  lastName: z.string(),
-  website: z.string(),
-  github: z.string(),
-  linkedin: z.string(),
-  yearsOfExp: z.string(),
-  ethExp: z.string(),
-  motivation: z.string(),
-  builtBefore: z.string(),
-  lookingToBuild: z.string(),
-  rules: z.string(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  website: z.string().optional(),
+  github: z.string().optional(),
+  linkedin: z.string().optional(),
+  yearsOfExp: z.number().optional(),
+  ethExp: z.any(),
+  // .union([
+  //   z.literal('beginner'),
+  //   z.literal('intermediate'),
+  //   z.literal('advanced'),
+  // ])
+  // .optional(),
+  motivation: z.any().optional(),
+  // .set(
+  //   z.literal('workshop'),
+  //   z.literal('resume'),
+  //   z.literal('improve'),
+  //   z.literal('jobOps'),
+  //   z.literal('meetPpl'),
+  //   z.literal('launchProduct'),
+  //   z.literal('winPrize'),
+  //   z.literal('other')
+  // )
+  // .optional(),
+  builtBefore: z.any(),
+  //z.string().min(250).max(500).optional(),
+  lookingToBuild: z.any().optional(),
+  //z.string().min(250).max(500).optional(),
+  rules: z.boolean().default(false),
   // website: z.union([
   //   z.string().url({ message: 'Invalid' }),
   //   z.string().min(0).max(0),
@@ -201,7 +216,7 @@ const HackerEditor = ({ userSsr }) => {
             // type='text'
             name='builtBefore'
             id='builtBefore'
-            placeholder='Eth Experience'
+            placeholder='builtBefore'
           />
           <label htmlFor='lookingToBuild'>
             Tell us about what you've built before?
