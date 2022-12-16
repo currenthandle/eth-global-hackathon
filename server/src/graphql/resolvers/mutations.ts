@@ -17,7 +17,7 @@ const roleValidator = z.union([
 
 export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   authRequest(ctx);
-  console.log('args', args);
+  // console.log('args', args);
   const { userUpdate, hackerProfile } = args;
   type ReduceInput = typeof userUpdate.userUpdate;
   console.log('here', userUpdate);
@@ -29,7 +29,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   //   }
   //   return acc;
   // }, {});
-  console.log('here!', ctx);
+  // console.log('here!', ctx);
   const user = await ctx.prisma.user.update({
     where: {
       id: ctx.auth.userId,
@@ -40,7 +40,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
       lastName: userUpdate.lastName,
     },
   });
-  console.log('here');
+  console.log('here', hackerProfile.github);
   const _hackerProfile = await ctx.prisma.hackerProfile.update({
     where: {
       userId: ctx.auth.userId,
@@ -52,6 +52,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     },
   });
   console.log('user', user);
+  console.log('hackerProfile', _hackerProfile);
   return user;
 };
 
