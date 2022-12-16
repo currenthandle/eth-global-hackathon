@@ -11,10 +11,10 @@ const schema = z.object({
   website: z.string().optional(),
   github: z.string().optional(),
   linkedin: z.string().optional(),
-  yearsOfExp: z.preprocess(
-    (a) => parseInt(z.string().parse(a), 10),
-    z.number().positive()
-  ),
+  yearsOfExp: z
+    .number()
+    .or(z.string().regex(/\d+/).transform(Number))
+    .refine((n) => n >= 0),
   // z.union([z.literal(0), z.string().numeric().min(1)]),
   ethExp: z.union([
     z.literal('beginner'),
@@ -97,11 +97,8 @@ const HackerEditor = ({ userSsr }) => {
           rules: formValues.rules,
         },
       };
-      console.log('formValues.yearsOfExp', Number(formValues.yearsOfExp));
-      console.log(
-        'formValues.yearsOfExp',
-        typeof Number(formValues.yearsOfExp)
-      );
+      console.log('submit formValues', formValues);
+
       const updatedUser = await updateUser({
         variables,
       });
@@ -109,6 +106,9 @@ const HackerEditor = ({ userSsr }) => {
       console.error('error', error);
     }
   };
+
+  console.log('formVale', getValues().yearsOfExp);
+  console.log('formVale', typeof getValues().yearsOfExp);
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>
@@ -241,9 +241,7 @@ const HackerEditor = ({ userSsr }) => {
             id='rules'
             placeholder='false'
           />
-          <label htmlFor='yearsOfExp'>
-            Do you accept the rules and code of conduct for the event?
-          </label>
+
           <button type='submit'>Submit</button>
         </form>
       </div>

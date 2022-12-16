@@ -40,7 +40,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   const hackerUpdate = Object.entries(hackerProfile).reduce<{
     [key: string]: string;
   }>((acc, [key, value]: [any, string]) => {
-    if (value) {
+    if (value || value === 0) {
       acc[key] = value;
     }
     return acc;
