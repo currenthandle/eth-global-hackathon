@@ -13,10 +13,11 @@ export const SelectRole = () => {
     if (!(e.target instanceof HTMLButtonElement)) {
       return;
     }
+    console.log('e.target.dataset.role,', e.target.dataset.role);
     const signUpResp = await signUpUser({
       variables: {
-        email: state.signUpData.email,
-        password: state.signUpData.password,
+        email: state.signUpData?.email,
+        password: state.signUpData?.password,
         role: e.target.dataset.role,
       },
     });

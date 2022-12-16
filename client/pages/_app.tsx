@@ -6,12 +6,13 @@ import '../styles/globals.css';
 import { StateContext, DispatchContext } from '../utils/context';
 import { useReducer } from 'react';
 import reducer from '../utils/reducer';
+import { SignUpData, State } from '../utils/types';
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) {
-  const initialState = { signUpData: null };
+  const initialState: State = { signUpData: null };
 
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
