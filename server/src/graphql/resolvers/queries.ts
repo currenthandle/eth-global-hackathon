@@ -21,8 +21,6 @@ export const emailIsAvailable = async (
     },
   });
   return !user;
-  // console.log('user', user);
-  // return true;
 };
 
 export const userData = async (_: undefined, __: {}, ctx: Context) => {

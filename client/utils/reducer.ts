@@ -6,14 +6,19 @@ export const actionValidator = z.object({
   payload: z.any(),
 });
 export type Action = z.infer<typeof actionValidator>;
-
-export default function reducer(userData: UserData, action: Action) {
-  console.log(userData);
+export default function reducer(state: UserData, action: Action) {
+  // console.log('in', userData);
   switch (action.type) {
-    case 'UPDATE_USER':
-      console.log('payload', action.payload);
-      return action.payload;
+    case 'SET_SIGNUP_DATA':
+      return {
+        signUpData: action.payload,
+        loggedIn: !state.loggedIn,
+      };
     // return { count: state.count + 1 };
+    case 'CLEAR_SIGNUP_DATA':
+      return {
+        signUpData: null,
+      };
     case 'decrement':
       return userData;
     // return { count: state.count - 1 };

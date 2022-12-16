@@ -3,9 +3,11 @@ import { useForm /*, type SubmitHandler*/ } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { SIGNUP_USER } from '../graphql/mutations';
+import { useContext, useState } from 'react';
+import { useMutation, useLazyQuery } from '@apollo/client';
+// import { SIGNUP_USER } from '../graphql/mutations';
+import { EMAIL_IS_AVAILABLE } from '../graphql/queries';
+import { DispatchContext } from '../utils/context';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -21,9 +23,13 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 const Signup = () => {
-  const [signUpUser, { data, error }] = useMutation(SIGNUP_USER);
+  // const [signUpUser, { data, error }] = useMutation(SIGNUP_USER);
   const [signUpError, setSignUpError] = useState('');
   const router = useRouter();
+  const dispatch = useContext(DispatchContext);
+  // const emailIsAvailable = useLazyQuery(EMAIL_IS_AVAILABLE);
+  const [isEmailAvailable, { data: available, error: availableErr }] =
+    useLazyQuery(EMAIL_IS_AVAILABLE);
 
   const {
     register,
@@ -43,21 +49,15 @@ const Signup = () => {
     if (formValues.password !== formValues.retypePassword) {
       setSignUpError('Passwords do not match');
     } else {
-      const signUpUserResp = await signUpUser({
+      const emailIsAvailableResp = await isEmailAvailable({
         variables: {
           email: formValues.email,
-          password: formValues.password,
-          // role: formValues.role,
         },
       });
-      console.log('hello');
-
-      if (signUpUserResp.data.signUpUser.__typename === 'Error') {
-        setSignUpError(signUpUserResp.data.signUpUser.message);
-      }
-      if (signUpUserResp.data.signUpUser.__typename === 'UserWithToken') {
-        document.cookie = `server-auth-token=${signUpUserResp.data.signUpUser.token}; path=/`;
-        router.push('/');
+      if (!emailIsAvailableResp.data.emailIsAvailable) {
+        setSignUpError('Email is already taken');
+      } else {
+        dispatch({ type: 'SET_SIGNUP_DATA', payload: formValues });
       }
     }
   };
