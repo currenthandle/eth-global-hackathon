@@ -74,27 +74,28 @@ const HackerEditor = ({ userSsr }) => {
     useMutation(UPDATE_USER);
 
   const onSubmit = async (/*data: Schema*/) => {
-    console.log('formValues', getValues());
+    // console.log('onSubmit formValues', getValues());
     try {
       const formValues = getValues();
       const variables = {
         userUpdate: {
-          firstName: formValues.firstName,
-          lastName: formValues.lastName,
+          firstName: formValues.firstName || '',
+          lastName: formValues.lastName || '',
         },
         hackerProfile: {
-          github: formValues.github,
-          linkedin: formValues.linkedin,
-          website: formValues.website,
-          yearsOfExp: Number(formValues.yearsOfExp),
+          github: formValues.github || '',
+          linkedin: formValues.linkedin || '',
+          website: formValues.website || '',
+          yearsOfExp: Number(formValues.yearsOfExp) || 0,
           ethExp: formValues.ethExp,
-          motivation: formValues.motivation,
-          builtBefore: formValues.builtBefore,
-          lookingToBuild: formValues.lookingToBuild,
-          rules: formValues.rules,
+          motivation: formValues.motivation || '',
+          builtBefore: formValues.builtBefore || '',
+          lookingToBuild: formValues.lookingToBuild || '',
+          rules: formValues.rules || false,
         },
       };
-      // console.log('submit formValues', formValues);
+      console.log('formValues', formValues);
+      console.log('submit variables', variables);
 
       const updatedUser = await updateUser({
         variables,

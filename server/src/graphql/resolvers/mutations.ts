@@ -21,30 +21,30 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   const { userUpdate, hackerProfile } = args;
   // type ReduceInput = typeof userUpdate.userUpdate;
   console.log('here', userUpdate);
-  const updates = Object.entries(userUpdate).reduce<{
-    [key: string]: string;
-  }>((acc, [key, value]: [UserUpdateKeys, string]) => {
-    if (value) {
-      acc[key] = value;
-    }
-    return acc;
-  }, {});
+  // const updates = Object.entries(userUpdate).reduce<{
+  //   [key: string]: string;
+  // }>((acc, [key, value]: [UserUpdateKeys, string]) => {
+  //   if (value) {
+  //     acc[key] = value;
+  //   }
+  //   return acc;
+  // }, {});
   // console.log('here!', ctx);
   const user = await ctx.prisma.user.update({
     where: {
       id: ctx.auth.userId,
       // email: "c@c/com"
     },
-    data: updates,
+    data: userUpdate,
   });
-  const hackerUpdate = Object.entries(hackerProfile).reduce<{
-    [key: string]: string | 0 | boolean;
-  }>((acc, [key, value]: [any, string | 0 | boolean]) => {
-    if (value || value === 0 || value === false) {
-      acc[key] = value;
-    }
-    return acc;
-  }, {});
+  // const hackerUpdate = Object.entries(hackerProfile).reduce<{
+  //   [key: string]: string | 0 | boolean;
+  // }>((acc, [key, value]: [any, string | 0 | boolean]) => {
+  //   if (value || value === 0 || value === false) {
+  //     acc[key] = value;
+  //   }
+  //   return acc;
+  // }, {});
 
   // console.log('hackerProfile', hackerProfile);
   const _hackerProfile = await ctx.prisma.hackerProfile.update({
@@ -56,7 +56,8 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     //   linkedin: hackerProfile.linkedin,
     //   website: hackerProfile.website,
     // },
-    data: hackerUpdate,
+    // data: hackerUpdate,
+    data: hackerProfile,
   });
   // console.log('user', user);
   console.log('_hackerProfile', _hackerProfile);
