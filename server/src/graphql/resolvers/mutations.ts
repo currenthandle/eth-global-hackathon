@@ -15,45 +15,43 @@ const roleValidator = z.union([
   z.literal('sponsor'),
 ]);
 
-export const updateUser = async (
-  _: undefined,
-  userUpdate: UserUpdate,
-  ctx: Context
-) => {
+export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   authRequest(ctx);
-  console.log('userUpdate', userUpdate);
+  console.log('args', args);
+  const { userUpdate, hackerProfile } = args;
   type ReduceInput = typeof userUpdate.userUpdate;
-  const updates = Object.entries(userUpdate.userUpdate).reduce<{
-    [key: string]: string | boolean;
-  }>((acc, [key, value]: [UserUpdateKeys, string | boolean]) => {
-    if (value) {
-      acc[key] = value;
-    }
-    return acc;
-  }, {});
-  console.log('updates', updates);
+  console.log('here', userUpdate);
+  // const updates = Object.entries(userUpdate).reduce<{
+  //   [key: string]: string;
+  // }>((acc, [key, value]: [UserUpdateKeys, string]) => {
+  //   if (value) {
+  //     acc[key] = value;
+  //   }
+  //   return acc;
+  // }, {});
+  console.log('here!', ctx);
   const user = await ctx.prisma.user.update({
     where: {
       id: ctx.auth.userId,
       // email: "c@c/com"
     },
     data: {
-      firstName: updates.firstName,
-      lastName: updates.lastName,
+      firstName: userUpdate.firstName,
+      lastName: userUpdate.lastName,
     },
   });
-  console.log('updates.github', updates.github);
-  const hackerProfile = await ctx.prisma.hackerProfile.update({
+  console.log('here');
+  const _hackerProfile = await ctx.prisma.hackerProfile.update({
     where: {
       userId: ctx.auth.userId,
     },
     data: {
-      github: updates.hackerProfile.github,
-      linkedin: updates.hackerProfile.linkedin,
-      website: updates.hackerProfile.website,
+      github: hackerProfile.github,
+      linkedin: hackerProfile.linkedin,
+      website: hackerProfile.website,
     },
   });
-  console.log('updated user', user);
+  console.log('user', user);
   return user;
 };
 
@@ -62,7 +60,6 @@ export const signUpUser = async (
   { email, password, role }: { email: string; password: string; role: Role },
   ctx: Context
 ) => {
-  console.log('inside signUpUser', role);
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
   }
@@ -102,19 +99,20 @@ export const signUpUser = async (
           userId: user.id,
         },
       });
-    } else if (role === 'mentor') {
-      const mentorProfile = await ctx.prisma.mentorProfile.create({
-        data: {
-          userId: user.id,
-        },
-      });
-    } else if (role === 'sponsor') {
-      const sponsorProfile = await ctx.prisma.sponsorProfile.create({
-        data: {
-          userId: user.id,
-        },
-      });
     }
+    // else if (role === 'mentor') {
+    //   const mentorProfile = await ctx.prisma.mentorProfile.create({
+    //     data: {
+    //       userId: user.id,
+    //     },
+    //   });
+    // } else if (role === 'sponsor') {
+    //   const sponsorProfile = await ctx.prisma.sponsorProfile.create({
+    //     data: {
+    //       userId: user.id,
+    //     },
+    //   });
+    // }
 
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
     const resp = {

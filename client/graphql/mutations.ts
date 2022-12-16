@@ -18,8 +18,16 @@ export const SIGNUP_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation Mutation($userUpdate: UserUpdate) {
-    updateUser(userUpdate: $userUpdate) {
+  mutation Mutation(
+    $userUpdate: UserUpdate
+    $hackerProfile: HackerProfile
+    $sponsorProfile: SponsorProfile
+  ) {
+    updateUser(
+      userUpdate: $userUpdate
+      hackerProfile: $hackerProfile
+      sponsorProfile: $sponsorProfile
+    ) {
       firstName
       lastName
     }

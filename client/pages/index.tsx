@@ -62,7 +62,6 @@ export const getServerSideProps: GetServerSideProps = async (
             role
             firstName
             lastName
-            github
           }
         }
       `,

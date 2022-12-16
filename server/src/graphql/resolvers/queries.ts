@@ -24,7 +24,6 @@ export const emailIsAvailable = async (
 };
 
 export const userData = async (_: undefined, __: {}, ctx: Context) => {
-  console.log('inside userData');
   authRequest(ctx);
 
   const user = await ctx.prisma.user.findUnique({
@@ -39,7 +38,6 @@ export const userData = async (_: undefined, __: {}, ctx: Context) => {
         userId: ctx.auth.userId,
       },
     });
-    console.log('hackerProfile', hackerProfile);
     return {
       ...user,
       ...hackerProfile,
@@ -51,7 +49,6 @@ export const validateUser = async (
   { email, password }: { email: string; password: string },
   ctx: Context
 ) => {
-  console.log('inside validateUser');
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
   }

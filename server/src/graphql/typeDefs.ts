@@ -15,11 +15,16 @@ const typeDefs = `#graphql
     yearsOfExp: Int
   }
 
+  input SponsorProfile {
+    github: String
+    linkedin: String
+    website: String
+    yearsOfExp: Int
+  }
+
   input UserUpdate {
-    email: String
     firstName: String
     lastName: String
-    hackerProfile: HackerProfile
   }
 
   type UserWithToken {
@@ -53,7 +58,7 @@ const typeDefs = `#graphql
   type Mutation {
     createUser(email: String!, password: String!): User!
     signUpUser(email: String!, password: String!, role: String!): UserOrError!
-    updateUser(userUpdate: UserUpdate): User!
+    updateUser(userUpdate: UserUpdate, hackerProfile: HackerProfile, sponsorProfile: SponsorProfile): User!
   }
 `;
 

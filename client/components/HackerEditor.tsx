@@ -16,10 +16,11 @@ const schema = z.object({
   school: z.string(),
   country: z.string(),
   company: z.string(),
-  website: z.union([
-    z.string().url({ message: 'Invalid' }),
-    z.string().min(0).max(0),
-  ]),
+  website: z.string(),
+  // website: z.union([
+  //   z.string().url({ message: 'Invalid' }),
+  //   z.string().min(0).max(0),
+  // ]),
   github: z.string(),
   twitter: z.string(),
   telegram: z.string(),
@@ -68,13 +69,11 @@ const HackerEditor = ({ userSsr }) => {
       console.log('formValues', formValues);
       const variables = {
         userUpdate: {
-          email: formValues.email,
           firstName: formValues.firstName,
           lastName: formValues.lastName,
-          hackerProfile: {
-            github: formValues.github,
-          },
-          //
+        },
+        hackerProfile: {
+          github: formValues.github,
         },
       };
       console.log('variables', variables);
@@ -83,7 +82,7 @@ const HackerEditor = ({ userSsr }) => {
       });
       console.log('updatedUser', updatedUser);
     } catch (error) {
-      console.error('error', error);
+      console.error('error mine', error);
     }
   };
   return (
