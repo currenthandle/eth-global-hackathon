@@ -33,13 +33,35 @@ model User {
 }
 
 model HackerProfile {
-  id         String  @id @default(cuid())
-  userId     String  @unique
-  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  github     String?
-  linkedin   String?
-  website    String?
-  yearsOfExp Int?
+  id             String       @id @default(cuid())
+  userId         String       @unique
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  website        String?
+  github         String?
+  linkedin       String?
+  yearsOfExp     Int?
+  ethExp         EthExp?
+  motivation     Motivation[]
+  builtBefore    String?      @db.VarChar(500)
+  lookingToBuild String?      @db.VarChar(500)
+  rules          Boolean      @default(false)
+}
+
+enum Motivation {
+  workshop
+  resume
+  improve
+  jobOps
+  meetPpl
+  launchProduct
+  winPrize
+  other
+}
+
+enum EthExp {
+  beginner
+  intermediate
+  expert
 }
 
 enum ExperienceLevel {

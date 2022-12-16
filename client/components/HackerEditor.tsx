@@ -12,19 +12,19 @@ const schema = z.object({
   ]),
   firstName: z.string(),
   lastName: z.string(),
-  student: z.boolean(),
-  school: z.string(),
-  country: z.string(),
-  company: z.string(),
   website: z.string(),
+  github: z.string(),
+  linkedin: z.string(),
+  yearsOfExp: z.string(),
+  ethExp: z.string(),
+  motivation: z.string(),
+  builtBefore: z.string(),
+  lookingToBuild: z.string(),
+  rules: z.string(),
   // website: z.union([
   //   z.string().url({ message: 'Invalid' }),
   //   z.string().min(0).max(0),
   // ]),
-  github: z.string(),
-  twitter: z.string(),
-  telegram: z.string(),
-  linkedin: z.string(),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -41,19 +41,17 @@ const HackerEditor = ({ userSsr }) => {
   } = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: userSsr.email || '',
       firstName: userSsr.firstName || '',
       lastName: userSsr.lastName || '',
-      // gender: '',
-      student: userSsr.student || false,
-      school: userSsr.school || '',
-      country: userSsr.country || '',
-      company: userSsr.company || '',
       website: userSsr.website || '',
       github: userSsr.github || '',
-      twitter: userSsr.twitter || '',
-      telegram: userSsr.telegram || '',
       linkedin: userSsr.linkedin || '',
+      yearsOfExp: userSsr.yearsOfExp || 0,
+      ethExp: userSsr.ethExp || 0,
+      motivation: userSsr.motivation || '',
+      builtBefore: userSsr.builtBefore || '',
+      lookingToBuild: userSsr.lookingToBuild || '',
+      rules: userSsr.rules || false,
     },
   });
 
@@ -74,6 +72,14 @@ const HackerEditor = ({ userSsr }) => {
         },
         hackerProfile: {
           github: formValues.github,
+          linkedin: formValues.linkedin,
+          website: formValues.website,
+          yearsOfExp: formValues.yearsOfExp,
+          ethExp: formValues.ethExp,
+          motivation: formValues.motivation,
+          builtBefore: formValues.builtBefore,
+          lookingToBuild: formValues.lookingToBuild,
+          rules: formValues.rules,
         },
       };
       console.log('variables', variables);
@@ -82,7 +88,7 @@ const HackerEditor = ({ userSsr }) => {
       });
       console.log('updatedUser', updatedUser);
     } catch (error) {
-      console.error('error mine', error);
+      console.error('error', error);
     }
   };
   return (
@@ -95,16 +101,6 @@ const HackerEditor = ({ userSsr }) => {
           className='flex flex-col'
           onSubmit={handleSubmit(onSubmit)}
         >
-          {/* <label htmlFor='email'>Email</label>
-          <input
-            {...register('email')}
-            type='email'
-            name='email'
-            id='email'
-            placeholder='Email'
-          /> */}
-          {/* set up inputs for all other fields describe in defaultValues */}
-
           <label htmlFor='firstName'>First Name</label>
           <input
             {...register('firstName')}
@@ -121,38 +117,7 @@ const HackerEditor = ({ userSsr }) => {
             id='lastName'
             placeholder='Last Name'
           />
-          {/* <label htmlFor='student'>Student</label>
-          <input
-            {...register('student')}
-            type='checkbox'
-            name='student'
-            id='student'
-            placeholder='Student'
-          /> */}
-          {/* <label htmlFor='school'>School</label>
-          <input
-            {...register('school')}
-            type='text'
-            name='school'
-            id='school'
-            placeholder='School'
-          /> */}
-          {/* <label htmlFor='country'>Country</label>
-          <input
-            {...register('country')}
-            type='text'
-            name='country'
-            id='country'
-            placeholder='Country'
-          />
-          <label htmlFor='company'>Company</label>
-          <input
-            {...register('company')}
-            type='text'
-            name='company'
-            id='company'
-            placeholder='Company'
-          /> */}
+
           <label htmlFor='website'>Website</label>
           <input
             {...register('website')}
@@ -169,22 +134,7 @@ const HackerEditor = ({ userSsr }) => {
             id='github'
             placeholder='Github'
           />
-          <label htmlFor='twitter'>Twitter</label>
-          <input
-            {...register('twitter')}
-            type='text'
-            name='twitter'
-            id='twitter'
-            placeholder='Twitter'
-          />
-          {/* <label htmlFor='telegram'>Telegram</label>
-          <input
-            {...register('telegram')}
-            type='text'
-            name='telegram'
-            id='teegram'
-            placeholder='Telegram'
-          /> */}
+
           <label htmlFor='linkedin'>Linkedin</label>
           <input
             {...register('linkedin')}
@@ -193,6 +143,88 @@ const HackerEditor = ({ userSsr }) => {
             id='linkedin'
             placeholder='Linkedin'
           />
+          <label htmlFor='yearsOfExp'>
+            How many years of experience do you have with sofware development?
+          </label>
+          <input
+            {...register('yearsOfExp')}
+            type='number'
+            name='yearsOfExp'
+            id='yearsOfExp'
+            placeholder='Year of experience'
+          />
+          <label htmlFor='yearsOfExp'>
+            What's your experience level with Ethereum?
+          </label>
+          <select
+            {...register('ethExp')}
+            name='ethExp'
+            id='ethExp'
+            placeholder='beginner'
+          >
+            <option value='beginner'>Beginner</option>
+            <option value='intermediate'>Intermediate</option>
+            <option value='beginner'>Beginner</option>
+          </select>
+          <label htmlFor='yearsOfExp'>
+            What's your experience level with Ethereum?
+          </label>
+          <select
+            {...register('motivation')}
+            name='motivation'
+            id='motivation'
+            placeholder='beginner'
+            multiple
+          >
+            <option value='workshop'>Attend workshops & tech talks</option>
+            <option value='resume'>
+              Build something to put on my resume / portfolio
+            </option>
+            <option value='improve'>
+              Get better as a developer / designer
+            </option>
+            <option value='jobOps'>
+              Meet companies for a potential job opportunity
+            </option>
+            <option value='meetPpl'>
+              Meet like-minded people and make friends
+            </option>
+            <option value='launchProduct'>Launch a product</option>
+            <option value='winPrize'>Win a prize</option>
+            <option value='other'>Other</option>
+          </select>
+          <label htmlFor='builtBefore'>
+            Tell us about what you've built before?
+          </label>
+          <textarea
+            {...register('builtBefore')}
+            // type='text'
+            name='builtBefore'
+            id='builtBefore'
+            placeholder='Eth Experience'
+          />
+          <label htmlFor='lookingToBuild'>
+            Tell us about what you've built before?
+          </label>
+          <textarea
+            {...register('lookingToBuild')}
+            name='lookingToBuild'
+            id='lookingToBuild'
+            placeholder='Looking to build'
+          />
+          <label htmlFor='rules'>
+            Tell us about what are you looking to build at this hackathon?
+          </label>
+          <input
+            {...register('rules')}
+            type='checkbox'
+            name='rules'
+            id='rules'
+            placeholder='false'
+          />
+          <label htmlFor='yearsOfExp'>
+            Do you accept the rules and code of conduct for the event?
+          </label>
           <button type='submit'>Submit</button>
         </form>
       </div>
