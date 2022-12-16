@@ -49,6 +49,14 @@ const typeDefs = `#graphql
     firstName: String
     lastName: String
     github: String
+    linkedin: String
+    website: String
+    yearsOfExp: Int
+    ethExp: String
+    motivation: [String]
+    builtBefore: String
+    lookingToBuild: String
+    rules: Boolean  
   }
 
   union UserOrError = UserWithToken | Error
