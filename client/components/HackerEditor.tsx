@@ -177,7 +177,7 @@ const HackerEditor = ({ userSsr }) => {
             min='0'
           />
           <label htmlFor='yearsOfExp'>
-            What's your experience level with Ethereum?
+            {"What's your experience level with Ethereum?"}
           </label>
           <select
             className='rounded-md border-2 border-black'
@@ -191,7 +191,7 @@ const HackerEditor = ({ userSsr }) => {
             <option value='beginner'>Beginner</option>
           </select>
           <label htmlFor='yearsOfExp'>
-            What's your experience level with Ethereum?
+            {"What's your experience level with Ethereum?"}
           </label>
           <select
             className='rounded-md border-2 border-black'
@@ -220,7 +220,7 @@ const HackerEditor = ({ userSsr }) => {
             <option value='other'>Other</option>
           </select>
           <label htmlFor='builtBefore'>
-            Tell us about what you've built before?
+            {"Tell us about what you've built before?"}
           </label>
           <textarea
             className='rounded-md border-2 border-black'
