@@ -2,10 +2,8 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { USER_DATA } from '../graphql/queries';
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next/types';
 
 const schema = z.object({
   email: z.union([
@@ -104,14 +102,14 @@ const HackerEditor = ({ userSsr }) => {
           className='flex flex-col'
           onSubmit={handleSubmit(onSubmit)}
         >
-          <label htmlFor='email'>Email</label>
+          {/* <label htmlFor='email'>Email</label>
           <input
             {...register('email')}
             type='email'
             name='email'
             id='email'
             placeholder='Email'
-          />
+          /> */}
           {/* set up inputs for all other fields describe in defaultValues */}
 
           <label htmlFor='firstName'>First Name</label>
@@ -130,23 +128,23 @@ const HackerEditor = ({ userSsr }) => {
             id='lastName'
             placeholder='Last Name'
           />
-          <label htmlFor='student'>Student</label>
+          {/* <label htmlFor='student'>Student</label>
           <input
             {...register('student')}
             type='checkbox'
             name='student'
             id='student'
             placeholder='Student'
-          />
-          <label htmlFor='school'>School</label>
+          /> */}
+          {/* <label htmlFor='school'>School</label>
           <input
             {...register('school')}
             type='text'
             name='school'
             id='school'
             placeholder='School'
-          />
-          <label htmlFor='country'>Country</label>
+          /> */}
+          {/* <label htmlFor='country'>Country</label>
           <input
             {...register('country')}
             type='text'
@@ -161,7 +159,7 @@ const HackerEditor = ({ userSsr }) => {
             name='company'
             id='company'
             placeholder='Company'
-          />
+          /> */}
           <label htmlFor='website'>Website</label>
           <input
             {...register('website')}
@@ -186,14 +184,14 @@ const HackerEditor = ({ userSsr }) => {
             id='twitter'
             placeholder='Twitter'
           />
-          <label htmlFor='telegram'>Telegram</label>
+          {/* <label htmlFor='telegram'>Telegram</label>
           <input
             {...register('telegram')}
             type='text'
             name='telegram'
             id='teegram'
             placeholder='Telegram'
-          />
+          /> */}
           <label htmlFor='linkedin'>Linkedin</label>
           <input
             {...register('linkedin')}
