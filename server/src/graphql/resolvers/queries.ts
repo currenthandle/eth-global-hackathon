@@ -33,7 +33,18 @@ export const userData = async (_: undefined, __: {}, ctx: Context) => {
       // email: 'c@c.com',
     },
   });
-  return user;
+  if (user.role === 'hacker') {
+    const hackerProfile = await ctx.prisma.hackerProfile.findUnique({
+      where: {
+        userId: ctx.auth.userId,
+      },
+    });
+    console.log('hackerProfile', hackerProfile);
+    return {
+      ...user,
+      ...hackerProfile,
+    };
+  }
 };
 export const validateUser = async (
   _: undefined,

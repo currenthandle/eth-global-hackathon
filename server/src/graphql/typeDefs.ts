@@ -31,11 +31,21 @@ const typeDefs = `#graphql
     message: String!
   }
 
+  type UserDate {
+    email: String
+    password: String
+    id: ID
+    role: String
+    firstName: String
+    lastName: String
+    github: String
+  }
+
   union UserOrError = UserWithToken | Error
 
   type Query {
     allUsers: [User!]!
-    userData: User
+    userData: UserDate!
     validateUser(email: String!, password: String!): UserOrError!
     emailIsAvailable(email: String!): Boolean!
   }

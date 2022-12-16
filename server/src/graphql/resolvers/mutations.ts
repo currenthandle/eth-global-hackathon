@@ -42,14 +42,15 @@ export const updateUser = async (
       lastName: updates.lastName,
     },
   });
+  console.log('updates.github', updates.github);
   const hackerProfile = await ctx.prisma.hackerProfile.update({
     where: {
       userId: ctx.auth.userId,
     },
     data: {
-      github: updates.github,
-      linkedin: updates.linkedin,
-      website: updates.website,
+      github: updates.hackerProfile.github,
+      linkedin: updates.hackerProfile.linkedin,
+      website: updates.hackerProfile.website,
     },
   });
   console.log('updated user', user);
