@@ -119,6 +119,7 @@ const HackerEditor = ({ userSsr }) => {
         >
           <label htmlFor='firstName'>First Name</label>
           <input
+            className='rounded-md border-2 border-black'
             {...register('firstName')}
             type='text'
             name='firstName'
@@ -127,6 +128,7 @@ const HackerEditor = ({ userSsr }) => {
           />
           <label htmlFor='lastName'>Last Name</label>
           <input
+            className='rounded-md border-2 border-black'
             {...register('lastName')}
             type='text'
             name='lastName'
@@ -136,6 +138,7 @@ const HackerEditor = ({ userSsr }) => {
 
           <label htmlFor='website'>Website</label>
           <input
+            className='rounded-md border-2 border-black'
             {...register('website')}
             type='text'
             name='website'
@@ -144,6 +147,7 @@ const HackerEditor = ({ userSsr }) => {
           />
           <label htmlFor='github'>Github</label>
           <input
+            className='rounded-md border-2 border-black'
             {...register('github')}
             type='text'
             name='github'
@@ -153,6 +157,7 @@ const HackerEditor = ({ userSsr }) => {
 
           <label htmlFor='linkedin'>Linkedin</label>
           <input
+            className='rounded-md border-2 border-black'
             {...register('linkedin')}
             type='text'
             name='linkedin'
@@ -163,16 +168,19 @@ const HackerEditor = ({ userSsr }) => {
             How many years of experience do you have with sofware development?
           </label>
           <input
+            className='rounded-md border-2 border-black'
             {...register('yearsOfExp')}
             type='number'
             name='yearsOfExp'
             id='yearsOfExp'
             placeholder='Year of experience'
+            min='0'
           />
           <label htmlFor='yearsOfExp'>
             What's your experience level with Ethereum?
           </label>
           <select
+            className='rounded-md border-2 border-black'
             {...register('ethExp')}
             name='ethExp'
             id='ethExp'
@@ -186,6 +194,7 @@ const HackerEditor = ({ userSsr }) => {
             What's your experience level with Ethereum?
           </label>
           <select
+            className='rounded-md border-2 border-black'
             {...register('motivation')}
             name='motivation'
             id='motivation'
@@ -214,6 +223,7 @@ const HackerEditor = ({ userSsr }) => {
             Tell us about what you've built before?
           </label>
           <textarea
+            className='rounded-md border-2 border-black'
             {...register('builtBefore')}
             // type='text'
             name='builtBefore'
@@ -224,6 +234,7 @@ const HackerEditor = ({ userSsr }) => {
             Tell us about what are you looking to build at this hackathon?
           </label>
           <textarea
+            className='rounded-md border-2 border-black'
             {...register('lookingToBuild')}
             name='lookingToBuild'
             id='lookingToBuild'
