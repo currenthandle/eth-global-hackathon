@@ -220,7 +220,7 @@ const HackerEditor = ({ userSsr }) => {
             placeholder='builtBefore'
           />
           <label htmlFor='lookingToBuild'>
-            Tell us about what you've built before?
+            Tell us about what are you looking to build at this hackathon?
           </label>
           <textarea
             {...register('lookingToBuild')}
@@ -229,7 +229,7 @@ const HackerEditor = ({ userSsr }) => {
             placeholder='Looking to build'
           />
           <label htmlFor='rules'>
-            Tell us about what are you looking to build at this hackathon?
+            Do you accept the rules and code of conduct for the event?
           </label>
           <input
             {...register('rules')}

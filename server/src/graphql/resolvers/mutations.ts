@@ -46,7 +46,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     return acc;
   }, {});
 
-  console.log('hackerProfile', hackerProfile);
+  // console.log('hackerProfile', hackerProfile);
   const _hackerProfile = await ctx.prisma.hackerProfile.update({
     where: {
       userId: ctx.auth.userId,
