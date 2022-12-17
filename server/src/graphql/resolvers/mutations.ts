@@ -17,20 +17,10 @@ const roleValidator = z.union([
 
 export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   authRequest(ctx);
-  // console.log('args', args);
-  const { userUpdate, hackerProfile, partnerProfile } = args;
+  const { userUpdate, hackerProfile, partnerProfile, mentorProfile } = args;
   console.log('args', args);
-  // type ReduceInput = typeof userUpdate.userUpdate;
   console.log('here', userUpdate);
-  // const updates = Object.entries(userUpdate).reduce<{
-  //   [key: string]: string;
-  // }>((acc, [key, value]: [UserUpdateKeys, string]) => {
-  //   if (value) {
-  //     acc[key] = value;
-  //   }
-  //   return acc;
-  // }, {});
-  // console.log('here!', ctx);
+
   const user = await ctx.prisma.user.update({
     where: {
       id: ctx.auth.userId,
@@ -38,16 +28,6 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     },
     data: userUpdate,
   });
-  // const hackerUpdate = Object.entries(hackerProfile).reduce<{
-  //   [key: string]: string | 0 | boolean;
-  // }>((acc, [key, value]: [any, string | 0 | boolean]) => {
-  //   if (value || value === 0 || value === false) {
-  //     acc[key] = value;
-  //   }
-  //   return acc;
-  // }, {});
-
-  // console.log('hackerProfile', hackerProfile);
   if (user.role === 'hacker') {
     console.log('hackerProfile', hackerProfile);
     if (hackerProfile.ethExp === '') {
@@ -72,13 +52,14 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     console.log('after');
     console.log('_partnerProfile', _partnerProfile);
   } else if (user.role === 'mentor') {
-    if (hackerProfile.ethExp === '') {
-      delete hackerProfile.ethExp;
+    if (mentorProfile.ethExp === '') {
+      delete mentorProfile.ethExp;
     }
-    const _mentorProfile = await ctx.prisma.mentorProfile.create({
-      data: {
-        userId: user.id,
+    const _mentorProfile = await ctx.prisma.mentorProfile.update({
+      where: {
+        userId: ctx.auth.userId,
       },
+      data: mentorProfile,
     });
 
     console.log('_mentorProfile', _mentorProfile);
