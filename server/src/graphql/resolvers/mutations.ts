@@ -40,7 +40,7 @@ export const updateUser = async (
       where: {
         userId: ctx.auth?.userId,
       },
-      data: hackerProfile as any,
+      data: hackerProfile,
     });
   } else if (user.role === 'partner' && 'partnerProfile' in args) {
     const { partnerProfile } = args;
@@ -56,7 +56,7 @@ export const updateUser = async (
       where: {
         userId: ctx.auth?.userId,
       },
-      data: mentorProfile as any,
+      data: mentorProfile,
     });
   }
   return user;

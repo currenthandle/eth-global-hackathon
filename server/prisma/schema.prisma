@@ -80,11 +80,3 @@ enum EthExp {
   intermediate
   expert
 }
-
-enum ExperienceLevel {
-  new
-  beginner
-  intermediate
-  advanced
-  expert
-}

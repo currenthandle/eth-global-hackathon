@@ -22,8 +22,7 @@ const schema = z.object({
   ethExp: z.union([
     z.literal('beginner'),
     z.literal('intermediate'),
-    z.literal('advanced'),
-    z.literal(''),
+    z.literal('expert'),
   ]),
   otherEvents: z.union([z.string().min(250).max(500), z.literal('')]),
   reasonForMentoring: z.union([z.string().min(250).max(500), z.literal('')]),
@@ -48,7 +47,7 @@ const MentorEditor = ({ userSsr }: UserSsr) => {
       telegram: userSsr.telegram || '',
       twitter: userSsr.twitter || '',
       yearsOfExp: userSsr.yearsOfExp || 0,
-      ethExp: userSsr.ethExp || '',
+      ethExp: userSsr.ethExp,
       otherEvents: userSsr.otherEvents || '',
       reasonForMentoring: userSsr.reasonForMentoring || '',
       rules: userSsr.rules || false,

@@ -20,8 +20,7 @@ const schema = z.object({
   ethExp: z.union([
     z.literal('beginner'),
     z.literal('intermediate'),
-    z.literal('advanced'),
-    z.literal(''),
+    z.literal('expert'),
   ]),
   motivation: z.union([
     z.literal(''),
@@ -60,7 +59,7 @@ const HackerEditor = ({ userSsr }: UserSsr) => {
       github: userSsr.github || '',
       linkedin: userSsr.linkedin || '',
       yearsOfExp: userSsr.yearsOfExp || 0,
-      ethExp: userSsr.ethExp || '',
+      ethExp: userSsr.ethExp,
       motivation: userSsr.motivation || '',
       builtBefore: userSsr.builtBefore || '',
       lookingToBuild: userSsr.lookingToBuild || '',
@@ -198,7 +197,7 @@ const HackerEditor = ({ userSsr }: UserSsr) => {
           >
             <option value='beginner'>Beginner</option>
             <option value='intermediate'>Intermediate</option>
-            <option value='Expert'>Expert</option>
+            <option value='expert'>Expert</option>
           </select>
 
           <label htmlFor='motivation'>

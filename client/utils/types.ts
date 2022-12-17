@@ -17,7 +17,7 @@ export type UserSsr = {
     linkedin?: string;
     rules?: boolean;
     yearsOfExp?: number;
-    ethExp?: 'beginner' | 'intermediate' | 'advanced' | '';
+    ethExp?: 'beginner' | 'intermediate' | 'expert';
     motivation: (
       | 'workshop'
       | 'resume'
