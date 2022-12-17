@@ -62,15 +62,17 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     });
   } else if (user.role === 'partner') {
     console.log('partnerProfile', partnerProfile);
+    console.log('before');
     const _partnerProfile = await ctx.prisma.partnerProfile.update({
       where: {
         userId: ctx.auth.userId,
       },
-      data: hackerProfile,
+      data: partnerProfile,
     });
+    console.log('after');
+    console.log('_partnerProfile', _partnerProfile);
   }
   // console.log('user', user);
-  // console.log('_hackerProfile', _hackerProfile);
   return user;
 };
 
@@ -118,20 +120,19 @@ export const signUpUser = async (
           userId: user.id,
         },
       });
+    } else if (role === 'partner') {
+      const partnerProfile = await ctx.prisma.partnerProfile.create({
+        data: {
+          userId: user.id,
+        },
+      });
+    } else if (role === 'mentor') {
+      const mentorProfile = await ctx.prisma.mentorProfile.create({
+        data: {
+          userId: user.id,
+        },
+      });
     }
-    // else if (role === 'mentor') {
-    //   const mentorProfile = await ctx.prisma.mentorProfile.create({
-    //     data: {
-    //       userId: user.id,
-    //     },
-    //   });
-    // } else if (role === 'partner') {
-    //   const partnerProfile = await ctx.prisma.partnerProfile.create({
-    //     data: {
-    //       userId: user.id,
-    //     },
-    //   });
-    // }
 
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
     const resp = {

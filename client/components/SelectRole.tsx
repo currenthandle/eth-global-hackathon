@@ -38,17 +38,17 @@ export const SelectRole = () => {
         </button>
         <button
           onClick={handleClick}
-          data-role='mentor'
-          className='rounded-lg border-2 p-6'
-        >
-          Mentor
-        </button>
-        <button
-          onClick={handleClick}
           data-role='partner'
           className='rounded-lg border-2 p-6'
         >
           Partner
+        </button>
+        <button
+          onClick={handleClick}
+          data-role='mentor'
+          className='rounded-lg border-2 p-6'
+        >
+          Mentor
         </button>
       </div>
     </div>
