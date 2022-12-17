@@ -84,7 +84,7 @@ const PartnerEditor = ({ userSsr }) => {
             <div className='flex flex-col grow mr-2'>
               <label htmlFor='firstName'>First Name</label>
               <input
-                className='rounded-md border-2 border-[#dadadb] h-12'
+                className='rounded-md border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('firstName')}
                 type='text'
                 name='firstName'
@@ -95,7 +95,7 @@ const PartnerEditor = ({ userSsr }) => {
             <div className='flex flex-col grow ml-2'>
               <label htmlFor='lastName'>Last Name</label>
               <input
-                className='rounded-md border-2 border-[#dadadb] h-12'
+                className='rounded-md border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('lastName')}
                 type='text'
                 name='lastName'
@@ -107,7 +107,7 @@ const PartnerEditor = ({ userSsr }) => {
 
           <label htmlFor='website'>Website</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('website')}
             type='text'
             name='website'
@@ -117,7 +117,7 @@ const PartnerEditor = ({ userSsr }) => {
 
           <label htmlFor='github'>Organization</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('organization')}
             type='text'
             name='organization'
@@ -127,7 +127,7 @@ const PartnerEditor = ({ userSsr }) => {
 
           <label htmlFor='linkedin'>Linkedin</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('linkedin')}
             type='text'
             name='linkedin'
@@ -137,7 +137,7 @@ const PartnerEditor = ({ userSsr }) => {
 
           <label htmlFor='telegram'>Telegram</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('telegram')}
             type='text'
             name='telegram'
@@ -147,7 +147,7 @@ const PartnerEditor = ({ userSsr }) => {
 
           <label htmlFor='twitter'>Twitter</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('twitter')}
             type='text'
             name='twitter'
@@ -159,7 +159,7 @@ const PartnerEditor = ({ userSsr }) => {
             Have you supported other Ethereum events before? If yes, which ones?
           </label>
           <textarea
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('otherEvents')}
             name='otherEvents'
             id='otherEvents'
@@ -170,7 +170,7 @@ const PartnerEditor = ({ userSsr }) => {
             Why do you want to support this hackathon?
           </label>
           <textarea
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('reasonForSupporting')}
             name='reasonForSupporting'
             id='reasonForSupporting'

@@ -8,7 +8,7 @@ const ProfileEditor = ({ userSsr }) => {
 
   return (
     <div className='border-[1px] rounded-3xl border-[#dadadb] bg-white p-8 w-8/12 max-w-2xl m-auto mt-14'>
-      <div className='bg-[#f4f4f5]  rounded-md border-2 border-[#dadadb] h-12 flex items-center'>
+      <div className='bg-[#f4f4f5] mb-6 rounded-md border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm'>
         {userSsr.email}
       </div>
       {/* <Image src='/team-header.webp' alt='Team Header' fill></Image> */}

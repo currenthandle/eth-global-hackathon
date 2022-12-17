@@ -115,7 +115,7 @@ const HackerEditor = ({ userSsr }) => {
             <div className='flex flex-col grow mr-2'>
               <label htmlFor='firstName'>First Name</label>
               <input
-                className='rounded-md border-2 border-[#dadadb] h-12'
+                className='rounded-md border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('firstName')}
                 type='text'
                 name='firstName'
@@ -126,7 +126,7 @@ const HackerEditor = ({ userSsr }) => {
             <div className='flex flex-col grow ml-2'>
               <label htmlFor='lastName'>Last Name</label>
               <input
-                className='rounded-md border-2 border-[#dadadb] h-12'
+                className='rounded-md border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('lastName')}
                 type='text'
                 name='lastName'
@@ -138,7 +138,7 @@ const HackerEditor = ({ userSsr }) => {
 
           <label htmlFor='website'>Website</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('website')}
             type='text'
             name='website'
@@ -148,7 +148,7 @@ const HackerEditor = ({ userSsr }) => {
 
           <label htmlFor='github'>Github</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('github')}
             type='text'
             name='github'
@@ -158,7 +158,7 @@ const HackerEditor = ({ userSsr }) => {
 
           <label htmlFor='linkedin'>Linkedin</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('linkedin')}
             type='text'
             name='linkedin'
@@ -170,7 +170,7 @@ const HackerEditor = ({ userSsr }) => {
             How many years of experience do you have with sofware development?
           </label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('yearsOfExp')}
             type='number'
             name='yearsOfExp'
@@ -183,7 +183,7 @@ const HackerEditor = ({ userSsr }) => {
             {"What's your experience level with Ethereum?"}
           </label>
           <select
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('ethExp')}
             name='ethExp'
             id='ethExp'
@@ -198,7 +198,7 @@ const HackerEditor = ({ userSsr }) => {
             What is your motivation to join this event?
           </label>
           <select
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('motivation')}
             name='motivation'
             id='motivation'
@@ -228,7 +228,7 @@ const HackerEditor = ({ userSsr }) => {
             {"Tell us about what you've built before?"}
           </label>
           <textarea
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('builtBefore')}
             // type='text'
             name='builtBefore'
@@ -240,7 +240,7 @@ const HackerEditor = ({ userSsr }) => {
             Tell us about what are you looking to build at this hackathon?
           </label>
           <textarea
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('lookingToBuild')}
             name='lookingToBuild'
             id='lookingToBuild'
