@@ -1,6 +1,6 @@
-# ETH Global Hackathon Signup and Profile Management System
+# ETH Global Hackathon: Create and Manage Applications
 
-## Server Setup
+## Server Setup (GraphQL API)
 
 1. Make sure you're using the latest Node.js LTS version (v18.12.1 or higher).
 2. Install Postgres locally (or use you preferred postgres service).
@@ -25,7 +25,7 @@ JWT_SECRET=41CD39FB323A6DBF371336BC9CC55
 10. Run `npm run dev` in the server directory to start the GraphQL server
 11. Leave the dev server running and open a new terminal window for the client
 
-## Client Setup
+## Client Setup (Next.js App)
 
 1. In the new terminal window, make sure you're in the project root
 2. `cd client`
