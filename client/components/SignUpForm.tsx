@@ -79,7 +79,7 @@ const Signup = () => {
             <label htmlFor='email'>email</label>
             <input
               {...register('email')}
-              className='rounded-md border-2 border-black'
+              className='rounded-lg border-2 border-black'
               type='email'
               name='email'
               id='email'
@@ -89,7 +89,7 @@ const Signup = () => {
             <label htmlFor='password'>Password</label>
             <input
               {...register('password')}
-              className='rounded-md border-2 border-black'
+              className='rounded-lg border-2 border-black'
               type='password'
               name='password'
               id='password'
@@ -99,7 +99,7 @@ const Signup = () => {
             <label htmlFor='retypePassword'>Password</label>
             <input
               {...register('retypePassword')}
-              className='rounded-md border-2 border-black'
+              className='rounded-lg border-2 border-black'
               type='password'
               name='retypePassword'
               id='retypePassword'
@@ -110,7 +110,7 @@ const Signup = () => {
             {/* <label htmlFor='role'>Role</label>
             <select
               {...register('role')}
-              className='rounded-md border-2 border-black'
+              className='rounded-lg border-2 border-black'
               name='role'
               id='role'
             >
@@ -122,7 +122,7 @@ const Signup = () => {
 
             <div className='flex justify-center'>
               <button
-                className='mt-4 w-4/12 rounded-md border-2 border-black'
+                className='mt-4 w-4/12 rounded-lg border-2 border-black'
                 type='submit'
               >
                 Sign up

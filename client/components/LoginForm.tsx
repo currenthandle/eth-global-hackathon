@@ -72,7 +72,7 @@ const Login = () => {
             <label htmlFor='email'>email</label>
             <input
               {...register('email')}
-              className='rounded-md border-2 border-black'
+              className='rounded-lg border-2 border-black'
               type='email'
               name='email'
               id='email'
@@ -82,7 +82,7 @@ const Login = () => {
             <label htmlFor='password'>Password</label>
             <input
               {...register('password')}
-              className='rounded-md border-2 border-black'
+              className='rounded-lg border-2 border-black'
               type='password'
               name='password'
               id='password'
@@ -92,7 +92,7 @@ const Login = () => {
 
             <div className='flex justify-center'>
               <button
-                className='mt-4 w-4/12 rounded-md border-2 border-black'
+                className='mt-4 w-4/12 rounded-lg border-2 border-black'
                 type='submit'
               >
                 Login
@@ -101,7 +101,7 @@ const Login = () => {
 
             <Link href='/signup'>
               <div className='flex justify-center'>
-                <button className='mt-4 w-4/12 rounded-md border-2 border-black'>
+                <button className='mt-4 w-4/12 rounded-lg border-2 border-black'>
                   Sign Up
                 </button>
               </div>

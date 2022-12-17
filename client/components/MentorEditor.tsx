@@ -102,7 +102,7 @@ const MentorEditor = ({ userSsr }) => {
             <div className='flex flex-col grow mr-2'>
               <label htmlFor='firstName'>First Name</label>
               <input
-                className='rounded-md border-2 border-[#dadadb] h-14 px-4 text-sm'
+                className='rounded-lg border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('firstName')}
                 type='text'
                 name='firstName'
@@ -113,7 +113,7 @@ const MentorEditor = ({ userSsr }) => {
             <div className='flex flex-col grow ml-2'>
               <label htmlFor='lastName'>Last Name</label>
               <input
-                className='rounded-md border-2 border-[#dadadb] h-14 px-4 text-sm'
+                className='rounded-lg border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('lastName')}
                 type='text'
                 name='lastName'
@@ -125,7 +125,7 @@ const MentorEditor = ({ userSsr }) => {
 
           <label htmlFor='website'>Website</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('website')}
             type='text'
             name='website'
@@ -135,7 +135,7 @@ const MentorEditor = ({ userSsr }) => {
 
           <label htmlFor='github'>Github</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('github')}
             type='text'
             name='github'
@@ -145,7 +145,7 @@ const MentorEditor = ({ userSsr }) => {
 
           <label htmlFor='linkedin'>Linkedin</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('linkedin')}
             type='text'
             name='linkedin'
@@ -155,7 +155,7 @@ const MentorEditor = ({ userSsr }) => {
 
           <label htmlFor='telegram'>Telegram</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('telegram')}
             type='text'
             name='telegram'
@@ -165,7 +165,7 @@ const MentorEditor = ({ userSsr }) => {
 
           <label htmlFor='twitter'>Twitter</label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('twitter')}
             type='text'
             name='twitter'
@@ -177,7 +177,7 @@ const MentorEditor = ({ userSsr }) => {
             How many years of experience do you have with sofware development?
           </label>
           <input
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('yearsOfExp')}
             type='number'
             name='yearsOfExp'
@@ -190,7 +190,7 @@ const MentorEditor = ({ userSsr }) => {
             {"What's your experience level with Ethereum?"}
           </label>
           <select
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('ethExp')}
             name='ethExp'
             id='ethExp'
@@ -206,7 +206,7 @@ const MentorEditor = ({ userSsr }) => {
             }
           </label>
           <textarea
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('otherEvents')}
             name='otherEvents'
             id='otherEvents'
@@ -217,7 +217,7 @@ const MentorEditor = ({ userSsr }) => {
             Why do you want to mentor at this hackathon?
           </label>
           <textarea
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
             {...register('reasonForMentoring')}
             name='reasonForMentoring'
             id='reasonForMentoring'
