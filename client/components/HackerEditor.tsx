@@ -40,13 +40,11 @@ const schema = z.object({
   builtBefore: z.union([z.string().min(250).max(500), z.literal('')]),
   lookingToBuild: z.union([z.string().min(250).max(500), z.literal('')]),
   rules: z.boolean().default(false),
-  // website: z.union([z.string(), z.literal('')]),
 });
 
 type Schema = z.infer<typeof schema>;
 
 const HackerEditor = ({ userSsr }) => {
-  // console.log('userSsr', userSsr);
   const {
     register,
     handleSubmit,
@@ -69,12 +67,10 @@ const HackerEditor = ({ userSsr }) => {
     },
   });
 
-  // const { data: initialData, error: initialError } = useQuery(USER_DATA);
   const [updateUser, { data: updatedUser, error: updatedUserErr }] =
     useMutation(UPDATE_USER);
 
   const onSubmit = async (/*data: Schema*/) => {
-    // console.log('onSubmit formValues', getValues());
     try {
       const formValues = getValues();
       const variables = {
@@ -268,7 +264,14 @@ const HackerEditor = ({ userSsr }) => {
               Yes I accept the rules and code of conduct for this event
             </p>
           </div>
-          <button type='submit'>Submit</button>
+          <div className='w-full flex justify-center mt-6'>
+            <button
+              className=' border-2 px-8 py-3 rounded-full bg-white bg-[#f4f4f5]'
+              type='submit'
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
