@@ -86,6 +86,7 @@ export type HackerForm = z.infer<typeof hackerFormValidator>;
 export const mentorFormValidator = userFormDataValidator.and(
   mentorFormDataValidator
 );
+export type MentorForm = z.infer<typeof mentorFormValidator>;
 
 export const partnerFormValidator = userFormDataValidator.and(
   partnerFormDataValidator

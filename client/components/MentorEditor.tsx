@@ -6,11 +6,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
 import { SubmitButton } from './SubmitButton';
-import { mentorFormValidator } from '../utils/validators';
-
-const schema = mentorFormValidator;
-
-type Schema = z.infer<typeof schema>;
+import { MentorForm, mentorFormValidator } from '../utils/validators';
 
 const MentorEditor = ({ userSsr }: UserSsr) => {
   const {
@@ -18,8 +14,8 @@ const MentorEditor = ({ userSsr }: UserSsr) => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<Schema>({
-    resolver: zodResolver(schema),
+  } = useForm<MentorForm>({
+    resolver: zodResolver(mentorFormValidator),
     defaultValues: {
       firstName: userSsr.firstName || '',
       lastName: userSsr.lastName || '',
