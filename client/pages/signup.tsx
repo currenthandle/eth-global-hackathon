@@ -3,9 +3,8 @@ import ClientOnly from '../components/ClientOnly';
 import { SelectRole } from '../components/SelectRole';
 import { useContext } from 'react';
 import { StateContext } from '../utils/context';
-import { memo } from 'react';
 
-export default memo(function Signup(props) {
+export default function Signup() {
   const state = useContext(StateContext);
   return (
     <div>
@@ -14,4 +13,4 @@ export default memo(function Signup(props) {
       </ClientOnly>
     </div>
   );
-});
+}
