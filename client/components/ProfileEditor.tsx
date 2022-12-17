@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import HackerEditor from './HackerEditor';
+import MentorEditor from './MentorEditor';
 import PartnerEditor from './PartnerEditor';
 
 const ProfileEditor = ({ userSsr }) => {
@@ -10,6 +11,7 @@ const ProfileEditor = ({ userSsr }) => {
       {/* <Image src='/team-header.webp' alt='Team Header' fill></Image> */}
       {userSsr.role === 'hacker' && <HackerEditor userSsr={userSsr} />}
       {userSsr.role === 'partner' && <PartnerEditor userSsr={userSsr} />}
+      {userSsr.role === 'mentor' && <MentorEditor userSsr={userSsr} />}
     </div>
   );
 };

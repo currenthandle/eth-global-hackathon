@@ -58,7 +58,7 @@ const typeDefs = `#graphql
     message: String!
   }
 
-  type UserDate {
+  type UserData {
     email: String
     password: String
     id: ID
@@ -84,7 +84,7 @@ const typeDefs = `#graphql
 
   type Query {
     allUsers: [User!]!
-    userData: UserDate!
+    userData: UserData!
     validateUser(email: String!, password: String!): UserOrError!
     emailIsAvailable(email: String!): Boolean!
   }
