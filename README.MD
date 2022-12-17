@@ -5,7 +5,7 @@
 1. Make sure you're using the latest Node.js LTS version (v18.12.1 or higher).
 2. Install Postgres locally (or use your preferred postgres service).
 3. If you're using a local Postgres service make sure you have `psql` installed. Then run `psql` to open the postgres shell.
-4. Create a database named `hackathon` by running `CREATE DATABASE hackathon;` from the `psql` shell. You can use any name you want but you'll need to set the `DATABASE_URL` accordingly in the in the `.env` file. See step 7 below.
+4. Create a database named `hackathon` by running `CREATE DATABASE hackathon;` from the `psql` shell. You can use any name you want but you'll need to set the `DATABASE_URL` accordingly in the `.env` file. See step 7 below.
 5. Create an `.env` file in `<project-root>/server`.
 6. Add a `JWT_SECRET` in `.env` and set it to a string. Any string will work but it's a good idea to use a long random string.
    Example: `JWT_SECRET=41CD39FB323A6DBF371336BC9CC55`.
