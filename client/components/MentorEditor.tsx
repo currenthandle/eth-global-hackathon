@@ -98,27 +98,33 @@ const MentorEditor = ({ userSsr }) => {
           className='flex flex-col'
           onSubmit={handleSubmit(onSubmit)}
         >
+          <label htmlFor='email'>Email</label>
+          <input
+            value={userSsr.email}
+            name='email'
+            className='bg-[#f4f4f5] mb-6 rounded-lg border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm w-full'
+          />
           <div className='flex flex-row justify-between mb-6'>
             <div className='flex flex-col grow mr-2'>
-              <label htmlFor='firstName'>First Name</label>
+              <label htmlFor='firstName'>First name</label>
               <input
                 className='rounded-lg border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('firstName')}
                 type='text'
                 name='firstName'
                 id='firstName'
-                placeholder='First Name'
+                placeholder='First name'
               />
             </div>
             <div className='flex flex-col grow ml-2'>
-              <label htmlFor='lastName'>Last Name</label>
+              <label htmlFor='lastName'>Last name</label>
               <input
                 className='rounded-lg border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('lastName')}
                 type='text'
                 name='lastName'
                 id='lastName'
-                placeholder='Last Name'
+                placeholder='Last name'
               />
             </div>
           </div>

@@ -111,31 +111,36 @@ const HackerEditor = ({ userSsr }) => {
           className='flex flex-col'
           onSubmit={handleSubmit(onSubmit)}
         >
+          <label htmlFor='email'>Email</label>
+          <input
+            value={userSsr.email}
+            name='email'
+            className='bg-[#f4f4f5] mb-6 rounded-lg border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm w-full'
+          />
           <div className='flex flex-row justify-between mb-6'>
             <div className='flex flex-col grow mr-2'>
-              <label htmlFor='firstName'>First Name</label>
+              <label htmlFor='firstName'>First name</label>
               <input
                 className='rounded-lg border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('firstName')}
                 type='text'
                 name='firstName'
                 id='firstName'
-                placeholder='First Name'
+                placeholder='First name'
               />
             </div>
             <div className='flex flex-col grow ml-2'>
-              <label htmlFor='lastName'>Last Name</label>
+              <label htmlFor='lastName'>Last name</label>
               <input
                 className='rounded-lg border-2 border-[#dadadb] h-14 px-4 text-sm'
                 {...register('lastName')}
                 type='text'
                 name='lastName'
                 id='lastName'
-                placeholder='Last Name'
+                placeholder='Last name'
               />
             </div>
           </div>
-
           <label htmlFor='website'>Website</label>
           <input
             className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
@@ -145,7 +150,6 @@ const HackerEditor = ({ userSsr }) => {
             id='website'
             placeholder='Website'
           />
-
           <label htmlFor='github'>Github</label>
           <input
             className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
@@ -155,7 +159,6 @@ const HackerEditor = ({ userSsr }) => {
             id='github'
             placeholder='Github'
           />
-
           <label htmlFor='linkedin'>Linkedin</label>
           <input
             className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
@@ -165,7 +168,6 @@ const HackerEditor = ({ userSsr }) => {
             id='linkedin'
             placeholder='Linkedin'
           />
-
           <label htmlFor='yearsOfExp'>
             How many years of experience do you have with sofware development?
           </label>
@@ -178,7 +180,6 @@ const HackerEditor = ({ userSsr }) => {
             placeholder='Year of experience'
             min='0'
           />
-
           <label htmlFor='ethExp'>
             {"What's your experience level with Ethereum?"}
           </label>
@@ -193,7 +194,6 @@ const HackerEditor = ({ userSsr }) => {
             <option value='intermediate'>Intermediate</option>
             <option value='beginner'>Beginner</option>
           </select>
-
           <label htmlFor='motivation'>
             What is your motivation to join this event?
           </label>
@@ -231,7 +231,6 @@ const HackerEditor = ({ userSsr }) => {
               Other
             </option>
           </select>
-
           <label htmlFor='builtBefore'>
             {"Tell us about what you've built before?"}
           </label>
@@ -243,7 +242,6 @@ const HackerEditor = ({ userSsr }) => {
             id='builtBefore'
             placeholder='I built...'
           />
-
           <label htmlFor='lookingToBuild'>
             Tell us about what are you looking to build at this hackathon?
           </label>
@@ -254,7 +252,6 @@ const HackerEditor = ({ userSsr }) => {
             id='lookingToBuild'
             placeholder="I'm looking to build..."
           />
-
           <label htmlFor='rules'>
             Do you accept the rules and code of conduct for the event?
           </label>
@@ -265,7 +262,6 @@ const HackerEditor = ({ userSsr }) => {
             id='rules'
             placeholder='false'
           />
-
           <button type='submit'>Submit</button>
         </form>
       </div>
