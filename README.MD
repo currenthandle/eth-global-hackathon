@@ -25,11 +25,11 @@ JWT_SECRET=41CD39FB323A6DBF371336BC9CC55
 11. To run the dev server you first need to run `npm run compile` or `npm start` for the first time from the server directory.
 12. After that you can run `npm run dev` in the server directory to start the GraphQL server in development mode.
     To run the server in production mode run `npm start` straight away.
-13. Leave the dev server running and open a new terminal window for the client
+13. Leave the dev server running and open a new terminal window for the client.
 
 ## Client Setup (Next.js App)
 
-1. In the new terminal window, make sure you're in the project root
+1. In the new terminal window, make sure you're in the project root.
 2. `cd client`
 3. `npm install`
 4. `npm run dev` to start the client in development mode.
