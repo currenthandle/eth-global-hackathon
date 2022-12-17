@@ -33,3 +33,12 @@ JWT_SECRET=41CD39FB323A6DBF371336BC9CC55
 3. `npm install`
 4. `npm run dev` to start the client
 5. Open your browser to `http://localhost:3000`
+6. The app will reroute yout to `http://localhost:3000/login`.
+7. Click the `Sign Up` button to create a new user and application with your email address.
+8. From there you will be able to update your application profile and view your application status.
+
+Note: If you have any issues clear the browser cache and cookies and try again.
+
+```
+
+```
