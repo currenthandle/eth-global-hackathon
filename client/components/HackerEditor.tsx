@@ -228,23 +228,23 @@ const HackerEditor = ({ userSsr }) => {
             {"Tell us about what you've built before?"}
           </label>
           <textarea
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-44 resize-none px-4 text-sm'
             {...register('builtBefore')}
             // type='text'
             name='builtBefore'
             id='builtBefore'
-            placeholder='builtBefore'
+            placeholder='I built...'
           />
 
           <label htmlFor='lookingToBuild'>
             Tell us about what are you looking to build at this hackathon?
           </label>
           <textarea
-            className='rounded-md border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-md border-2 border-[#dadadb] mb-6 h-44 resize-none px-4 text-sm'
             {...register('lookingToBuild')}
             name='lookingToBuild'
             id='lookingToBuild'
-            placeholder='Looking to build'
+            placeholder="I'm looking to build..."
           />
 
           <label htmlFor='rules'>
