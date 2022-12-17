@@ -51,7 +51,7 @@ const Signup = () => {
   };
 
   return (
-    <div className='flex justify-center pt-10'>
+    <div className='flex justify-center pt-10 mt-16'>
       <div className='w-6/12 rounded-lg border-2 py-4'>
         <h1 className='flex w-full justify-center'>Signup</h1>
         {signUpError && (
