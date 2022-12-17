@@ -19,6 +19,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   authRequest(ctx);
   // console.log('args', args);
   const { userUpdate, hackerProfile, partnerProfile } = args;
+  console.log('args', args);
   // type ReduceInput = typeof userUpdate.userUpdate;
   console.log('here', userUpdate);
   // const updates = Object.entries(userUpdate).reduce<{
@@ -48,6 +49,10 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
 
   // console.log('hackerProfile', hackerProfile);
   if (user.role === 'hacker') {
+    console.log('hackerProfile', hackerProfile);
+    if (hackerProfile.ethExp === '') {
+      delete hackerProfile.ethExp;
+    }
     const _hackerProfile = await ctx.prisma.hackerProfile.update({
       where: {
         userId: ctx.auth.userId,
@@ -60,6 +65,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
       // data: hackerUpdate,
       data: hackerProfile,
     });
+    console.log('_hackerProfile', _hackerProfile);
   } else if (user.role === 'partner') {
     console.log('partnerProfile', partnerProfile);
     console.log('before');
