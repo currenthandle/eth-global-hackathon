@@ -6,7 +6,7 @@ import '../styles/globals.css';
 import { StateContext, DispatchContext } from '../utils/context';
 import { useReducer } from 'react';
 import reducer from '../utils/reducer';
-import { SignUpData, State } from '../utils/types';
+import { type State } from '../utils/types';
 
 export default function App({
   Component,
