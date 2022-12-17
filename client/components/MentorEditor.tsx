@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
+import { SubmitButton } from './SubmitButton';
 
 const schema = z.object({
   firstName: z.string().optional(),
@@ -249,14 +250,7 @@ const MentorEditor = ({ userSsr }: UserSsr) => {
             </p>
           </div>
 
-          <div className='w-full flex justify-center mt-6'>
-            <button
-              className=' border-2 px-8 py-3 rounded-full bg-[#f4f4f5]'
-              type='submit'
-            >
-              Submit
-            </button>
-          </div>
+          <SubmitButton />
         </form>
       </div>
     </div>

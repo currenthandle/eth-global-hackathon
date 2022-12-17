@@ -1,10 +1,11 @@
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
+import { SubmitButton } from './SubmitButton';
 
 const schema = z.object({
   firstName: z.string().optional(),
@@ -244,7 +245,6 @@ const HackerEditor = ({ userSsr }: UserSsr) => {
           <textarea
             className='rounded-lg border-2 border-[#dadadb] mb-6 h-44 resize-none px-4 py-2 text-sm'
             {...register('builtBefore')}
-            // type='text'
             name='builtBefore'
             id='builtBefore'
             placeholder='I built...'
@@ -277,15 +277,7 @@ const HackerEditor = ({ userSsr }: UserSsr) => {
               Yes I accept the rules and code of conduct for this event
             </p>
           </div>
-
-          <div className='w-full flex justify-center mt-6'>
-            <button
-              className=' border-2 px-8 py-3 rounded-full bg-[#f4f4f5]'
-              type='submit'
-            >
-              Submit
-            </button>
-          </div>
+          <SubmitButton />
         </form>
       </div>
     </div>
