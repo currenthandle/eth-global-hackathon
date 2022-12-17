@@ -7,16 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ApplicationStatus {
+  Accepted
+  Rejected
+  Pending
+}
+
 model User {
-  id                String          @id @default(cuid())
-  email             String          @unique
-  role              Role            @default(hacker)
+  id                String            @id @default(cuid())
+  email             String            @unique
+  role              Role              @default(hacker)
   firstName         String?
   lastName          String?
   website           String?
   linkedin          String?
-  rules             Boolean         @default(false)
-  applicationStatus Boolean         @default(false)
+  rules             Boolean           @default(false)
+  applicationStatus ApplicationStatus @default(Pending)
   HackerProfile     HackerProfile?
   PartnerProfile    PartnerProfile?
   MentorProfile     MentorProfile?
