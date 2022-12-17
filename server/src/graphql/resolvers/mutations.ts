@@ -57,12 +57,6 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
       where: {
         userId: ctx.auth.userId,
       },
-      // data: {
-      //   github: hackerProfile.github,
-      //   linkedin: hackerProfile.linkedin,
-      //   website: hackerProfile.website,
-      // },
-      // data: hackerUpdate,
       data: hackerProfile,
     });
     console.log('_hackerProfile', _hackerProfile);
@@ -77,6 +71,17 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     });
     console.log('after');
     console.log('_partnerProfile', _partnerProfile);
+  } else if (user.role === 'mentor') {
+    if (hackerProfile.ethExp === '') {
+      delete hackerProfile.ethExp;
+    }
+    const _mentorProfile = await ctx.prisma.mentorProfile.create({
+      data: {
+        userId: user.id,
+      },
+    });
+
+    console.log('_mentorProfile', _mentorProfile);
   }
   // console.log('user', user);
   return user;

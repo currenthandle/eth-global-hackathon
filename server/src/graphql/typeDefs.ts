@@ -31,6 +31,19 @@ const typeDefs = `#graphql
     rules: Boolean
   }
 
+  input MentorProfile {
+    website: String
+    github: String
+    linkedin: String
+    telegram: String
+    twitter: String
+    yearsOfExp: Int
+    ethExp: String
+    otherEvents: String
+    reasonForMentoring: String
+    rules: Boolean
+  }
+
   input UserUpdate {
     firstName: String
     lastName: String
@@ -79,7 +92,7 @@ const typeDefs = `#graphql
   type Mutation {
     createUser(email: String!, password: String!): User!
     signUpUser(email: String!, password: String!, role: String!): UserOrError!
-    updateUser(userUpdate: UserUpdate, hackerProfile: HackerProfile, partnerProfile: PartnerProfile): User!
+    updateUser(userUpdate: UserUpdate, hackerProfile: HackerProfile, partnerProfile: PartnerProfile, mentorProfile: MentorProfile): User!
   }
 `;
 

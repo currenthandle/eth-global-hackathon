@@ -31,6 +31,7 @@ model User {
   Experience        Experience?
   HackerProfile     HackerProfile?
   PartnerProfile    PartnerProfile?
+  MentorProfile     MentorProfile?
 }
 
 model PartnerProfile {
@@ -45,6 +46,22 @@ model PartnerProfile {
   otherEvents         String? @db.VarChar(500)
   reasonForSupporting String? @db.VarChar(500)
   rules               Boolean @default(false)
+}
+
+model MentorProfile {
+  id                 String  @id @default(cuid())
+  userId             String  @unique
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  website            String?
+  github             String?
+  linkedin           String?
+  telegram           String?
+  twitter            String?
+  yearsOfExp         Int?
+  ethExp             EthExp?
+  otherEvents        String? @db.VarChar(500)
+  reasonForMentoring String? @db.VarChar(500)
+  rules              Boolean @default(false)
 }
 
 model HackerProfile {

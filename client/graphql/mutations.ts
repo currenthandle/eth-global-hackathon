@@ -22,11 +22,13 @@ export const UPDATE_USER = gql`
     $userUpdate: UserUpdate
     $hackerProfile: HackerProfile
     $partnerProfile: PartnerProfile
+    $mentorProfile: MentorProfile
   ) {
     updateUser(
       userUpdate: $userUpdate
       hackerProfile: $hackerProfile
       partnerProfile: $partnerProfile
+      mentorProfile: $mentorProfile
     ) {
       firstName
       lastName
