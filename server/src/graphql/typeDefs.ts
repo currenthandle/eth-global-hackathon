@@ -75,6 +75,7 @@ const typeDefs = `#graphql
     reasonForSupporting: String
     reasonForMentoring: String
     organization: String
+    applicationStatus: Boolean
   }
 
   union UserOrError = UserWithToken | Error

@@ -36,5 +36,6 @@ export type UserSsr = {
     otherEvents?: string;
     reasonForSupporting?: string;
     reasonForMentoring?: string;
+    applicationStatus: boolean;
   };
 };

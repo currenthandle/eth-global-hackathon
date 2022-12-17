@@ -66,6 +66,7 @@ export const getServerSideProps: GetServerSideProps = async (
             otherEvents
             reasonForSupporting
             reasonForMentoring
+            applicationStatus
           }
         }
       `,
