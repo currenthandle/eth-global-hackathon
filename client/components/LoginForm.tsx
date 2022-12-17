@@ -63,10 +63,10 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
             className='flex w-6/12 flex-col justify-center'
           >
-            <label htmlFor='email'>email</label>
+            <label htmlFor='email'>Email</label>
             <input
               {...register('email')}
-              className='rounded-lg border-2 border-black'
+              className='rounded-lg border-2 border-[#dadadb]'
               type='email'
               name='email'
               id='email'
@@ -75,7 +75,7 @@ const Login = () => {
             <p>{errors.email?.message}</p>
             <div className='flex justify-center'>
               <button
-                className='mt-4 w-4/12 rounded-lg border-2 border-black'
+                className='mt-4 w-4/12 rounded-lg border-2 border-[#dadadb]'
                 type='submit'
               >
                 Login
@@ -84,7 +84,7 @@ const Login = () => {
 
             <Link href='/signup'>
               <div className='flex justify-center'>
-                <button className='mt-4 w-4/12 rounded-lg border-2 border-black'>
+                <button className='mt-4 w-4/12 rounded-lg border-2 border-[#dadadb]'>
                   Sign Up
                 </button>
               </div>

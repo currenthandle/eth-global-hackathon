@@ -58,10 +58,10 @@ const Signup = () => {
             onSubmit={handleSubmit(onSubmit)}
             className='flex w-6/12 flex-col justify-center'
           >
-            <label htmlFor='email'>email</label>
+            <label htmlFor='email'>Email</label>
             <input
               {...register('email')}
-              className='rounded-lg border-2 border-black'
+              className='rounded-lg border-2 border-[#dadadb]'
               type='email'
               name='email'
               id='email'
@@ -71,7 +71,7 @@ const Signup = () => {
 
             <div className='flex justify-center'>
               <button
-                className='mt-4 w-4/12 rounded-lg border-2 border-black'
+                className='mt-4 w-4/12 rounded-lg border-2 border-[#dadadb]'
                 type='submit'
               >
                 Sign up
