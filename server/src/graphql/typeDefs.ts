@@ -60,7 +60,11 @@ const typeDefs = `#graphql
     motivation: [String]
     builtBefore: String
     lookingToBuild: String
-    rules: Boolean  
+    rules: Boolean
+    telegram: String
+    twitter: String
+    otherEvents: String
+    reasonForSupporting: String
   }
 
   union UserOrError = UserWithToken | Error
