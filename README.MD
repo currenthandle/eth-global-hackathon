@@ -12,18 +12,19 @@
 7. Next, add a `DATABASE_URL` to the same `.env` and set it to the connection URL for your postgres database, using the following format `postgres://{user}:{password}@{host}:{port}/{db_name}?sslmode=require`
    Example: `DATABASE_URL=postgresql://{user}:{password}@]{hostname}:{port}/{dbname}{?param1=value1&...}`
    Your`.env`should look like this (no postgres password in this example):
-   `.env`:
+
+`.env`:
 
 ```
 DATABASE_URL=postgresql://steve@localhost:5432/hackathon?schema=public
 JWT_SECRET=41CD39FB323A6DBF371336BC9CC55
 ```
 
-7. Run `npm install` in the server directory
-8. Run `npx prisma generate` in the server directory to connect to the database
-9. Run `npx prisma migrate dev --name init` in the server directory to create the database tables
-10. Run `npm run dev` in the server directory to start the GraphQL server
-11. Leave the dev server running and open a new terminal window for the client
+8. Run `npm install` in the server directory
+9. Run `npx prisma generate` in the server directory to connect to the database
+10. Run `npx prisma migrate dev --name init` in the server directory to create the database tables
+11. Run `npm run dev` in the server directory to start the GraphQL server
+12. Leave the dev server running and open a new terminal window for the client
 
 ## Client Setup (Next.js App)
 
