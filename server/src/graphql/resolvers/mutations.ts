@@ -5,7 +5,13 @@ import jwt from 'jsonwebtoken';
 
 import { Context } from '../../utils/types';
 import authRequest from '../../utils/authRequest.js';
-import { updateUserValidator } from '../../utils/validators.js';
+import {
+  type UpdateUserInput,
+  type UpdateMentorInput,
+  type UpdatePartnerInput,
+  type UpdateHackerInput,
+  updateUserValidator,
+} from '../../utils/validators.js';
 type Role = 'hacker' | 'mentor' | 'partner';
 
 const emailValidator = z.string().email();
@@ -15,13 +21,20 @@ const roleValidator = z.union([
   z.literal('partner'),
 ]);
 
-export const updateUser = async (_: undefined, args: any, ctx: Context) => {
+export const updateUser = async (
+  _: undefined,
+  args: UpdateUserInput,
+  ctx: Context
+) => {
   if (!updateUserValidator.parse(args)) {
     throw new Error('Invalid input');
+  } else {
+    console.log('valid input');
   }
   authRequest(ctx);
+  console.log('args', args, Object.keys(args));
   const { userUpdate, hackerProfile, partnerProfile, mentorProfile } = args;
-  console.log('args', args);
+  // console.log('args', args);
   // console.log('here', userUpdate);
 
   const user = await ctx.prisma.user.update({
@@ -44,16 +57,16 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     });
     // console.log('_hackerProfile', _hackerProfile);
   } else if (user.role === 'partner') {
-    console.log('partnerProfile', partnerProfile);
-    console.log('before');
+    // console.log('partnerProfile', partnerProfile);
+    // console.log('before');
     const _partnerProfile = await ctx.prisma.partnerProfile.update({
       where: {
         userId: ctx.auth.userId,
       },
       data: partnerProfile,
     });
-    console.log('after');
-    console.log('_partnerProfile', _partnerProfile);
+    // console.log('after');
+    // console.log('_partnerProfile', _partnerProfile);
   } else if (user.role === 'mentor') {
     if (mentorProfile.ethExp === '') {
       delete mentorProfile.ethExp;
@@ -66,7 +79,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
       data: mentorProfile,
     });
 
-    console.log('_mentorProfile', _mentorProfile);
+    // console.log('_mentorProfile', _mentorProfile);
   }
   // console.log('user', user);
   return user;
