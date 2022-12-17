@@ -101,6 +101,12 @@ const MentorEditor = ({ userSsr }: UserSsr) => {
           <div className='bg-[#f4f4f5] mb-6 rounded-lg border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm w-full'>
             {userSsr.email}
           </div>
+
+          <p>Application Status</p>
+          <div className='bg-[#f4f4f5] mb-6 rounded-lg border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm w-full'>
+            {userSsr.applicationStatus ? 'Approved' : 'Pending'}
+          </div>
+
           <div className='flex flex-row justify-between mb-6'>
             <div className='flex flex-col grow mr-2'>
               <label htmlFor='firstName'>First name</label>

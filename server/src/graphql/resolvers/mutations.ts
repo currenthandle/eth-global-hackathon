@@ -1,5 +1,3 @@
-import { userData } from './queries';
-import { UserUpdate, UserUpdateKeys } from './../../utils/types';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
@@ -7,9 +5,6 @@ import { Context } from '../../utils/types';
 import authRequest from '../../utils/authRequest.js';
 import {
   type UpdateUserInput,
-  type UpdateMentorInput,
-  type UpdatePartnerInput,
-  type UpdateHackerInput,
   updateUserValidator,
 } from '../../utils/validators.js';
 type Role = 'hacker' | 'mentor' | 'partner';
