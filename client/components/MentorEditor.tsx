@@ -6,28 +6,9 @@ import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
 import { SubmitButton } from './SubmitButton';
+import { mentorFormValidator } from '../utils/validators';
 
-const schema = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  website: z.string().optional(),
-  github: z.string().optional(),
-  linkedin: z.string().optional(),
-  rules: z.boolean().default(false),
-  telegram: z.string().optional(),
-  twitter: z.string().optional(),
-  yearsOfExp: z
-    .number()
-    .or(z.string().regex(/\d+/).transform(Number))
-    .refine((n) => n >= 0),
-  ethExp: z.union([
-    z.literal('beginner'),
-    z.literal('intermediate'),
-    z.literal('expert'),
-  ]),
-  otherEvents: z.union([z.string().min(250).max(500), z.literal('')]),
-  reasonForMentoring: z.union([z.string().min(250).max(500), z.literal('')]),
-});
+const schema = mentorFormValidator;
 
 type Schema = z.infer<typeof schema>;
 

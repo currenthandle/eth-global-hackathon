@@ -61,6 +61,19 @@ const hackerFormDataValidator = z.object({
   lookingToBuild: textAreaValidator,
 });
 
+const mentorFormDataValidator = z.object({
+  telegram: z.string().optional(),
+  twitter: z.string().optional(),
+  yearsOfExp: yearsOfExpValidator,
+  ethExp: ethExpValidator,
+  otherEvents: textAreaValidator,
+  reasonForMentoring: textAreaValidator,
+});
+
 export const hackerFormValidator = userFormDataValidator.and(
   hackerFormDataValidator
+);
+
+export const mentorFormValidator = userFormDataValidator.and(
+  mentorFormDataValidator
 );

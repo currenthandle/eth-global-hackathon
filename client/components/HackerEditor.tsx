@@ -13,7 +13,6 @@ const schema = hackerFormValidator;
 type Schema = z.infer<typeof schema>;
 
 const HackerEditor = ({ userSsr }: UserSsr) => {
-  console.log('userSsr', userSsr);
   const {
     register,
     handleSubmit,
