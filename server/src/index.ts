@@ -22,7 +22,7 @@ const server = new ApolloServer<Context>({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-  formatError: (formattedError /*, error*/) => {
+  formatError: (formattedError) => {
     return { message: formattedError.message };
   },
 });
