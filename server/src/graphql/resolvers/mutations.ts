@@ -49,7 +49,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
       data: partnerProfile,
     });
     console.log('after');
-    // console.log('_partnerProfile', _partnerProfile);
+    console.log('_partnerProfile', _partnerProfile);
   } else if (user.role === 'mentor') {
     if (mentorProfile.ethExp === '') {
       delete mentorProfile.ethExp;

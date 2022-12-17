@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (
             builtBefore
             lookingToBuild
             rules
-
+            organization
             telegram
             twitter
             otherEvents
