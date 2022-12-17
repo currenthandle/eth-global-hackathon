@@ -1,7 +1,6 @@
 const typeDefs = `#graphql
   type User {
     email: String!
-    password: String!
     id: ID!
     role: String!
     firstName: String
@@ -60,7 +59,6 @@ const typeDefs = `#graphql
 
   type UserData {
     email: String
-    password: String
     id: ID
     role: String
     firstName: String
@@ -86,13 +84,13 @@ const typeDefs = `#graphql
   type Query {
     allUsers: [User!]!
     userData: UserData!
-    validateUser(email: String!, password: String!): UserOrError!
+    validateUser(email: String!): UserOrError!
     emailIsAvailable(email: String!): Boolean!
   }
 
   type Mutation {
-    createUser(email: String!, password: String!): User!
-    signUpUser(email: String!, password: String!, role: String!): UserOrError!
+    createUser(email: String!): User!
+    signUpUser(email: String!, role: String!): UserOrError!
     updateUser(userUpdate: UserUpdate, hackerProfile: HackerProfile, partnerProfile: PartnerProfile, mentorProfile: MentorProfile): User!
   }
 `;

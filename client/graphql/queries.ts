@@ -26,8 +26,8 @@ export const EMAIL_IS_AVAILABLE = gql`
 `;
 
 export const VALIDATE_USER = gql`
-  query ValidateUser($email: String!, $password: String!) {
-    validateUser(email: $email, password: $password) {
+  query ValidateUser($email: String!) {
+    validateUser(email: $email) {
       __typename
       ... on UserWithToken {
         user {

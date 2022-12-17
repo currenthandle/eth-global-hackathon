@@ -5,7 +5,6 @@ import { Context } from '../../utils/types';
 import authRequest from '../../utils/authRequest.js';
 
 const emailValidator = z.string().email();
-const passwordValidator = z.string().min(2);
 
 export const emailIsAvailable = async (
   _: undefined,
@@ -69,24 +68,21 @@ export const userData = async (_: undefined, __: {}, ctx: Context) => {
 };
 export const validateUser = async (
   _: undefined,
-  { email, password }: { email: string; password: string },
+  { email }: { email: string },
   ctx: Context
 ) => {
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
-  }
-  if (!passwordValidator.parse(password)) {
-    throw new Error('Invalid password input');
   }
   const user = await ctx.prisma.user.findUnique({
     where: {
       email,
     },
   });
-  if (!user || user.password !== password) {
+  if (!user) {
     return {
       __typename: 'Error',
-      message: 'Invalid user or password',
+      message: 'Invalid user',
     };
   }
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);

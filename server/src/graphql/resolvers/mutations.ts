@@ -8,7 +8,6 @@ import authRequest from '../../utils/authRequest.js';
 type Role = 'hacker' | 'mentor' | 'partner';
 
 const emailValidator = z.string().email();
-const passwordValidator = z.string().min(2);
 const roleValidator = z.union([
   z.literal('hacker'),
   z.literal('mentor'),
@@ -71,14 +70,11 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
 
 export const signUpUser = async (
   _: undefined,
-  { email, password, role }: { email: string; password: string; role: Role },
+  { email, role }: { email: string; role: Role },
   ctx: Context
 ) => {
   if (!emailValidator.parse(email)) {
     throw new Error('Invalid email input');
-  }
-  if (!passwordValidator.parse(password)) {
-    throw new Error('Invalid password input');
   }
   if (!roleValidator.parse(role)) {
     throw new Error('Invalid role input');
@@ -102,7 +98,6 @@ export const signUpUser = async (
     const user = await ctx.prisma.user.create({
       data: {
         email,
-        password,
         role,
       },
     });

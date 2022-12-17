@@ -17,7 +17,6 @@ export const SelectRole = () => {
     const signUpResp = await signUpUser({
       variables: {
         email: state.signUpData?.email,
-        password: state.signUpData?.password,
         role: e.target.dataset.role,
       },
     });

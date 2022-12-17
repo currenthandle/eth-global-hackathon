@@ -10,7 +10,6 @@ import { VALIDATE_USER } from '../graphql/queries';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
-  password: z.string().min(2, { message: 'Too short' }),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -29,7 +28,6 @@ const Login = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       email: '',
-      password: '',
     },
   });
   const onSubmit = async (/*data: Schema*/) => {
@@ -38,7 +36,6 @@ const Login = () => {
       const validUser = await validateUser({
         variables: {
           email: formValues.email,
-          password: formValues.password,
         },
       });
 
@@ -79,17 +76,6 @@ const Login = () => {
               placeholder='Email'
             />
             <p>{errors.email?.message}</p>
-            <label htmlFor='password'>Password</label>
-            <input
-              {...register('password')}
-              className='rounded-lg border-2 border-black'
-              type='password'
-              name='password'
-              id='password'
-              placeholder='Password'
-            />
-            <p>{errors.password?.message}</p>
-
             <div className='flex justify-center'>
               <button
                 className='mt-4 w-4/12 rounded-lg border-2 border-black'

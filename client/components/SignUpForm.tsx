@@ -11,13 +11,6 @@ import { DispatchContext } from '../utils/context';
 
 const schema = z.object({
   email: z.string().email({ message: 'Email is required' }),
-  password: z.string().min(2, { message: 'Too short' }),
-  retypePassword: z.string().min(2, { message: 'Too short' }),
-  // role: z.union([
-  //   z.literal('hacker'),
-  //   z.literal('mentor'),
-  //   z.literal('partner'),
-  // ]),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -40,25 +33,20 @@ const Signup = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       email: '',
-      password: '',
-      retypePassword: '',
     },
   });
   const onSubmit = async (/*data: Schema*/) => {
     const formValues = getValues();
-    if (formValues.password !== formValues.retypePassword) {
-      setSignUpError('Passwords do not match');
+
+    const emailIsAvailableResp = await isEmailAvailable({
+      variables: {
+        email: formValues.email,
+      },
+    });
+    if (!emailIsAvailableResp.data.emailIsAvailable) {
+      setSignUpError('Email is already taken');
     } else {
-      const emailIsAvailableResp = await isEmailAvailable({
-        variables: {
-          email: formValues.email,
-        },
-      });
-      if (!emailIsAvailableResp.data.emailIsAvailable) {
-        setSignUpError('Email is already taken');
-      } else {
-        dispatch({ type: 'SET_SIGNUP_DATA', payload: formValues });
-      }
+      dispatch({ type: 'SET_SIGNUP_DATA', payload: formValues });
     }
   };
 
@@ -86,39 +74,6 @@ const Signup = () => {
               placeholder='Email'
             />
             <p>{errors.email?.message}</p>
-            <label htmlFor='password'>Password</label>
-            <input
-              {...register('password')}
-              className='rounded-lg border-2 border-black'
-              type='password'
-              name='password'
-              id='password'
-              placeholder='Password'
-            />
-            <p>{errors.password?.message}</p>
-            <label htmlFor='retypePassword'>Password</label>
-            <input
-              {...register('retypePassword')}
-              className='rounded-lg border-2 border-black'
-              type='password'
-              name='retypePassword'
-              id='retypePassword'
-              placeholder='Retype Password'
-            />
-            <p>{errors.password?.message}</p>
-
-            {/* <label htmlFor='role'>Role</label>
-            <select
-              {...register('role')}
-              className='rounded-lg border-2 border-black'
-              name='role'
-              id='role'
-            >
-              <option value='hacker'>Hacker</option>
-              <option value='mentor'>Mentor</option>
-              <option value='partner'>Partner</option>
-            </select>
-            <p>{errors.role?.message}</p> */}
 
             <div className='flex justify-center'>
               <button
