@@ -1,9 +1,10 @@
 import Image from 'next/image';
+import { UserSsr } from '../utils/types';
 import HackerEditor from './HackerEditor';
 import MentorEditor from './MentorEditor';
 import PartnerEditor from './PartnerEditor';
 
-const ProfileEditor = ({ userSsr }) => {
+const ProfileEditor = ({ userSsr }: UserSsr) => {
   // console.log('userSsr', userSsr  );
 
   return (

@@ -4,6 +4,7 @@ import { z } from 'zod';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
+import { UserSsr } from '../utils/types';
 
 const schema = z.object({
   firstName: z.string().optional(),
@@ -44,7 +45,7 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-const HackerEditor = ({ userSsr }) => {
+const HackerEditor = ({ userSsr }: UserSsr) => {
   const {
     register,
     handleSubmit,
