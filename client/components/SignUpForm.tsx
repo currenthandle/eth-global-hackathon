@@ -32,7 +32,7 @@ const Signup = () => {
       email: '',
     },
   });
-  const onSubmit = async (/*data: Schema*/) => {
+  const onSubmit = async () => {
     const formValues = getValues();
 
     const emailIsAvailableResp = await isEmailAvailable({

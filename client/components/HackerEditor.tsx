@@ -33,7 +33,7 @@ const HackerEditor = ({ userSsr }: UserSsr) => {
   const [updateUser, { data: updatedUser, error: updatedUserErr }] =
     useMutation(UPDATE_USER);
 
-  const onSubmit = async (/*data: Schema*/) => {
+  const onSubmit = async () => {
     try {
       const formValues = getValues();
       const variables = {

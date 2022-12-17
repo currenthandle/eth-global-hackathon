@@ -30,7 +30,7 @@ const Login = () => {
       email: '',
     },
   });
-  const onSubmit = async (/*data: Schema*/) => {
+  const onSubmit = async () => {
     try {
       const formValues = getValues();
       const validUser = await validateUser({
