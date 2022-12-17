@@ -164,7 +164,7 @@ const PartnerEditor = ({ userSsr }) => {
             Have you supported other Ethereum events before? If yes, which ones?
           </label>
           <textarea
-            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-44 resize-none px-4 py-2 text-sm'
             {...register('otherEvents')}
             name='otherEvents'
             id='otherEvents'
@@ -175,7 +175,7 @@ const PartnerEditor = ({ userSsr }) => {
             Why do you want to support this hackathon?
           </label>
           <textarea
-            className='rounded-lg border-2 border-[#dadadb] mb-6 h-14 px-4 text-sm'
+            className='rounded-lg border-2 border-[#dadadb] mb-6 h-44 resize-none px-4 py-2 text-sm'
             {...register('reasonForSupporting')}
             name='reasonForSupporting'
             id='reasonForSupporting'
@@ -185,15 +185,28 @@ const PartnerEditor = ({ userSsr }) => {
           <label htmlFor='rules'>
             Do you accept the rules and code of conduct for the event?
           </label>
-          <input
-            {...register('rules')}
-            type='checkbox'
-            name='rules'
-            id='rules'
-            placeholder='false'
-          />
+          <div className='mt-2 flex justify-start items-center'>
+            <input
+              {...register('rules')}
+              type='checkbox'
+              name='rules'
+              id='rules'
+              placeholder='false'
+              className='h-4 w-4  cursor-pointer'
+            />
+            <p className='ml-4  text-sm'>
+              Yes I accept the rules and code of conduct for this event
+            </p>
+          </div>
 
-          <button type='submit'>Submit</button>
+          <div className='w-full flex justify-center mt-6'>
+            <button
+              className=' border-2 px-8 py-3 rounded-full  bg-[#f4f4f5]'
+              type='submit'
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
