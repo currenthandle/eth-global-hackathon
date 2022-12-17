@@ -252,16 +252,22 @@ const HackerEditor = ({ userSsr }) => {
             id='lookingToBuild'
             placeholder="I'm looking to build..."
           />
-          <label htmlFor='rules'>
+          <label htmlFor='rules' className=''>
             Do you accept the rules and code of conduct for the event?
           </label>
-          <input
-            {...register('rules')}
-            type='checkbox'
-            name='rules'
-            id='rules'
-            placeholder='false'
-          />
+          <div className='mt-2 flex justify-start items-center'>
+            <input
+              {...register('rules')}
+              type='checkbox'
+              name='rules'
+              id='rules'
+              placeholder='false'
+              className='h-4 w-4  cursor-pointer'
+            />
+            <p className='ml-4  text-sm'>
+              Yes I accept the rules and code of conduct for this event
+            </p>
+          </div>
           <button type='submit'>Submit</button>
         </form>
       </div>

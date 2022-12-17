@@ -233,13 +233,16 @@ const MentorEditor = ({ userSsr }) => {
           <label htmlFor='rules'>
             Do you accept the rules and code of conduct for the event?
           </label>
-          <input
-            {...register('rules')}
-            type='checkbox'
-            name='rules'
-            id='rules'
-            placeholder='false'
-          />
+          <div>
+            <input
+              {...register('rules')}
+              type='checkbox'
+              name='rules'
+              id='rules'
+              placeholder='false'
+              className='flex justify-left'
+            />
+          </div>
 
           <button type='submit'>Submit</button>
         </form>
