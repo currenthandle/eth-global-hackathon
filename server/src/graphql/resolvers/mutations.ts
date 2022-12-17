@@ -23,6 +23,8 @@ const roleValidator = z.union([
 
 export const updateUser = async (
   _: undefined,
+  // tried this as well
+  // args: UpdateMentorInput | UpdatePartnerInput | UpdateHackerInput,
   args: UpdateUserInput,
   ctx: Context
 ) => {
