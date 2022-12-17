@@ -15,7 +15,7 @@ const Home = ({ userSsr }: UserSsr) => {
   }, [router]);
 
   return (
-    <main className='bg-project-blur bg-contain bg-no-repeat pb-20  pt-8 '>
+    <main className='bg-project-blur bg-contain bg-no-repeat pb-20  pt-6 '>
       <Header />
       <ClientOnly>
         <ProfileEditor userSsr={userSsr} />
