@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 
 import { Context } from '../../utils/types';
 import authRequest from '../../utils/authRequest.js';
+import { updateUserValidator } from '../../utils/validators.js';
 type Role = 'hacker' | 'mentor' | 'partner';
 
 const emailValidator = z.string().email();
@@ -15,6 +16,9 @@ const roleValidator = z.union([
 ]);
 
 export const updateUser = async (_: undefined, args: any, ctx: Context) => {
+  if (!updateUserValidator.parse(args)) {
+    throw new Error('Invalid input');
+  }
   authRequest(ctx);
   const { userUpdate, hackerProfile, partnerProfile, mentorProfile } = args;
   console.log('args', args);

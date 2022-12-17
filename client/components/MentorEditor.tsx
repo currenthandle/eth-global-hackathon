@@ -11,6 +11,7 @@ const schema = z.object({
   website: z.string().optional(),
   github: z.string().optional(),
   linkedin: z.string().optional(),
+  rules: z.boolean().default(false),
   telegram: z.string().optional(),
   twitter: z.string().optional(),
   yearsOfExp: z
@@ -25,7 +26,6 @@ const schema = z.object({
   ]),
   otherEvents: z.union([z.string().min(250).max(500), z.literal('')]),
   reasonForMentoring: z.union([z.string().min(250).max(500), z.literal('')]),
-  rules: z.boolean().default(false),
 });
 
 type Schema = z.infer<typeof schema>;
