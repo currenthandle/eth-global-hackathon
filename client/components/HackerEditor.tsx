@@ -151,6 +151,7 @@ const HackerEditor = ({ userSsr }) => {
             id='website'
             placeholder='Website'
           />
+
           <label htmlFor='github'>Github</label>
           <input
             className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
@@ -170,6 +171,7 @@ const HackerEditor = ({ userSsr }) => {
             id='linkedin'
             placeholder='Linkedin'
           />
+
           <label htmlFor='yearsOfExp'>
             How many years of experience do you have with sofware development?
           </label>
@@ -182,6 +184,7 @@ const HackerEditor = ({ userSsr }) => {
             placeholder='Year of experience'
             min='0'
           />
+
           <label htmlFor='yearsOfExp'>
             {"What's your experience level with Ethereum?"}
           </label>
@@ -196,6 +199,7 @@ const HackerEditor = ({ userSsr }) => {
             <option value='intermediate'>Intermediate</option>
             <option value='beginner'>Beginner</option>
           </select>
+
           <label htmlFor='yearsOfExp'>
             {"What's your experience level with Ethereum?"}
           </label>
@@ -225,6 +229,7 @@ const HackerEditor = ({ userSsr }) => {
             <option value='winPrize'>Win a prize</option>
             <option value='other'>Other</option>
           </select>
+
           <label htmlFor='builtBefore'>
             {"Tell us about what you've built before?"}
           </label>
@@ -236,6 +241,7 @@ const HackerEditor = ({ userSsr }) => {
             id='builtBefore'
             placeholder='builtBefore'
           />
+
           <label htmlFor='lookingToBuild'>
             Tell us about what are you looking to build at this hackathon?
           </label>
@@ -246,6 +252,7 @@ const HackerEditor = ({ userSsr }) => {
             id='lookingToBuild'
             placeholder='Looking to build'
           />
+
           <label htmlFor='rules'>
             Do you accept the rules and code of conduct for the event?
           </label>
