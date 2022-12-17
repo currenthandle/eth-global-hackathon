@@ -36,7 +36,7 @@ export const updateUser = async (
 
   const user = await ctx.prisma.user.update({
     where: {
-      id: ctx.auth.userId,
+      id: ctx.auth?.userId,
     },
     data: userUpdate,
   });
@@ -45,7 +45,7 @@ export const updateUser = async (
     const { ethExp, ...rest } = hackerProfile;
     const _hackerProfile = await ctx.prisma.hackerProfile.update({
       where: {
-        userId: ctx.auth.userId,
+        userId: ctx.auth?.userId,
       },
       data: hackerProfile as any,
     });
@@ -53,7 +53,7 @@ export const updateUser = async (
     const { partnerProfile } = args;
     const _partnerProfile = await ctx.prisma.partnerProfile.update({
       where: {
-        userId: ctx.auth.userId,
+        userId: ctx.auth?.userId,
       },
       data: partnerProfile,
     });
@@ -61,7 +61,7 @@ export const updateUser = async (
     const { mentorProfile } = args;
     const _mentorProfile = await ctx.prisma.mentorProfile.update({
       where: {
-        userId: ctx.auth.userId,
+        userId: ctx.auth?.userId,
       },
       data: mentorProfile as any,
     });
