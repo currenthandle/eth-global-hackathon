@@ -11,6 +11,7 @@
    Example: `JWT_SECRET=41CD39FB323A6DBF371336BC9CC55`.
 7. Next, add a `DATABASE_URL` to the same `.env` and set it to the connection URL for your postgres database, using the following format: `DATABASE_URL=postgresql://{user}:{password}@]{hostname}:{port}/{dbname}{?param1=value1&...}`
    Your`.env`should look like this (no postgres password in this example):
+
    `<project-root>/server/.env`:
 
 ```
