@@ -24,6 +24,9 @@ model User {
   role      Role    @default(hacker)
   firstName String?
   lastName  String?
+  website   String?
+  linkedin  String?
+  rules     Boolean @default(false)
 
   applicationStatus Boolean         @default(false)
   // wallet    String?
@@ -37,45 +40,36 @@ model PartnerProfile {
   id                  String  @id @default(cuid())
   userId              String  @unique
   user                User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  website             String?
   organization        String?
-  linkedin            String?
   telegram            String?
   twitter             String?
   otherEvents         String? @db.VarChar(500)
   reasonForSupporting String? @db.VarChar(500)
-  rules               Boolean @default(false)
 }
 
 model MentorProfile {
   id                 String  @id @default(cuid())
   userId             String  @unique
   user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  website            String?
   github             String?
-  linkedin           String?
   telegram           String?
   twitter            String?
   yearsOfExp         Int?
   ethExp             EthExp?
   otherEvents        String? @db.VarChar(500)
   reasonForMentoring String? @db.VarChar(500)
-  rules              Boolean @default(false)
 }
 
 model HackerProfile {
   id             String       @id @default(cuid())
   userId         String       @unique
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  website        String?
   github         String?
-  linkedin       String?
   yearsOfExp     Int?
   ethExp         EthExp?
   motivation     Motivation[]
   builtBefore    String?      @db.VarChar(500)
   lookingToBuild String?      @db.VarChar(500)
-  rules          Boolean      @default(false)
 }
 
 enum Motivation {
