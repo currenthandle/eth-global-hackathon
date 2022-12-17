@@ -185,7 +185,7 @@ const HackerEditor = ({ userSsr }) => {
             min='0'
           />
 
-          <label htmlFor='yearsOfExp'>
+          <label htmlFor='ethExp'>
             {"What's your experience level with Ethereum?"}
           </label>
           <select
@@ -200,8 +200,8 @@ const HackerEditor = ({ userSsr }) => {
             <option value='beginner'>Beginner</option>
           </select>
 
-          <label htmlFor='yearsOfExp'>
-            {"What's your experience level with Ethereum?"}
+          <label htmlFor='motivation'>
+            What is your motivation to join this event?
           </label>
           <select
             className='rounded-md border-2 border-[#dadadb] mb-6 h-12'
