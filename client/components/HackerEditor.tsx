@@ -6,11 +6,9 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
 import { SubmitButton } from './SubmitButton';
-import { hackerFormValidator } from '../utils/validators';
+import { HackerForm, hackerFormValidator } from '../utils/validators';
 
-const schema = hackerFormValidator;
-
-type Schema = z.infer<typeof schema>;
+// type Schema = z.infer<typeof hackerFormValidator>;
 
 const HackerEditor = ({ userSsr }: UserSsr) => {
   const {
@@ -18,8 +16,8 @@ const HackerEditor = ({ userSsr }: UserSsr) => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<Schema>({
-    resolver: zodResolver(schema),
+  } = useForm<HackerForm>({
+    resolver: zodResolver(hackerFormValidator),
     defaultValues: {
       firstName: userSsr.firstName || '',
       lastName: userSsr.lastName || '',
