@@ -35,7 +35,7 @@ JWT_SECRET=41CD39FB323A6DBF371336BC9CC55
 4. `npm run dev` to start the client in development mode.
    To run the client in production mode run `npm run build` and `npm run start` instead.
 5. Open your browser to `http://localhost:3000`
-6. The app will reroute yout to `http://localhost:3000/login`.
+6. The app will reroute you to `http://localhost:3000/login`.
 7. Click the `Sign Up` button to create a new user and application with your email address.
 8. From there you will be able to update your application profile and view your application status.
 
