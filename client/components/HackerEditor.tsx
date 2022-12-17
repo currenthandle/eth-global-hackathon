@@ -13,6 +13,7 @@ const schema = hackerFormValidator;
 type Schema = z.infer<typeof schema>;
 
 const HackerEditor = ({ userSsr }: UserSsr) => {
+  console.log('userSsr', userSsr);
   const {
     register,
     handleSubmit,
@@ -161,7 +162,6 @@ const HackerEditor = ({ userSsr }: UserSsr) => {
             {...register('ethExp')}
             name='ethExp'
             id='ethExp'
-            placeholder='beginner'
           >
             <option value='beginner'>Beginner</option>
             <option value='intermediate'>Intermediate</option>
@@ -176,7 +176,6 @@ const HackerEditor = ({ userSsr }: UserSsr) => {
             {...register('motivation')}
             name='motivation'
             id='motivation'
-            placeholder='beginner'
             defaultValue={['workshop']}
             multiple
           >
