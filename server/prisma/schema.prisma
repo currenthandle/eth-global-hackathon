@@ -41,7 +41,7 @@ model MentorProfile {
   telegram           String?
   twitter            String?
   yearsOfExp         Int?
-  ethExp             EthExp?
+  ethExp             EthExp? @default(beginner)
   otherEvents        String? @db.VarChar(500)
   reasonForMentoring String? @db.VarChar(500)
 }
@@ -52,7 +52,7 @@ model HackerProfile {
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   github         String?
   yearsOfExp     Int?
-  ethExp         EthExp?
+  ethExp         EthExp?      @default(beginner)
   motivation     Motivation[]
   builtBefore    String?      @db.VarChar(500)
   lookingToBuild String?      @db.VarChar(500)

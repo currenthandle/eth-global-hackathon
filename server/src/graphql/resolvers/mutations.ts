@@ -26,8 +26,11 @@ export const updateUser = async (
   args: UpdateUserInput,
   ctx: Context
 ) => {
+  console.log('before validation');
+  console.log('parsed=', updateUserValidator.parse(args));
   if (!updateUserValidator.parse(args)) {
-    throw new Error('Invalid input');
+    // throw new Error('Invalid input');
+    console.error('error, invalid');
   } else {
     console.log('valid input');
   }

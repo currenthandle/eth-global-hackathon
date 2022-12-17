@@ -191,7 +191,7 @@ const HackerEditor = ({ userSsr }) => {
           >
             <option value='beginner'>Beginner</option>
             <option value='intermediate'>Intermediate</option>
-            <option value='beginner'>Beginner</option>
+            <option value='Expert'>Expert</option>
           </select>
 
           <label htmlFor='motivation'>
