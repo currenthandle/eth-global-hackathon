@@ -15,7 +15,7 @@ datasource db {
 enum Role {
   hacker
   mentor
-  sponsor
+  partner
 }
 
 model User {

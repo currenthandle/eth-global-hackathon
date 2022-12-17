@@ -45,10 +45,10 @@ export const SelectRole = () => {
         </button>
         <button
           onClick={handleClick}
-          data-role='sponsor'
+          data-role='partner'
           className='rounded-lg border-2 p-6'
         >
-          Sponsor
+          Partner
         </button>
       </div>
     </div>

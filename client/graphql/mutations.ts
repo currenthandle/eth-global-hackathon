@@ -21,12 +21,12 @@ export const UPDATE_USER = gql`
   mutation Mutation(
     $userUpdate: UserUpdate
     $hackerProfile: HackerProfile
-    $sponsorProfile: SponsorProfile
+    $partnerProfile: PartnerProfile
   ) {
     updateUser(
       userUpdate: $userUpdate
       hackerProfile: $hackerProfile
-      sponsorProfile: $sponsorProfile
+      partnerProfile: $partnerProfile
     ) {
       firstName
       lastName

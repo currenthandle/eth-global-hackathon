@@ -5,14 +5,14 @@ import jwt from 'jsonwebtoken';
 
 import { Context } from '../../utils/types';
 import authRequest from '../../utils/authRequest.js';
-type Role = 'hacker' | 'mentor' | 'sponsor';
+type Role = 'hacker' | 'mentor' | 'partner';
 
 const emailValidator = z.string().email();
 const passwordValidator = z.string().min(2);
 const roleValidator = z.union([
   z.literal('hacker'),
   z.literal('mentor'),
-  z.literal('sponsor'),
+  z.literal('partner'),
 ]);
 
 export const updateUser = async (_: undefined, args: any, ctx: Context) => {
@@ -115,8 +115,8 @@ export const signUpUser = async (
     //       userId: user.id,
     //     },
     //   });
-    // } else if (role === 'sponsor') {
-    //   const sponsorProfile = await ctx.prisma.sponsorProfile.create({
+    // } else if (role === 'partner') {
+    //   const partnerProfile = await ctx.prisma.partnerProfile.create({
     //     data: {
     //       userId: user.id,
     //     },

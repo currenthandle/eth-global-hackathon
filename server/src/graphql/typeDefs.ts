@@ -20,7 +20,7 @@ const typeDefs = `#graphql
     rules: Boolean
   }
 
-  input SponsorProfile {
+  input PartnerProfile {
     github: String
     linkedin: String
     website: String
@@ -71,7 +71,7 @@ const typeDefs = `#graphql
   type Mutation {
     createUser(email: String!, password: String!): User!
     signUpUser(email: String!, password: String!, role: String!): UserOrError!
-    updateUser(userUpdate: UserUpdate, hackerProfile: HackerProfile, sponsorProfile: SponsorProfile): User!
+    updateUser(userUpdate: UserUpdate, hackerProfile: HackerProfile, partnerProfile: PartnerProfile): User!
   }
 `;
 

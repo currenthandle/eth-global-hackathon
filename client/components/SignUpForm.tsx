@@ -16,7 +16,7 @@ const schema = z.object({
   // role: z.union([
   //   z.literal('hacker'),
   //   z.literal('mentor'),
-  //   z.literal('sponsor'),
+  //   z.literal('partner'),
   // ]),
 });
 
@@ -116,7 +116,7 @@ const Signup = () => {
             >
               <option value='hacker'>Hacker</option>
               <option value='mentor'>Mentor</option>
-              <option value='sponsor'>Sponsor</option>
+              <option value='partner'>Partner</option>
             </select>
             <p>{errors.role?.message}</p> */}
 
