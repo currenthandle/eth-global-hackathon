@@ -1,8 +1,3 @@
-// import Head from 'next/head';
-// import Image from 'next/image';
-// import ClientOnly from '../components/ClientOnly';
-// import { Sample } from '../components/Sample';
-// import styles from '../styles/Home.module.css';
 import { useRouter } from 'next/router';
 import { type GetServerSideProps, type GetServerSidePropsContext } from 'next';
 import Header from '../components/Header';
@@ -11,17 +6,13 @@ import ClientOnly from '../components/ClientOnly';
 import { useEffect } from 'react';
 import { UserSsr } from '../utils/types';
 
-// export default function Home(): NextPage {
 const Home = ({ userSsr }: UserSsr) => {
-  // console.log('props', props);
   const router = useRouter();
   useEffect(() => {
     if (!document.cookie) {
-      console.log('redirecting');
       router.push('/login');
     }
   }, [router]);
-  // console.log('props', props);
 
   return (
     <main className='bg-project-blur bg-contain bg-no-repeat pb-20  pt-8 '>
@@ -81,8 +72,6 @@ export const getServerSideProps: GetServerSideProps = async (
     }),
   });
   const json = await resp.json();
-  // const text = await resp.text();
-  // console.log('text', text);
   return {
     props: {
       userSsr: json.data.userData,

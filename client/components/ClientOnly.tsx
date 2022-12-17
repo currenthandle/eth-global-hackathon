@@ -9,8 +9,6 @@ export default function ClientOnly({
 }) {
   const [hasMounted, setHasMounted] = useState(false);
 
-  // console.log('children', children);
-  // console.log('delegated', delegated);
   useEffect(() => {
     setHasMounted(true);
   }, []);

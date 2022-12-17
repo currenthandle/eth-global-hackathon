@@ -39,9 +39,7 @@ const Login = () => {
         },
       });
 
-      console.log('begin', validUser);
       if (validUser?.data?.validateUser?.message) {
-        console.log('hello');
         setIncorrectCreds(validUser?.data?.validateUser?.message);
       } else {
         document.cookie = `server-auth-token=${validUser.data.validateUser.token}`;

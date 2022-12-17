@@ -81,8 +81,6 @@ const MentorEditor = ({ userSsr }: UserSsr) => {
         },
       };
 
-      console.log('variables', variables);
-
       const updatedUser = await updateUser({
         variables,
       });

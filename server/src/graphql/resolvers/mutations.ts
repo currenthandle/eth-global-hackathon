@@ -26,13 +26,8 @@ export const updateUser = async (
   args: UpdateUserInput,
   ctx: Context
 ) => {
-  console.log('before validation');
-  console.log('parsed=', updateUserValidator.parse(args));
   if (!updateUserValidator.parse(args)) {
-    // throw new Error('Invalid input');
-    console.error('error, invalid');
-  } else {
-    console.log('valid input');
+    throw new Error('Invalid input');
   }
   authRequest(ctx);
   const { userUpdate } = args;
@@ -83,22 +78,17 @@ export const signUpUser = async (
   if (!roleValidator.parse(role)) {
     throw new Error('Invalid role input');
   }
-  // check prisma db to see if the user already exists
   const user = await ctx.prisma.user.findUnique({
     where: {
       email,
     },
   });
-  // if the user exists, return an error
   if (user) {
-    // throw new Error('User already exists');
     return {
       __typename: 'Error',
       message: 'Email already registered',
     };
-  }
-  // if the user doesn't exist, create the user and return the user
-  else {
+  } else {
     const user = await ctx.prisma.user.create({
       data: {
         email,

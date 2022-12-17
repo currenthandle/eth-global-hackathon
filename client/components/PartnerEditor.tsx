@@ -65,7 +65,6 @@ const PartnerEditor = ({ userSsr }: UserSsr) => {
           reasonForSupporting: formValues.reasonForSupporting || '',
         },
       };
-      console.log('variables', variables);
       const updatedUser = await updateUser({
         variables,
       });
