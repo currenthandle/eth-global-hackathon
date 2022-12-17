@@ -82,7 +82,7 @@ const PartnerEditor = ({ userSsr }) => {
           firstName: formValues.firstName || '',
           lastName: formValues.lastName || '',
         },
-        hackerProfile: {
+        partnerProfile: {
           github: formValues.github || '',
           linkedin: formValues.linkedin || '',
           website: formValues.website || '',
