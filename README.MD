@@ -13,7 +13,7 @@
    Example: `DATABASE_URL=postgresql://{user}:{password}@]{hostname}:{port}/{dbname}{?param1=value1&...}`
    Your`.env`should look like this (no postgres password in this example):
 
-`.env`:
+`<project-root>/server/.env`:
 
 ```
 DATABASE_URL=postgresql://steve@localhost:5432/hackathon?schema=public
