@@ -16,11 +16,8 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 const Signup = () => {
-  // const [signUpUser, { data, error }] = useMutation(SIGNUP_USER);
   const [signUpError, setSignUpError] = useState('');
-  const router = useRouter();
   const dispatch = useContext(DispatchContext);
-  // const emailIsAvailable = useLazyQuery(EMAIL_IS_AVAILABLE);
   const [isEmailAvailable, { data: available, error: availableErr }] =
     useLazyQuery(EMAIL_IS_AVAILABLE);
 
@@ -52,7 +49,7 @@ const Signup = () => {
 
   return (
     <div className='flex justify-center pt-10 mt-16'>
-      <div className='w-6/12 rounded-lg border-2 py-4'>
+      <div className='w-6/12 rounded-lg py-4'>
         <h1 className='flex w-full justify-center'>Signup</h1>
         {signUpError && (
           <p className='flex w-full justify-center text-red-500'>

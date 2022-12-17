@@ -52,7 +52,7 @@ const Login = () => {
 
   return (
     <div className='flex justify-center pt-10 mt-16'>
-      <div className='w-6/12 rounded-lg border-2 py-4'>
+      <div className='w-6/12 rounded-lg py-4'>
         <h1 className='flex w-full justify-center'>Login</h1>
         {incorrectCreds && (
           <p className='flex w-full justify-center text-red-500'>

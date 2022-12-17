@@ -23,12 +23,12 @@ export const SelectRole = () => {
     router.push('/');
   };
   return (
-    <div className='flex flex-col items-center pt-10 mt-10'>
+    <div className='flex flex-col items-center pt-10 mt-12'>
       <h1 className='text-4xl mb-6'>Welcome to ETH Global</h1>
       <h2 className='text-xl mb-6'>{"We're so glad to have you!"}</h2>
       <p className='mb-4'>What role are you applying for?</p>
 
-      <div className='flex justify-around w-4/12'>
+      <div className='flex justify-around w-4/12 pt-8'>
         <button
           onClick={handleClick}
           data-role='hacker'
