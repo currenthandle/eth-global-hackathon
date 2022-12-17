@@ -19,9 +19,9 @@ DATABASE_URL=postgresql://steve@localhost:5432/hackathon?schema=public
 JWT_SECRET=41CD39FB323A6DBF371336BC9CC55
 ```
 
-8. Run `npm install` in the server directory
-9. Run `npx prisma generate` in the server directory to connect to the database
-10. Run `npx prisma migrate dev --name init` in the server directory to create the database tables
+8. Run `npm install` in the server directory.
+9. Run `npx prisma generate` in the server directory to connect to the database.
+10. Run `npx prisma migrate dev --name init` in the server directory to create the database tables.
 11. To run the dev server you first need to run `npm run compile` or `npm start` for the first time from the server directory.
 12. After that you can run `npm run dev` in the server directory to start the GraphQL server in development mode.
     To run the server in production mode run `npm start` straight away.
