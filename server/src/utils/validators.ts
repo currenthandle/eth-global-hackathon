@@ -12,7 +12,6 @@ const ethExpValidator = z.union([
   z.literal('beginner'),
   z.literal('intermediate'),
   z.literal('advanced'),
-  z.literal(''),
 ]);
 
 const motiavtionValidator = z.union([
@@ -72,8 +71,8 @@ const updateMentorValidator = z.object({
 });
 
 // tried this as well
-// export const updateUserValidator = z.union([
-export const updateUserValidator = z.discriminatedUnion('userUpdate', [
+export const updateUserValidator = z.union([
+  // export const updateUserValidator = z.discriminatedUnion('userUpdate', [
   updateHackerValidator,
   updatePartnerValidator,
   updateMentorValidator,

@@ -23,8 +23,6 @@ const roleValidator = z.union([
 
 export const updateUser = async (
   _: undefined,
-  // tried this as well
-  // args: UpdateMentorInput | UpdatePartnerInput | UpdateHackerInput,
   args: UpdateUserInput,
   ctx: Context
 ) => {
@@ -34,56 +32,40 @@ export const updateUser = async (
     console.log('valid input');
   }
   authRequest(ctx);
-  console.log('args', args, Object.keys(args));
-  const { userUpdate, hackerProfile, partnerProfile, mentorProfile } = args;
-  // console.log('args', args);
-  // console.log('here', userUpdate);
+  const { userUpdate } = args;
 
   const user = await ctx.prisma.user.update({
     where: {
       id: ctx.auth.userId,
-      // email: "c@c/com"
     },
     data: userUpdate,
   });
-  if (user.role === 'hacker') {
-    // console.log('hackerProfile', hackerProfile);
-    if (hackerProfile.ethExp === '') {
-      delete hackerProfile.ethExp;
-    }
+  if (user.role === 'hacker' && 'hackerProfile' in args) {
+    const { hackerProfile } = args;
+    const { ethExp, ...rest } = hackerProfile;
     const _hackerProfile = await ctx.prisma.hackerProfile.update({
       where: {
         userId: ctx.auth.userId,
       },
-      data: hackerProfile,
+      data: hackerProfile as any,
     });
-    // console.log('_hackerProfile', _hackerProfile);
-  } else if (user.role === 'partner') {
-    // console.log('partnerProfile', partnerProfile);
-    // console.log('before');
+  } else if (user.role === 'partner' && 'partnerProfile' in args) {
+    const { partnerProfile } = args;
     const _partnerProfile = await ctx.prisma.partnerProfile.update({
       where: {
         userId: ctx.auth.userId,
       },
       data: partnerProfile,
     });
-    // console.log('after');
-    // console.log('_partnerProfile', _partnerProfile);
-  } else if (user.role === 'mentor') {
-    if (mentorProfile.ethExp === '') {
-      delete mentorProfile.ethExp;
-    }
-    // console.log('mentorProfile', mentorProfile);
+  } else if (user.role === 'mentor' && 'mentorProfile' in args) {
+    const { mentorProfile } = args;
     const _mentorProfile = await ctx.prisma.mentorProfile.update({
       where: {
         userId: ctx.auth.userId,
       },
-      data: mentorProfile,
+      data: mentorProfile as any,
     });
-
-    // console.log('_mentorProfile', _mentorProfile);
   }
-  // console.log('user', user);
   return user;
 };
 
@@ -141,7 +123,10 @@ export const signUpUser = async (
       });
     }
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { userId: user.id },
+      process.env.JWT_SECRET as string
+    );
     const resp = {
       __typename: 'UserWithToken',
       user,
