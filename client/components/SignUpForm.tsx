@@ -1,11 +1,8 @@
-import { type NextPage } from 'next';
-import { useForm /*, type SubmitHandler*/ } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
-import { useMutation, useLazyQuery } from '@apollo/client';
-// import { SIGNUP_USER } from '../graphql/mutations';
+import { useLazyQuery } from '@apollo/client';
 import { EMAIL_IS_AVAILABLE } from '../graphql/queries';
 import { DispatchContext } from '../utils/context';
 
