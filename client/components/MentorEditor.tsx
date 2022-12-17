@@ -93,8 +93,6 @@ const MentorEditor = ({ userSsr }) => {
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>
-        <h1>Edit profile</h1>
-        <p>Change your profile and account settings</p>
         <form
           action=''
           className='flex flex-col'

@@ -16,13 +16,11 @@ const schema = z.object({
   otherEvents: z.union([z.string().min(250).max(500), z.literal('')]),
   reasonForSupporting: z.union([z.string().min(250).max(500), z.literal('')]),
   rules: z.boolean().default(false),
-  // website: z.union([z.string(), z.literal('')]),
 });
 
 type Schema = z.infer<typeof schema>;
 
 const PartnerEditor = ({ userSsr }) => {
-  // console.log('userSsr', userSsr);
   const {
     register,
     handleSubmit,
@@ -44,12 +42,10 @@ const PartnerEditor = ({ userSsr }) => {
     },
   });
 
-  // const { data: initialData, error: initialError } = useQuery(USER_DATA);
   const [updateUser, { data: updatedUser, error: updatedUserErr }] =
     useMutation(UPDATE_USER);
 
   const onSubmit = async (/*data: Schema*/) => {
-    // console.log('onSubmit formValues', getValues());
     try {
       const formValues = getValues();
       const variables = {
@@ -79,8 +75,6 @@ const PartnerEditor = ({ userSsr }) => {
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>
-        <h1>Edit profile</h1>
-        <p>Change your profile and account settings</p>
         <form
           action=''
           className='flex flex-col'

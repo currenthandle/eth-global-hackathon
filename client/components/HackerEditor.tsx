@@ -94,8 +94,6 @@ const HackerEditor = ({ userSsr }) => {
           rules: formValues.rules || false,
         },
       };
-      console.log('formValues', formValues);
-      console.log('submit variables', variables);
 
       const updatedUser = await updateUser({
         variables,
@@ -105,13 +103,9 @@ const HackerEditor = ({ userSsr }) => {
     }
   };
 
-  // console.log('formVale', getValues().yearsOfExp);
-  // console.log('formVale', typeof getValues().yearsOfExp);
   return (
     <div className='flex justify-center'>
       <div className='flex justify-center flex-col items-center'>
-        <h1>Edit profile</h1>
-        <p>Change your profile and account settings</p>
         <form
           action=''
           className='flex flex-col'

@@ -7,7 +7,10 @@ const ProfileEditor = ({ userSsr }) => {
   // console.log('userSsr', userSsr  );
 
   return (
-    <div className='border-2 rounded-3xl border-[#dadadb] bg-white p-8 w-8/12 max-w-2xl m-auto '>
+    <div className='border-[1px] rounded-3xl border-[#dadadb] bg-white p-8 w-8/12 max-w-2xl m-auto mt-14'>
+      <div className='bg-[#f4f4f5]  rounded-md border-2 border-[#dadadb] h-12 flex items-center'>
+        {userSsr.email}
+      </div>
       {/* <Image src='/team-header.webp' alt='Team Header' fill></Image> */}
       {userSsr.role === 'hacker' && <HackerEditor userSsr={userSsr} />}
       {userSsr.role === 'partner' && <PartnerEditor userSsr={userSsr} />}
