@@ -4,33 +4,19 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-  // Further reading:
-  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
   url      = env("DATABASE_URL")
-  // relationMode = "prisma"
-}
-
-enum Role {
-  hacker
-  mentor
-  partner
 }
 
 model User {
-  id        String  @id @default(cuid())
-  email     String  @unique
-  role      Role    @default(hacker)
-  firstName String?
-  lastName  String?
-  website   String?
-  linkedin  String?
-  rules     Boolean @default(false)
-
+  id                String          @id @default(cuid())
+  email             String          @unique
+  role              Role            @default(hacker)
+  firstName         String?
+  lastName          String?
+  website           String?
+  linkedin          String?
+  rules             Boolean         @default(false)
   applicationStatus Boolean         @default(false)
-  // wallet    String?
-  Experience        Experience?
   HackerProfile     HackerProfile?
   PartnerProfile    PartnerProfile?
   MentorProfile     MentorProfile?
@@ -83,6 +69,12 @@ enum Motivation {
   other
 }
 
+enum Role {
+  hacker
+  mentor
+  partner
+}
+
 enum EthExp {
   beginner
   intermediate
@@ -95,35 +87,4 @@ enum ExperienceLevel {
   intermediate
   advanced
   expert
-}
-
-model Experience {
-  id          String           @id @default(cuid())
-  userId      String           @unique
-  description String
-  level       ExperienceLevel?
-  years       Int?
-  tools       Tool[]
-  languages   Language[]
-  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  // @@index([userId])
-}
-
-model Tool {
-  id           String     @id @default(cuid())
-  experienceId String
-  name         String
-  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
-
-  // @@index([experienceId])
-}
-
-model Language {
-  id           String     @id @default(cuid())
-  experienceId String
-  name         String
-  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
-
-  // @@index([experienceId])
 }
