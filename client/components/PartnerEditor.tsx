@@ -1,16 +1,11 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
 import { SubmitButton } from './SubmitButton';
-import { partnerFormValidator } from '../utils/validators';
-
-const schema = partnerFormValidator;
-
-type Schema = z.infer<typeof schema>;
+import { PartnerForm, partnerFormValidator } from '../utils/validators';
 
 const PartnerEditor = ({ userSsr }: UserSsr) => {
   const {
@@ -18,8 +13,8 @@ const PartnerEditor = ({ userSsr }: UserSsr) => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<Schema>({
-    resolver: zodResolver(schema),
+  } = useForm<PartnerForm>({
+    resolver: zodResolver(partnerFormValidator),
     defaultValues: {
       firstName: userSsr.firstName || '',
       lastName: userSsr.lastName || '',

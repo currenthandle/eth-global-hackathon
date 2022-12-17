@@ -1,14 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
 import { SubmitButton } from './SubmitButton';
 import { HackerForm, hackerFormValidator } from '../utils/validators';
-
-// type Schema = z.infer<typeof hackerFormValidator>;
 
 const HackerEditor = ({ userSsr }: UserSsr) => {
   const {
