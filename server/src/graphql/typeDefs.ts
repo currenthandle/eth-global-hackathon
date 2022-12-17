@@ -21,7 +21,14 @@ const typeDefs = `#graphql
   }
 
   input PartnerProfile {
+    website: String
+    organization: String
     linkedin: String
+    telegram: String
+    twitter: String
+    otherEvents: String
+    reasonForSupporting: String
+    rules: Boolean
   }
 
   input UserUpdate {

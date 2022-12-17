@@ -18,7 +18,7 @@ const roleValidator = z.union([
 export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   authRequest(ctx);
   // console.log('args', args);
-  const { userUpdate, hackerProfile } = args;
+  const { userUpdate, hackerProfile, partnerProfile } = args;
   // type ReduceInput = typeof userUpdate.userUpdate;
   console.log('here', userUpdate);
   // const updates = Object.entries(userUpdate).reduce<{
@@ -47,20 +47,30 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   // }, {});
 
   // console.log('hackerProfile', hackerProfile);
-  const _hackerProfile = await ctx.prisma.hackerProfile.update({
-    where: {
-      userId: ctx.auth.userId,
-    },
-    // data: {
-    //   github: hackerProfile.github,
-    //   linkedin: hackerProfile.linkedin,
-    //   website: hackerProfile.website,
-    // },
-    // data: hackerUpdate,
-    data: hackerProfile,
-  });
+  if (user.role === 'hacker') {
+    const _hackerProfile = await ctx.prisma.hackerProfile.update({
+      where: {
+        userId: ctx.auth.userId,
+      },
+      // data: {
+      //   github: hackerProfile.github,
+      //   linkedin: hackerProfile.linkedin,
+      //   website: hackerProfile.website,
+      // },
+      // data: hackerUpdate,
+      data: hackerProfile,
+    });
+  } else if (user.role === 'partner') {
+    console.log('partnerProfile', partnerProfile);
+    const _partnerProfile = await ctx.prisma.partnerProfile.update({
+      where: {
+        userId: ctx.auth.userId,
+      },
+      data: hackerProfile,
+    });
+  }
   // console.log('user', user);
-  console.log('_hackerProfile', _hackerProfile);
+  // console.log('_hackerProfile', _hackerProfile);
   return user;
 };
 
