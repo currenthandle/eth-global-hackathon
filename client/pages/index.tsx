@@ -76,6 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (
             twitter
             otherEvents
             reasonForSupporting
+            reasonForMentoring
           }
         }
       `,

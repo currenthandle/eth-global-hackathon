@@ -78,6 +78,7 @@ const typeDefs = `#graphql
     twitter: String
     otherEvents: String
     reasonForSupporting: String
+    reasonForMentoring: String
   }
 
   union UserOrError = UserWithToken | Error

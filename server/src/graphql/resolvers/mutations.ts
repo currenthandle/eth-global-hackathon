@@ -55,6 +55,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     if (mentorProfile.ethExp === '') {
       delete mentorProfile.ethExp;
     }
+    console.log('mentorProfile', mentorProfile);
     const _mentorProfile = await ctx.prisma.mentorProfile.update({
       where: {
         userId: ctx.auth.userId,
