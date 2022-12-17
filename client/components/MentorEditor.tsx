@@ -1,7 +1,6 @@
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
 import { SubmitButton } from './SubmitButton';
@@ -31,7 +30,6 @@ const MentorEditor = ({ userSsr }: UserSsr) => {
     },
   });
 
-  // const { data: initialData, error: initialError } = useQuery(USER_DATA);
   const [updateUser, { data: updatedUser, error: updatedUserErr }] =
     useMutation(UPDATE_USER);
 

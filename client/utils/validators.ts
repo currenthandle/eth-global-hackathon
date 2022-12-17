@@ -11,21 +11,6 @@ const ethExpValidator = z.union([
   z.literal('expert'),
 ]);
 
-// const motiavtionValidator = z.union([
-//   z.literal(''),
-//   z.array(
-//     z.union([
-//       z.literal('workshop'),
-//       z.literal('resume'),
-//       z.literal('improve'),
-//       z.literal('jobOps'),
-//       z.literal('meetPpl'),
-//       z.literal('launchProduct'),
-//       z.literal('winPrize'),
-//       z.literal('other'),
-//     ])
-//   ),
-// ]);
 const motiavtionValidator = z.array(
   z.union([
     z.literal('workshop'),
