@@ -32,7 +32,7 @@ export const userData = async (_: undefined, __: {}, ctx: Context) => {
     },
   });
   // console.log('user on server', user);
-  if (user.role === 'hacker') {
+  if (user?.role === 'hacker') {
     const hackerProfile = await ctx.prisma.hackerProfile.findUnique({
       where: {
         userId: ctx.auth.userId,
@@ -43,7 +43,7 @@ export const userData = async (_: undefined, __: {}, ctx: Context) => {
       ...hackerProfile,
     };
   }
-  if (user.role === 'partner') {
+  if (user?.role === 'partner') {
     const partnerProfile = await ctx.prisma.partnerProfile.findUnique({
       where: {
         userId: ctx.auth.userId,
@@ -54,7 +54,7 @@ export const userData = async (_: undefined, __: {}, ctx: Context) => {
       ...partnerProfile,
     };
   }
-  if (user.role === 'mentor') {
+  if (user?.role === 'mentor') {
     const mentorProfile = await ctx.prisma.mentorProfile.findUnique({
       where: {
         userId: ctx.auth.userId,
@@ -86,7 +86,7 @@ export const validateUser = async (
       message: 'Invalid user',
     };
   }
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string);
   return {
     __typename: 'UserWithToken',
     user,
