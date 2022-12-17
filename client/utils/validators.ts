@@ -70,10 +70,22 @@ const mentorFormDataValidator = z.object({
   reasonForMentoring: textAreaValidator,
 });
 
+const partnerFormDataValidator = z.object({
+  organization: z.string().optional(),
+  telegram: z.string().optional(),
+  twitter: z.string().optional(),
+  otherEvents: textAreaValidator,
+  reasonForSupporting: textAreaValidator,
+});
+
 export const hackerFormValidator = userFormDataValidator.and(
   hackerFormDataValidator
 );
 
 export const mentorFormValidator = userFormDataValidator.and(
   mentorFormDataValidator
+);
+
+export const partnerFormValidator = userFormDataValidator.and(
+  partnerFormDataValidator
 );

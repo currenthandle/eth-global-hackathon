@@ -6,19 +6,9 @@ import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../graphql/mutations';
 import { UserSsr } from '../utils/types';
 import { SubmitButton } from './SubmitButton';
+import { partnerFormValidator } from '../utils/validators';
 
-const schema = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  website: z.string().optional(),
-  rules: z.boolean().default(false),
-  linkedin: z.string().optional(),
-  organization: z.string().optional(),
-  telegram: z.string().optional(),
-  twitter: z.string().optional(),
-  otherEvents: z.union([z.string().min(250).max(500), z.literal('')]),
-  reasonForSupporting: z.union([z.string().min(250).max(500), z.literal('')]),
-});
+const schema = partnerFormValidator;
 
 type Schema = z.infer<typeof schema>;
 
