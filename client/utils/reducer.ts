@@ -10,7 +10,6 @@ export const actionValidator = z.object({
 });
 export type Action = z.infer<typeof actionValidator>;
 export default function reducer(state: State, action: Action): State {
-  console.log('action.payload=', action.payload);
   switch (action.type) {
     case 'SET_SIGNUP_DATA':
       return {

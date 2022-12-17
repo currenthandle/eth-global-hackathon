@@ -67,9 +67,7 @@ const updateMentorValidator = z.object({
   }),
 });
 
-// tried this as well
 export const updateUserValidator = z.union([
-  // export const updateUserValidator = z.discriminatedUnion('userUpdate', [
   updateHackerValidator,
   updatePartnerValidator,
   updateMentorValidator,
