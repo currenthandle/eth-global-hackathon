@@ -52,18 +52,19 @@ const PartnerEditor = ({ userSsr }) => {
         userUpdate: {
           firstName: formValues.firstName || '',
           lastName: formValues.lastName || '',
+          website: formValues.website || '',
+          linkedin: formValues.linkedin || '',
+          rules: formValues.rules || false,
         },
         partnerProfile: {
-          website: formValues.website || '',
           organization: formValues.organization || '',
-          linkedin: formValues.linkedin || '',
           telegram: formValues.telegram || '',
           twitter: formValues.twitter || '',
           otherEvents: formValues.otherEvents || '',
           reasonForSupporting: formValues.reasonForSupporting || '',
-          rules: formValues.rules || false,
         },
       };
+      console.log('variables', variables);
       const updatedUser = await updateUser({
         variables,
       });
@@ -80,12 +81,10 @@ const PartnerEditor = ({ userSsr }) => {
           className='flex flex-col'
           onSubmit={handleSubmit(onSubmit)}
         >
-          <label htmlFor='email'>Email</label>
-          <input
-            value={userSsr.email}
-            name='email'
-            className='bg-[#f4f4f5] mb-6 rounded-lg border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm w-full'
-          />
+          <p>Email</p>
+          <div className='bg-[#f4f4f5] mb-6 rounded-lg border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm w-full'>
+            {userSsr.email}
+          </div>
           <div className='flex flex-row justify-between mb-6'>
             <div className='flex flex-col grow mr-2'>
               <label htmlFor='firstName'>First name</label>

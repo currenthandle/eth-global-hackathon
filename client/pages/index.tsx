@@ -16,7 +16,7 @@ import { useEffect, useLayoutEffect } from 'react';
 
 // export default function Home(): NextPage {
 const Home: NextPage = (props) => {
-  console.log('props', props);
+  // console.log('props', props);
   const router = useRouter();
   useEffect(() => {
     if (!document.cookie) {
@@ -24,7 +24,7 @@ const Home: NextPage = (props) => {
       router.push('/login');
     }
   }, [router]);
-  console.log('props', props);
+  // console.log('props', props);
 
   return (
     <main className='bg-project-blur bg-contain bg-no-repeat pb-20  pt-8 '>
