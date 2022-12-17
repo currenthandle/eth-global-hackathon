@@ -21,10 +21,7 @@ const typeDefs = `#graphql
   }
 
   input PartnerProfile {
-    github: String
     linkedin: String
-    website: String
-    yearsOfExp: Int
   }
 
   input UserUpdate {

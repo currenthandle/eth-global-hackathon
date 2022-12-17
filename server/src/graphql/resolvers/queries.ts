@@ -24,7 +24,7 @@ export const emailIsAvailable = async (
 };
 
 export const userData = async (_: undefined, __: {}, ctx: Context) => {
-  authRequest(ctx);
+  // authRequest(ctx);
 
   const user = await ctx.prisma.user.findUnique({
     where: {
@@ -41,6 +41,17 @@ export const userData = async (_: undefined, __: {}, ctx: Context) => {
     return {
       ...user,
       ...hackerProfile,
+    };
+  }
+  if (user.role === 'partner') {
+    const partnerProfile = await ctx.prisma.partnerProfile.findUnique({
+      where: {
+        userId: ctx.auth.userId,
+      },
+    });
+    return {
+      ...user,
+      ...partnerProfile,
     };
   }
 };
