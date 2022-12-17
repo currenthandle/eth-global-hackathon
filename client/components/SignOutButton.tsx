@@ -7,7 +7,7 @@ const SignOutButton = () => {
   const dispatch = useContext(DispatchContext);
   return (
     <button
-      className='rounded-lg border-2 p-6'
+      className=' border-2 px-8 py-4 rounded-full bg-white'
       onClick={() => {
         deleteAllCookies();
         router.push('/');
