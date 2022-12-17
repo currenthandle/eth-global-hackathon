@@ -5,18 +5,18 @@ const typeDefs = `#graphql
     role: String!
     firstName: String
     lastName: String
+    linkedin: String
+    website: String
+    rules: Boolean
   }
 
   input HackerProfile {
     github: String
-    linkedin: String
-    website: String
     yearsOfExp: Int
     ethExp: String
     motivation: [String]
     builtBefore: String
     lookingToBuild: String
-    rules: Boolean
   }
 
   input PartnerProfile {
@@ -46,6 +46,9 @@ const typeDefs = `#graphql
   input UserUpdate {
     firstName: String
     lastName: String
+    linkedin: String
+    website: String
+    rules: Boolean
   }
 
   type UserWithToken {

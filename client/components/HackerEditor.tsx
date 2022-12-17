@@ -77,17 +77,17 @@ const HackerEditor = ({ userSsr }) => {
         userUpdate: {
           firstName: formValues.firstName || '',
           lastName: formValues.lastName || '',
+          rules: formValues.rules || false,
+          linkedin: formValues.linkedin || '',
+          website: formValues.website || '',
         },
         hackerProfile: {
           github: formValues.github || '',
-          linkedin: formValues.linkedin || '',
-          website: formValues.website || '',
           yearsOfExp: Number(formValues.yearsOfExp) || 0,
           ethExp: formValues.ethExp,
           motivation: formValues.motivation || '',
           builtBefore: formValues.builtBefore || '',
           lookingToBuild: formValues.lookingToBuild || '',
-          rules: formValues.rules || false,
         },
       };
 
@@ -107,12 +107,10 @@ const HackerEditor = ({ userSsr }) => {
           className='flex flex-col'
           onSubmit={handleSubmit(onSubmit)}
         >
-          <label htmlFor='email'>Email</label>
-          <input
-            value={userSsr.email}
-            name='email'
-            className='bg-[#f4f4f5] mb-6 rounded-lg border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm w-full'
-          />
+          <p>Email</p>
+          <div className='bg-[#f4f4f5] mb-6 rounded-lg border-2 border-[#dadadb] h-14 px-4 flex items-center cursor-no-drop text-sm w-full'>
+            {userSsr.email}
+          </div>
           <div className='flex flex-row justify-between mb-6'>
             <div className='flex flex-col grow mr-2'>
               <label htmlFor='firstName'>First name</label>

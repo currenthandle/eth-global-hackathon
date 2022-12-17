@@ -18,7 +18,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
   authRequest(ctx);
   const { userUpdate, hackerProfile, partnerProfile, mentorProfile } = args;
   console.log('args', args);
-  console.log('here', userUpdate);
+  // console.log('here', userUpdate);
 
   const user = await ctx.prisma.user.update({
     where: {
@@ -28,7 +28,7 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
     data: userUpdate,
   });
   if (user.role === 'hacker') {
-    console.log('hackerProfile', hackerProfile);
+    // console.log('hackerProfile', hackerProfile);
     if (hackerProfile.ethExp === '') {
       delete hackerProfile.ethExp;
     }
@@ -38,23 +38,23 @@ export const updateUser = async (_: undefined, args: any, ctx: Context) => {
       },
       data: hackerProfile,
     });
-    console.log('_hackerProfile', _hackerProfile);
+    // console.log('_hackerProfile', _hackerProfile);
   } else if (user.role === 'partner') {
-    console.log('partnerProfile', partnerProfile);
-    console.log('before');
+    // console.log('partnerProfile', partnerProfile);
+    // console.log('before');
     const _partnerProfile = await ctx.prisma.partnerProfile.update({
       where: {
         userId: ctx.auth.userId,
       },
       data: partnerProfile,
     });
-    console.log('after');
-    console.log('_partnerProfile', _partnerProfile);
+    // console.log('after');
+    // console.log('_partnerProfile', _partnerProfile);
   } else if (user.role === 'mentor') {
     if (mentorProfile.ethExp === '') {
       delete mentorProfile.ethExp;
     }
-    console.log('mentorProfile', mentorProfile);
+    // console.log('mentorProfile', mentorProfile);
     const _mentorProfile = await ctx.prisma.mentorProfile.update({
       where: {
         userId: ctx.auth.userId,
